@@ -65,7 +65,7 @@ namespace Frogger.World
         /// <param name="game"></param>
         /// <param name="graphics"></param>
         public PlayerShip(Game game, GraphicsDeviceManager graphics)
-            : base(game, graphics, "Content/vaisseau", true)
+            : base(game, graphics, "Content/frog", false)
         {
             this.mLocation = new Vector2(350, 460);
 

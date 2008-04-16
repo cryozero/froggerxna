@@ -71,6 +71,9 @@ namespace FroggerXNA
         Background background;
         PlayerShip player;
 
+
+        EnnemyShip ship;
+
         LineManager lineManager = new LineManager();
 
 
@@ -126,8 +129,13 @@ namespace FroggerXNA
 
                 background = new Background(this, graphics);
                 player = new PlayerShip(this, graphics);
+                ship = new EnnemyShip(this, graphics, new Vector2(100, 20));
+
+
+
                 FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
 
+                this.Components.Add(ship);
                 this.Components.Add(fps);
                 this.Components.Add(background);
                 this.Components.Add(player);

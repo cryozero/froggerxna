@@ -91,6 +91,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Car</Name>
     </Compile>
+    <Compile Include="World\EnnemyShip.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>EnnemyShip</Name>
+    </Compile>
     <Compile Include="World\PlayerShip.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>PlayerShip</Name>
@@ -127,11 +131,11 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Name>fond</Name>
     </Content>
-    <Content Include="Content\vaisseau.png">
+    <Content Include="Content\frog.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
-      <Name>vaisseau</Name>
+      <Name>frog</Name>
     </Content>
     <Content Include="Game.ico">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -186,6 +190,12 @@
     <Content Include="Audio\Score.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Score</Name>
+    </Content>
+    <Content Include="Content\evilFighter.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>evilFighter</Name>
     </Content>
     <Content Include="Content\fireball.bmp">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
