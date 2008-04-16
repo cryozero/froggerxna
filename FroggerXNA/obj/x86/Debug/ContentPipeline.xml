@@ -19,6 +19,15 @@
       <Output>bin\x86\Debug\Content\vaisseau.xnb</Output>
       <Time>2008-04-16T10:13:29.203125+01:00</Time>
     </Item>
+    <Item>
+      <Source>Content\SpriteFont.spritefont</Source>
+      <Name>Content\SpriteFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\SpriteFont.xnb</Output>
+      <Time>2008-04-16T22:34:23.984375+01:00</Time>
+    </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>

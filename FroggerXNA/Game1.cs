@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Frogger.World;
+using Frogger.Utils;
 #endregion
 
 namespace FroggerXNA
@@ -50,6 +51,10 @@ namespace FroggerXNA
 
             background = new Background(this, graphics);
             player = new PlayerShip(this, graphics);
+            FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
+
+            this.Components.Add(fps);
+
 
             this.Components.Add(background);
             this.Components.Add(player);
