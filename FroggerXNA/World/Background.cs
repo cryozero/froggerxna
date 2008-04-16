@@ -14,9 +14,9 @@ namespace Frogger.World
     {
         #region Constants
 
-        public const int BACKGROUND_HEIGHT = 600;
-        public const int BACKGROUND_WIDTH = 800;
-
+        public int BACKGROUND_HEIGHT = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+        public  int BACKGROUND_WIDTH = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+        
         #endregion
 
         #region Properties

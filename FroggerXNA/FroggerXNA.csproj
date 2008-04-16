@@ -55,19 +55,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\Line.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Line</Name>
+    </Compile>
     <Compile Include="World\Background.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Background</Name>
+    </Compile>
+    <Compile Include="World\Bicyclist.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Bicyclist</Name>
+    </Compile>
+    <Compile Include="World\Bus.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Bus</Name>
+    </Compile>
+    <Compile Include="World\Car.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Car</Name>
     </Compile>
     <Compile Include="World\PlayerShip.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>PlayerShip</Name>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Program.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Program</Name>
-    </Compile>
     <Compile Include="FroggerXNA.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>FroggerXNA</Name>
@@ -75,6 +87,14 @@
     <Compile Include="Utils\FPSManager.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>FPSManager</Name>
+    </Compile>
+    <Compile Include="World\Taxi.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Taxi</Name>
+    </Compile>
+    <Compile Include="World\Truck.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Truck</Name>
     </Compile>
     <Compile Include="World\WorldEntity.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>

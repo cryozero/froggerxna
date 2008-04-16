@@ -13,6 +13,38 @@ using Frogger.Utils;
 
 namespace FroggerXNA
 {
+
+    static class Program
+    {
+
+        /// The main entry point for the application.
+
+        static void Main(string[] args)
+        {
+            using (FroggerXNA game = new FroggerXNA())
+            {
+                game.Run();
+            }
+        }
+    }
+
+
+    /// Different states for the game (include levels)
+
+    enum GameState
+    {
+        TitleScreen,
+        GameActive,
+        GameOver,
+        Level1,
+        Level2,
+        Level3,
+        Level4,
+        Level5
+    };
+
+
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -25,16 +57,43 @@ namespace FroggerXNA
         Background background;
         PlayerShip player;
 
+
+
+
+        List<Line> titleLineList = new List<Line>();
+        Matrix titleMatrix;
+        
+        List<Line> authorLineList = new List<Line>();
+        Matrix authorMatrix;
+        
+        List<Line> versionLineList = new List<Line>();
+        Matrix versionMatrix;
+
+        List<Line> konamiLineList = new List<Line>();
+        Matrix konamiMatrix;
+
+                /// <summary>
+        /// Constructor.
+        /// </summary>
+
+
         #endregion
 
         #region Initialization
 
         public FroggerXNA()
         {
+
+            //Sound.Initialize();
+
             graphics = new GraphicsDeviceManager(this);
             content = new ContentManager(Services);
-            IsFixedTimeStep = true;
-            graphics.SynchronizeWithVerticalRetrace = false;
+
+           // graphics.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(OnPreparingDeviceSettings);
+
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.IsFullScreen = true;
         
         }
 
