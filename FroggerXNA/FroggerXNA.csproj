@@ -55,11 +55,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Background.cs">
+    <Compile Include="World\Background.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Background</Name>
     </Compile>
-    <Compile Include="PlayerShip.cs">
+    <Compile Include="World\PlayerShip.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>PlayerShip</Name>
     </Compile>
@@ -68,15 +68,15 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Program</Name>
     </Compile>
-    <Compile Include="Game1.cs">
+    <Compile Include="FroggerXNA.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Game1</Name>
+      <Name>FroggerXNA</Name>
     </Compile>
     <Compile Include="Utils\FPSManager.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>FPSManager</Name>
     </Compile>
-    <Compile Include="WorldEntity.cs">
+    <Compile Include="World\WorldEntity.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>WorldEntity</Name>
     </Compile>
