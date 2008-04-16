@@ -87,7 +87,7 @@ namespace Frogger.World
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                if (mLocation.X < Background.BACKGROUND_WIDTH - Size.X)
+                //if (mLocation.X < Background.BACKGROUND_WIDTH - Size.X)
                     mLocation.X += (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Left))
@@ -103,7 +103,7 @@ namespace Frogger.World
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                if (mLocation.Y < Background.BACKGROUND_HEIGHT - Size.Y)
+              //  if (mLocation.Y < Background.BACKGROUND_HEIGHT - Size.Y)
                     mLocation.Y += (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
             }
 
