@@ -232,7 +232,7 @@ namespace Frogger.Utils
             Vector4 lineColor;
             bool uniqueColors = false;
             if (techniqueName == null)
-                effect.CurrentTechnique = effect.Techniques[0];
+                 effect.CurrentTechnique = effect.Techniques[0];
             else
                 effect.CurrentTechnique = effect.Techniques[techniqueName];
             effect.Begin();
