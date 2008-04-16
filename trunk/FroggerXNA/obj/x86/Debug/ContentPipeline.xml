@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Content\fond.bmp</Source>
+      <Name>Content\fond</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\fond.xnb</Output>
+      <Time>2008-04-16T10:09:44.3125+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\vaisseau.png</Source>
+      <Name>Content\vaisseau</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\vaisseau.xnb</Output>
+      <Time>2008-04-16T10:13:29.203125+01:00</Time>
+    </Item>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <RootDirectory>C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\</RootDirectory>
+      <IntermediateDirectory>C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2007-04-05T12:17:30+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2007-04-05T12:18:14+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2007-04-05T12:18:04+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2007-04-05T12:17:16+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\1.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2008-04-10T00:42:19.65625+01:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
