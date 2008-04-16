@@ -191,6 +191,12 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Score</Name>
     </Content>
+    <Content Include="Content\car.jpg">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>car</Name>
+    </Content>
     <Content Include="Content\evilFighter.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>

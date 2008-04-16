@@ -72,7 +72,9 @@ namespace FroggerXNA
         PlayerShip player;
 
 
-        EnnemyShip ship;
+        //EnnemyShip ship;
+
+        Car car;
 
         LineManager lineManager = new LineManager();
 
@@ -129,13 +131,14 @@ namespace FroggerXNA
 
                 background = new Background(this, graphics);
                 player = new PlayerShip(this, graphics);
-                ship = new EnnemyShip(this, graphics, new Vector2(100, 20));
-
+                //ship = new EnnemyShip(this, graphics, new Vector2(100, 20));
+                car = new Car(this, graphics, new Vector2(1200, 400));
 
 
                 FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
 
-                this.Components.Add(ship);
+                //this.Components.Add(ship);
+                this.Components.Add(car);
                 this.Components.Add(fps);
                 this.Components.Add(background);
                 this.Components.Add(player);
