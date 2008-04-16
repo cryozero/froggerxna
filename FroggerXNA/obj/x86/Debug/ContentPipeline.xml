@@ -28,6 +28,15 @@
       <Output>bin\x86\Debug\Content\SpriteFont.xnb</Output>
       <Time>2008-04-16T22:34:23.984375+01:00</Time>
     </Item>
+    <Item>
+      <Source>Content\fireball.bmp</Source>
+      <Name>Content\fireball</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\fireball.xnb</Output>
+      <Time>2008-04-16T23:50:33.890625+01:00</Time>
+    </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>

@@ -55,9 +55,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Effects\Particle.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Particle</Name>
+    </Compile>
+    <Compile Include="Effects\ParticlesEmitter.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>ParticlesEmitter</Name>
+    </Compile>
     <Compile Include="Utils\Line.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Line</Name>
+    </Compile>
+    <Compile Include="Utils\Sound.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Sound</Name>
     </Compile>
     <Compile Include="Utils\StrokeFont.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -139,6 +151,60 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Name>SpriteFont</Name>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Audio\AddLine.wav">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>AddLine</Name>
+    </Content>
+    <Content Include="Audio\Damage.wav">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Damage</Name>
+    </Content>
+    <Content Include="Audio\Death.wav">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Death</Name>
+    </Content>
+    <Content Include="Audio\MicrobeEnter.wav">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>MicrobeEnter</Name>
+    </Content>
+    <Content Include="Audio\MicrobePatrol.xap">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>XactImporter</Importer>
+      <Processor>XactProcessor</Processor>
+      <Name>MicrobePatrol</Name>
+    </Content>
+    <Content Include="Audio\NoScore.wav">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>NoScore</Name>
+    </Content>
+    <Content Include="Audio\PerfectScore.wav">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>PerfectScore</Name>
+    </Content>
+    <Content Include="Audio\Score.wav">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Score</Name>
+    </Content>
+    <Content Include="Content\fireball.bmp">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>fireball</Name>
+    </Content>
+    <None Include="Audio\MicrobePatrol.xgs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>MicrobePatrol</Name>
+    </None>
+    <None Include="Audio\MicrobePatrol.xsb">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>MicrobePatrol</Name>
+    </None>
+    <None Include="Audio\MicrobePatrol.xwb">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>MicrobePatrol</Name>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA\Game Studio Express\v1.0\Microsoft.Xna.ContentPipeline.targets" />

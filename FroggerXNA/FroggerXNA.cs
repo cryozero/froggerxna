@@ -29,6 +29,14 @@ namespace FroggerXNA
     }
 
 
+    class Player
+    {
+        public int score = 0;
+        public int lives = 3;
+
+    }
+
+
     /// Different states for the game (include levels)
 
     enum GameState
@@ -89,7 +97,7 @@ namespace FroggerXNA
         public FroggerXNA()
         {
 
-            //Sound.Initialize();
+            Sound.Initialize();
 
             graphics = new GraphicsDeviceManager(this);
             content = new ContentManager(Services);
@@ -113,6 +121,24 @@ namespace FroggerXNA
         {
             // TODO: Add your initialization logic here
 
+            if (gameState == GameState.GameActive)
+            {
+
+                background = new Background(this, graphics);
+                player = new PlayerShip(this, graphics);
+                FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
+
+                this.Components.Add(fps);
+                this.Components.Add(background);
+                this.Components.Add(player);
+
+            }
+
+            Sound.Play(Sounds.Damage);
+
+          
+
+            base.Initialize();
 
             // Some static text
             StrokeFont.AddStringCentered("The Fr gger", titleLineList);
@@ -126,25 +152,16 @@ namespace FroggerXNA
 
             StrokeFont.AddStringCentered("Based on Konami'game@1984", konamiLineList);
             konamiMatrix = Matrix.CreateScale(0.003f) * Matrix.CreateTranslation(0, 0.7f, 0);
-
-
-            if (gameState == GameState.GameActive)
-            {
-                background = new Background(this, graphics);
-                player = new PlayerShip(this, graphics);
-                FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
-
-                this.Components.Add(fps);
-                this.Components.Add(background);
-                this.Components.Add(player);
-            }
-
-            base.Initialize();
+ 
         }
+
+
 
         void NewGame()
         {
             gameState = GameState.GameActive;
+
+          //  player = new Player();
         }
 
 
@@ -220,6 +237,7 @@ namespace FroggerXNA
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            Sound.Update();
             KeyboardState keyboardState = Keyboard.GetState(); //Keyboard state
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
 
@@ -251,11 +269,10 @@ namespace FroggerXNA
         {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+
 
 
             //Displayed before the game start
-
 
             if (gameState == GameState.TitleScreen)
             {
