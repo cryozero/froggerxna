@@ -9,7 +9,7 @@ namespace FroggerXNA
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (FroggerXNA game = new FroggerXNA())
             {
                 game.Run();
             }

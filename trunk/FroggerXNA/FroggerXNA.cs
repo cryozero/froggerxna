@@ -16,7 +16,7 @@ namespace FroggerXNA
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class FroggerXNA : Microsoft.Xna.Framework.Game
     {
         #region variables
 
@@ -29,7 +29,7 @@ namespace FroggerXNA
 
         #region Initialization
 
-        public Game1()
+        public FroggerXNA()
         {
             graphics = new GraphicsDeviceManager(this);
             content = new ContentManager(Services);
@@ -73,6 +73,9 @@ namespace FroggerXNA
         /// <param name="loadAllContent">Which type of content to load.</param>
         protected override void LoadGraphicsContent(bool loadAllContent)
         {
+
+            graphics.GraphicsDevice.RenderState.CullMode = CullMode.None;
+
             if (loadAllContent)
             {
                 // TODO: Load any ResourceManagementMode.Automatic content
