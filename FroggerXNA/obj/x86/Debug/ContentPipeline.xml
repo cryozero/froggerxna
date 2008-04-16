@@ -11,15 +11,6 @@
       <Time>2008-04-16T10:09:44.3125+01:00</Time>
     </Item>
     <Item>
-      <Source>Content\vaisseau.png</Source>
-      <Name>Content\vaisseau</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>bin\x86\Debug\Content\vaisseau.xnb</Output>
-      <Time>2008-04-16T10:13:29.203125+01:00</Time>
-    </Item>
-    <Item>
       <Source>Content\SpriteFont.spritefont</Source>
       <Name>Content\SpriteFont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -36,6 +27,24 @@
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\fireball.xnb</Output>
       <Time>2008-04-16T23:50:33.890625+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\frog.png</Source>
+      <Name>Content\frog</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\frog.xnb</Output>
+      <Time>2008-04-16T10:13:29.203125+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\evilFighter.png</Source>
+      <Name>Content\evilFighter</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\evilFighter.xnb</Output>
+      <Time>2008-04-17T00:12:33+01:00</Time>
     </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
