@@ -10,14 +10,14 @@ namespace Frogger.World
     /// <summary>
     /// Represents the ship of the player
     /// </summary>
-    class PlayerShip : WorldEntity
+    class Frog : WorldEntity
     {
         #region Constants
 
         /// <summary>
         /// Default speed of the ship
         /// </summary>
-        const float SPEED = 0.1f;
+        const float SPEED = 0.2f;
 
         #endregion
 
@@ -59,20 +59,16 @@ namespace Frogger.World
 
         #region Initialization
 
-        /// <summary>
-        /// Represents the ship of the player
-        /// </summary>
-        /// <param name="game"></param>
-        /// <param name="graphics"></param>
-        public PlayerShip(Game game, GraphicsDeviceManager graphics)
-            : base(game, graphics, "Content/frog", false)
+   
+        public Frog(Game game, GraphicsDeviceManager graphics)
+            : base(game, graphics, "content/frog", true)
         {
-            this.mLocation = new Vector2(350, 460);
+            this.mLocation = new Vector2(550, 660);
 
             mEngineEffect = new ParticlesEmitter(game, graphics, new Vector2(this.Location.X + this.Size.X / 2f,
                                                                 this.Location.Y + this.Size.Y));
 
-            game.Components.Add(mEngineEffect);
+           // game.Components.Add(mEngineEffect);
         }
 
         #endregion
