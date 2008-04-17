@@ -30,7 +30,7 @@ namespace Frogger.World
         /// <summary>
         /// Fix the speed of the ennemy ship
         /// </summary>
-        private const float SPEED = 0.05f;
+        private const float SPEED = 0.55f;
 
         #endregion
 
