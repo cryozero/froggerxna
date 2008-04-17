@@ -95,9 +95,9 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>EnnemyShip</Name>
     </Compile>
-    <Compile Include="World\PlayerShip.cs">
+    <Compile Include="World\Frog.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>PlayerShip</Name>
+      <Name>Frog</Name>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -130,12 +130,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
       <Name>fond</Name>
-    </Content>
-    <Content Include="Content\frog.png">
-      <XNAUseContentPipeline>true</XNAUseContentPipeline>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Name>frog</Name>
     </Content>
     <Content Include="Game.ico">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -208,6 +202,12 @@
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
       <Name>fireball</Name>
+    </Content>
+    <Content Include="Content\frog.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>frog</Name>
     </Content>
     <None Include="Audio\MicrobePatrol.xgs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
