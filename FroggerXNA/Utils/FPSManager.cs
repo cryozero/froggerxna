@@ -64,7 +64,7 @@ namespace Frogger.Utils
             this.mSpriteBatch.Begin();
             this.mSpriteBatch.DrawString(mSpriteFont,
                                          String.Format("FPS : {0}", mFrameRate),
-                                         new Vector2(20, 20), Color.White);
+                                         new Vector2(10, 750), Color.White);
             this.mSpriteBatch.End();
 
             mFrameCount++;
