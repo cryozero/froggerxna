@@ -2,15 +2,6 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>Content\fond.bmp</Source>
-      <Name>Content\fond</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>bin\x86\Debug\Content\fond.xnb</Output>
-      <Time>2008-04-17T00:18:28.75+01:00</Time>
-    </Item>
-    <Item>
       <Source>Content\SpriteFont.spritefont</Source>
       <Name>Content\SpriteFont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -54,6 +45,24 @@
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\frog.xnb</Output>
       <Time>2008-04-17T01:00:41.359375+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\bus.png</Source>
+      <Name>Content\bus</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\bus.xnb</Output>
+      <Time>2008-04-17T12:08:36.09375+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\fond.png</Source>
+      <Name>Content\fond</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\fond.xnb</Output>
+      <Time>2008-04-17T12:29:35.09375+01:00</Time>
     </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

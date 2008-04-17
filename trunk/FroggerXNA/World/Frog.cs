@@ -63,7 +63,7 @@ namespace Frogger.World
         public Frog(Game game, GraphicsDeviceManager graphics)
             : base(game, graphics, "content/frog", true)
         {
-            this.mLocation = new Vector2(550, 660);
+            this.mLocation = new Vector2(620, 670);
 
             mEngineEffect = new ParticlesEmitter(game, graphics, new Vector2(this.Location.X + this.Size.X / 2f,
                                                                 this.Location.Y + this.Size.Y));

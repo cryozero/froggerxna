@@ -125,12 +125,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\fond.bmp">
-      <XNAUseContentPipeline>true</XNAUseContentPipeline>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Name>fond</Name>
-    </Content>
     <Content Include="Game.ico">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Game</Name>
@@ -185,6 +179,12 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Score</Name>
     </Content>
+    <Content Include="Content\bus.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>bus</Name>
+    </Content>
     <Content Include="Content\car.jpg">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
@@ -202,6 +202,12 @@
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
       <Name>fireball</Name>
+    </Content>
+    <Content Include="Content\fond.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>fond</Name>
     </Content>
     <Content Include="Content\frog.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
