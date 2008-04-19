@@ -30,7 +30,7 @@ namespace Frogger.World
         /// <summary>
         /// Fix the speed of the ennemy ship
         /// </summary>
-        private const float SPEED = 0.55f;
+        private const float SPEED = 0.1f;
 
         #endregion
 
@@ -44,7 +44,7 @@ namespace Frogger.World
         /// <summary>
         /// location of the ship
         /// </summary>
-        Vector2 mLocation;
+        public Vector2 mLocation;
 
         #endregion
 
@@ -81,20 +81,7 @@ namespace Frogger.World
 
         #endregion
 
-        #region Update
 
-        /// <summary>
-        /// Update the ennemy ship location and behavior
-        /// </summary>
-        /// <param name="gameTime"></param>
-        public override void Update(GameTime gameTime)
-        {
-            mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-
-            base.Update(gameTime);
-        }
-
-        #endregion
     }
 
 

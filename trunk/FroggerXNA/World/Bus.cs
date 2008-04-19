@@ -44,7 +44,7 @@ namespace Frogger.World
         /// <summary>
         /// location of the ship
         /// </summary>
-        Vector2 mLocation;
+        public Vector2 mLocation;
 
         #endregion
 
@@ -89,7 +89,7 @@ namespace Frogger.World
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+           // mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
             base.Update(gameTime);
         }
