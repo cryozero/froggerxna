@@ -10,7 +10,7 @@ namespace Frogger.World
     /// <summary>
     /// Represents the ship of the player
     /// </summary>
-    class Car : WorldEntity
+    class Gateway : WorldEntity
     {
         #region Enum
 
@@ -63,36 +63,24 @@ namespace Frogger.World
         /// </summary>
         public override Vector2 Size
         {
-            get { return new Vector2(64, 64); }
+            get { return new Vector2(100, 100); }
         }
         #endregion
 
         #region Initialization
 
 
-        public Car(Game game, GraphicsDeviceManager graphics, Vector2 location)
-            : base(game, graphics, "content/car", true)
+        public Gateway(Game game, GraphicsDeviceManager graphics, Vector2 location)
+            : base(game, graphics, "content/gateway", true)
         {
             this.mLocation = location;
 
- 
-
+            Random r = new Random();
+            mCurrentState = (AIState)r.Next(0, 2);
         }
 
         #endregion
 
-
-        public override void Update(GameTime gameTime)
-        {
-            // mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-
-            if (mLocation.X <= 10)
-            {
-                this.mLocation.X = GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width;
-            }
-
-            base.Update(gameTime);
-        }
 
     }
 

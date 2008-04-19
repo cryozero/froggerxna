@@ -62,8 +62,7 @@ namespace FroggerXNA
 
         GameState gameState = GameState.TitleScreen;
 
-        Matrix viewMatrix = Matrix.Identity;
-        Matrix projMatrix;
+
 
         SpriteBatch spriteBatch;
         SpriteFont mBitmapFont;
@@ -83,6 +82,12 @@ namespace FroggerXNA
         Car car;
         Car car2;
         Bus bus;
+
+        Gateway gateway;
+        Gateway gateway_2;
+        Gateway gateway_3;
+        Gateway gateway_4;
+        Gateway gateway_5;
 
         LineManager lineManager = new LineManager();
 
@@ -158,7 +163,13 @@ namespace FroggerXNA
                     this.Components.Add(card);
                 }
 
-                
+
+
+                gateway = new Gateway(this, graphics, new Vector2(200, 20));
+                gateway_2 = new Gateway(this, graphics, new Vector2(400, 20));
+                gateway_3 = new Gateway(this, graphics, new Vector2(600, 20));
+                gateway_4 = new Gateway(this, graphics, new Vector2(800, 20));
+                gateway_5 = new Gateway(this, graphics, new Vector2(1000, 20));
 
                 //this.Components.Add(ship);
 
@@ -178,7 +189,7 @@ namespace FroggerXNA
 
 
 
-
+                    
                     this.Components.Add(frog);
             Sound.Play(Sounds.Damage);
 
@@ -191,6 +202,13 @@ namespace FroggerXNA
 
                 FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
                 this.Components.Add(fps);
+
+
+                this.Components.Add(gateway);
+                this.Components.Add(gateway_2);
+                this.Components.Add(gateway_3);
+                this.Components.Add(gateway_4);
+                this.Components.Add(gateway_5);
 
                 this.Components.Add(background);
 
@@ -232,6 +250,39 @@ namespace FroggerXNA
         void GameOver()
         {
             gameState = GameState.GameOver;
+        }
+
+
+        void Diplayed()
+        {
+            gateway.Visible = true;
+            gateway_2.Visible = true;
+            gateway_3.Visible = true;
+            gateway_4.Visible = true;
+            gateway_5.Visible = true;
+
+
+            background.Visible = true;
+            bus.Visible = true;
+
+            car.Visible = true;
+            car2.Visible = true;
+            frog.Visible = true;
+        }
+
+        void Hidden()
+        {
+            gateway.Visible = false;
+            gateway_2.Visible = false;
+            gateway_3.Visible = false;
+            gateway_4.Visible = false;
+            gateway_5.Visible = false;
+
+            background.Visible = false;
+            bus.Visible = false;
+            car.Visible = false;
+            car2.Visible = false;
+            frog.Visible = false;
         }
 
 
@@ -354,6 +405,9 @@ namespace FroggerXNA
            }
 
 
+
+
+
            if (gameState == GameState.Level1) //When you press on start, the game run
            {
                bus.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
@@ -392,13 +446,9 @@ namespace FroggerXNA
                 //lineManager.Draw(authorLineList, 1.5f, Color.CornflowerBlue.ToVector4(), viewMatrix, projMatrix, 0, null, authorMatrix, 0.80f);
                 //lineManager.Draw(versionLineList, 2.0f, new Vector4(0.4f, 0.4f, 0.4f, 1), viewMatrix, projMatrix, 0, null, versionMatrix, 0.60f);
                 //lineManager.Draw(konamiLineList, 1.0new Vector4(0.4f, 0.4f, 0.4f, 1), viewMatrix, projMatrix, 0, null, konamiMatrix, 0.30f);
-                graphics.GraphicsDevice.Clear(Color.Black); 
+                graphics.GraphicsDevice.Clear(Color.Black);
 
-                background.Visible = false;
-                bus.Visible = false;
-                car.Visible = false;
-                car2.Visible = false;
-                frog.Visible = false;
+                Hidden();
 
                 spriteBatch.Begin();
                 spriteBatch.DrawString(mBitmapFont, "Press on space to start the game", new Vector2(250.0f, 700.0f), Color.BurlyWood);
@@ -409,13 +459,7 @@ namespace FroggerXNA
             if (gameState == GameState.Level1)
             {
 
-
-                background.Visible = true;
-                bus.Visible = true;
-                
-                car.Visible = true;
-                car2.Visible = true;
-                frog.Visible = true;
+                Diplayed();
 
                 spriteBatch.Begin();
                 spriteBatch.DrawString(mBitmapFont, "Level " + level.ToString(), new Vector2(150.0f, 700.0f), Color.BurlyWood);
@@ -425,7 +469,9 @@ namespace FroggerXNA
 
             if (gameState == GameState.GameOver)
             {
-                graphics.GraphicsDevice.Clear(Color.Black); 
+                graphics.GraphicsDevice.Clear(Color.Black);
+
+                Hidden();
 
                 background.Visible = false;
                 spriteBatch.Begin();

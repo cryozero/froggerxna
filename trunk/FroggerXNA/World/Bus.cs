@@ -75,8 +75,7 @@ namespace Frogger.World
         {
             this.mLocation = location;
 
-            Random r = new Random();
-            mCurrentState = (AIState)r.Next(0, 2);
+     
         }
 
         #endregion
@@ -90,6 +89,11 @@ namespace Frogger.World
         public override void Update(GameTime gameTime)
         {
            // mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+
+            if (mLocation.X <= 10)
+            {
+                this.mLocation.X = GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width;
+            }
 
             base.Update(gameTime);
         }
