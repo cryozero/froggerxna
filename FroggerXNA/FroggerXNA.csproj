@@ -123,6 +123,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Truck</Name>
     </Compile>
+    <Compile Include="World\Wood.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Wood</Name>
+    </Compile>
     <Compile Include="World\WorldEntity.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>WorldEntity</Name>
@@ -237,6 +241,18 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>MicrobePatrol</Name>
     </None>
+    <Content Include="Content\intro.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>intro</Name>
+    </Content>
+    <Content Include="Content\wood.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>wood</Name>
+    </Content>
     <Content Include="Fonts\space.spritefont">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>FontDescriptionImporter</Importer>

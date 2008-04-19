@@ -69,7 +69,12 @@ namespace FroggerXNA
 
         GraphicsDeviceManager graphics;
         ContentManager content;
+
+
         Background background;
+        Background intro;
+        
+        
         Frog frog;
 
         public const float SPEED = 0.05f;
@@ -80,8 +85,19 @@ namespace FroggerXNA
         //EnnemyShip ship;
 
         Car car;
-        Car car2;
+        Car car_2;
+        Car car_3;
+        Car car_4;
+        Car car_5;
+
         Bus bus;
+        Bus bus_2;
+        Bus bus_3;
+
+        Wood wood;
+
+  
+
 
         Gateway gateway;
         Gateway gateway_2;
@@ -146,22 +162,37 @@ namespace FroggerXNA
 
            
 
-                background = new Background(this, graphics);
+                background = new Background(this, graphics,"Content/fond");
+
+
+                intro = new Background(this, graphics, "Content/intro");
+
+
                 frog = new Frog(this, graphics);
                 //ship = new EnnemyShip(this, graphics, new Vector2(100, 20));
-                car = new Car(this, graphics, new Vector2(1200, 400));
-                car2 = new Car(this, graphics, new Vector2(1000, 420));
-               // bus = new Bus(this, graphics, new Vector2(900, 530));
+               
+            
+                car = new Car(this, graphics, new Vector2(1200, 410));
+                car_2 = new Car(this, graphics, new Vector2(1000, 420));
+                car_3 = new Car(this, graphics, new Vector2(700, 410));
+                car_4 = new Car(this, graphics, new Vector2(800, 530));
+                car_5 = new Car(this, graphics, new Vector2(610, 420));
 
-                List<Car> carlist = new List<Car>();
+                wood = new Wood(this, graphics, new Vector2(110, 220));
 
-                car = new Car(this, graphics, new Vector2(1200, 400));
-                carlist.Add(car);
+         
+  
 
-                foreach (Car card in carlist)
-                {
-                    this.Components.Add(card);
-                }
+               
+
+ 
+                 this.Components.Add(car);
+                 this.Components.Add(car_2);
+                 this.Components.Add(car_3);
+                 this.Components.Add(car_4);
+                 this.Components.Add(car_5);
+
+                 this.Components.Add(wood);
 
 
 
@@ -178,7 +209,7 @@ namespace FroggerXNA
                    
 
 //                     this.Components.Add(car);
-                    this.Components.Add(car2);
+                    
 
   //                  this.Components.Add(bus);
 
@@ -211,7 +242,7 @@ namespace FroggerXNA
                 this.Components.Add(gateway_5);
 
                 this.Components.Add(background);
-
+                this.Components.Add(intro);
            
 
             // Some static text
@@ -266,7 +297,16 @@ namespace FroggerXNA
             bus.Visible = true;
 
             car.Visible = true;
-            car2.Visible = true;
+            car_2.Visible = true;
+            car_3.Visible = true;
+            car_4.Visible = true;
+            car_5.Visible = true;
+
+
+            wood.Visible = true;
+
+           
+
             frog.Visible = true;
         }
 
@@ -280,8 +320,17 @@ namespace FroggerXNA
 
             background.Visible = false;
             bus.Visible = false;
+
             car.Visible = false;
-            car2.Visible = false;
+            car_2.Visible = false;
+            car_3.Visible = false;
+            car_4.Visible = false;
+            car_5.Visible = false;
+
+            wood.Visible = false;
+
+          
+
             frog.Visible = false;
         }
 
@@ -405,13 +454,29 @@ namespace FroggerXNA
            }
 
 
+           if (frog.mLocation.X >= gateway.mLocation.X - 50 && frog.mLocation.X <= gateway.mLocation.X + 50
+      && frog.mLocation.Y >= gateway.mLocation.Y - 50 && frog.mLocation.Y <= gateway.mLocation.Y + 50
+
+             )
+           {
+               gameState = GameState.Level2;
+           }
+
+
 
 
 
            if (gameState == GameState.Level1) //When you press on start, the game run
            {
                bus.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+               
                car.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+               car_2.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+               car_3.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+               car_4.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+               car_5.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+
+               wood.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
                if (bus.mLocation.X == frog.mLocation.X)
                {
