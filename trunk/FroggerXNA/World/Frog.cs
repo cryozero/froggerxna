@@ -26,7 +26,7 @@ namespace Frogger.World
         /// <summary>
         /// location of the ship
         /// </summary>
-        Vector2 mLocation;
+        public Vector2 mLocation;
 
         /// <summary>
         /// time when the player shot for the last time
@@ -65,8 +65,8 @@ namespace Frogger.World
         {
             this.mLocation = new Vector2(620, 670);
 
-            mEngineEffect = new ParticlesEmitter(game, graphics, new Vector2(this.Location.X + this.Size.X / 2f,
-                                                                this.Location.Y + this.Size.Y));
+          //  mEngineEffect = new ParticlesEmitter(game, graphics, new Vector2(this.Location.X + this.Size.X / 2f,
+                                                             //   this.Location.Y + this.Size.Y));
 
            // game.Components.Add(mEngineEffect);
         }
@@ -81,7 +81,7 @@ namespace Frogger.World
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            mEngineEffect.Location = new Vector2(this.Location.X + this.Size.X / 2f, this.Location.Y + this.Size.Y);
+            //mEngineEffect.Location = new Vector2(this.Location.X + this.Size.X / 2f, this.Location.Y + this.Size.Y);
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {

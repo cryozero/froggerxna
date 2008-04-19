@@ -14,3 +14,4 @@ C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXN
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\car.xnb
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\frog.xnb
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\bus.xnb
+C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\HealthBar.xnb
