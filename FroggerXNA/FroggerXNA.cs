@@ -138,6 +138,15 @@ namespace FroggerXNA
                 car2 = new Car(this, graphics, new Vector2(1000, 420));
                 bus = new Bus(this, graphics, new Vector2(900, 530));
 
+                List<Car> carlist = new List<Car>();
+
+                car = new Car(this, graphics, new Vector2(1200, 400));
+                carlist.Add(car);
+
+                foreach (Car card in carlist)
+                {
+                    this.Components.Add(card);
+                }
 
                 FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
 
@@ -145,7 +154,7 @@ namespace FroggerXNA
 
                 this.Components.Add(frog);
                 
-                this.Components.Add(car);
+               // this.Components.Add(car);
                 this.Components.Add(car2);
 
                 this.Components.Add(bus);
@@ -278,6 +287,19 @@ namespace FroggerXNA
                     NewGame(); //New game
                 
             }
+
+
+            if (keyboardState.IsKeyDown(Keys.A)) //When you press on start, the game run
+            {
+                gameState=GameState.Level2;
+
+            }
+
+            if (bus.Location == frog.Location)
+            {
+                Exit();
+            }
+
 
             // TODO: Add your update logic here
 
