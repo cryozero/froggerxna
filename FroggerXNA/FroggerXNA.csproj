@@ -111,6 +111,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>FPSManager</Name>
     </Compile>
+    <Compile Include="World\Gateway.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Gateway</Name>
+    </Compile>
     <Compile Include="World\Taxi.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Taxi</Name>
@@ -238,6 +242,12 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Name>space</Name>
+    </Content>
+    <Content Include="Content\gateway.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>gateway</Name>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
