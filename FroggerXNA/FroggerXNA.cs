@@ -65,12 +65,17 @@ namespace FroggerXNA
         Matrix viewMatrix = Matrix.Identity;
         Matrix projMatrix;
 
-  
+        SpriteBatch spriteBatch;
+        SpriteFont mBitmapFont;
 
         GraphicsDeviceManager graphics;
         ContentManager content;
         Background background;
         Frog frog;
+
+        public const float SPEED = 0.05f;
+
+        public int level = 1;
 
 
         //EnnemyShip ship;
@@ -141,7 +146,7 @@ namespace FroggerXNA
                 //ship = new EnnemyShip(this, graphics, new Vector2(100, 20));
                 car = new Car(this, graphics, new Vector2(1200, 400));
                 car2 = new Car(this, graphics, new Vector2(1000, 420));
-                bus = new Bus(this, graphics, new Vector2(900, 530));
+               // bus = new Bus(this, graphics, new Vector2(900, 530));
 
                 List<Car> carlist = new List<Car>();
 
@@ -153,33 +158,41 @@ namespace FroggerXNA
                     this.Components.Add(card);
                 }
 
-                FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
+                
 
                 //this.Components.Add(ship);
 
 
-                if (gameState == GameState.GameActive)
-                {
-                    this.Components.Add(frog);
+      
+                   
 
-                    // this.Components.Add(car);
+//                     this.Components.Add(car);
                     this.Components.Add(car2);
 
-                    this.Components.Add(bus);
+  //                  this.Components.Add(bus);
 
-                    this.Components.Add(fps);
 
-                }
-                
-                
-               // this.Components.Add(background);
-                
 
-            
 
+
+
+
+
+
+                    this.Components.Add(frog);
             Sound.Play(Sounds.Damage);
 
-          
+
+
+
+   
+                bus = new Bus(this, graphics, new Vector2(900, 530));
+                this.Components.Add(bus);
+
+                FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
+                this.Components.Add(fps);
+
+                this.Components.Add(background);
 
            
 
@@ -205,11 +218,20 @@ namespace FroggerXNA
 
         void NewGame()
         {
-            gameState = GameState.GameActive;
 
+            
 
+            gameState = GameState.Level1;
+           
+            
 
           //  player = new Player();
+        }
+
+
+        void GameOver()
+        {
+            gameState = GameState.GameOver;
         }
 
 
@@ -237,7 +259,9 @@ namespace FroggerXNA
 
                 //Load the HealthBar image from the disk into the Texture2D object
                 mHealthBar = aLoader.Load<Texture2D>("content/HealthBar") as Texture2D;
-                
+
+                spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
+                mBitmapFont = content.Load<SpriteFont>("fonts/space");
                 
                 // TODO: Load any ResourceManagementMode.Automatic content
             }
@@ -321,20 +345,28 @@ namespace FroggerXNA
            }
 
 
-           if (frog.mLocation.X == 200)
+           if (frog.mLocation.X >= bus.mLocation.X-50 && frog.mLocation.X <= bus.mLocation.X+50
+               && frog.mLocation.Y >= bus.mLocation.Y-50 && frog.mLocation.Y <= bus.mLocation.Y + 50
+               
+               )
            {
-               frog.mLocation.X = 100;
+               GameOver();
            }
 
 
-           /* if (bus.I)
-            {
-                Exit();
-            }*/
+           if (gameState == GameState.Level1) //When you press on start, the game run
+           {
+               bus.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+               car.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
+               if (bus.mLocation.X == frog.mLocation.X)
+               {
+                   Exit();
+               }
+           
+           }
 
-
-            // TODO: Add your update logic here
+      
 
             base.Update(gameTime);
         }
@@ -359,11 +391,50 @@ namespace FroggerXNA
                 //  lineManager.Draw(titleLineList, 1.5f, Color.BlanchedAlmond.ToVector4(), viewMatrix, projMatrix, 0, null, titleMatrix, 0.90f);
                 //lineManager.Draw(authorLineList, 1.5f, Color.CornflowerBlue.ToVector4(), viewMatrix, projMatrix, 0, null, authorMatrix, 0.80f);
                 //lineManager.Draw(versionLineList, 2.0f, new Vector4(0.4f, 0.4f, 0.4f, 1), viewMatrix, projMatrix, 0, null, versionMatrix, 0.60f);
-                //lineManager.Draw(konamiLineList, 1.0f, new Vector4(0.4f, 0.4f, 0.4f, 1), viewMatrix, projMatrix, 0, null, konamiMatrix, 0.30f);
-                graphics.GraphicsDevice.Clear(Color.Red);
+                //lineManager.Draw(konamiLineList, 1.0new Vector4(0.4f, 0.4f, 0.4f, 1), viewMatrix, projMatrix, 0, null, konamiMatrix, 0.30f);
+                graphics.GraphicsDevice.Clear(Color.Black); 
+
+                background.Visible = false;
+                bus.Visible = false;
+                car.Visible = false;
+                car2.Visible = false;
+                frog.Visible = false;
+
+                spriteBatch.Begin();
+                spriteBatch.DrawString(mBitmapFont, "Press on space to start the game", new Vector2(250.0f, 700.0f), Color.BurlyWood);
+                spriteBatch.End();
+
+            }
+
+            if (gameState == GameState.Level1)
+            {
+
+
+                background.Visible = true;
+                bus.Visible = true;
+                
+                car.Visible = true;
+                car2.Visible = true;
+                frog.Visible = true;
+
+                spriteBatch.Begin();
+                spriteBatch.DrawString(mBitmapFont, "Level " + level.ToString(), new Vector2(150.0f, 700.0f), Color.BurlyWood);
+                spriteBatch.End();
+
+            }
+
+            if (gameState == GameState.GameOver)
+            {
+                graphics.GraphicsDevice.Clear(Color.Black); 
+
+                background.Visible = false;
+                spriteBatch.Begin();
+                spriteBatch.DrawString(mBitmapFont, "Game Over", new Vector2(480.0f, 300.0f), Color.MediumSlateBlue);
+                spriteBatch.End();
             }
 
 
+            /*
             //TODO: Add your drawing code here
             mBatch.Begin();
 
@@ -377,12 +448,10 @@ namespace FroggerXNA
             mBatch.Draw(mHealthBar, new Rectangle(this.Window.ClientBounds.Width / 2 - mHealthBar.Width / 2, 30, mHealthBar.Width, 44), new Rectangle(0, 0, mHealthBar.Width, 44), Color.White);
 
             mBatch.End();
+            */
 
-            if (gameState == GameState.GameActive)
-            {
-                bus = new Bus(this, graphics, new Vector2(900, 530));
-                this.Components.Add(bus);
-            }
+            
+
 
             base.Draw(gameTime);
         }

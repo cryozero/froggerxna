@@ -73,6 +73,15 @@
       <Output>bin\x86\Debug\Content\HealthBar.xnb</Output>
       <Time>2008-04-19T20:43:57.5+01:00</Time>
     </Item>
+    <Item>
+      <Source>Fonts\space.spritefont</Source>
+      <Name>Fonts\space</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Fonts\space.xnb</Output>
+      <Time>2008-04-19T21:34:48.90625+01:00</Time>
+    </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
