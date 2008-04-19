@@ -46,8 +46,8 @@ namespace Frogger.World
         /// </summary>
         /// <param name="game"></param>
         /// <param name="graphics"></param>
-        public Background(Game game, GraphicsDeviceManager graphics)
-            : base(game, graphics, "Content/fond", false)
+        public Background(Game game, GraphicsDeviceManager graphics,String image)
+            : base(game, graphics, image, false)
         {
 
         }

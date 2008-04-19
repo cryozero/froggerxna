@@ -62,7 +62,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\fond.xnb</Output>
-      <Time>2008-04-19T23:04:41.734375+01:00</Time>
+      <Time>2008-04-19T23:30:01.984375+01:00</Time>
     </Item>
     <Item>
       <Source>Content\HealthBar.png</Source>
@@ -90,6 +90,24 @@
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\gateway.xnb</Output>
       <Time>2008-04-19T22:55:12.515625+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\intro.png</Source>
+      <Name>Content\intro</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\intro.xnb</Output>
+      <Time>2008-04-19T23:18:45+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\wood.png</Source>
+      <Name>Content\wood</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\wood.xnb</Output>
+      <Time>2008-04-19T23:40:07.625+01:00</Time>
     </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
