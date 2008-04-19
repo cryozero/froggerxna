@@ -215,6 +215,12 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Name>frog</Name>
     </Content>
+    <Content Include="Content\HealthBar.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>HealthBar</Name>
+    </Content>
     <None Include="Audio\MicrobePatrol.xgs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>MicrobePatrol</Name>

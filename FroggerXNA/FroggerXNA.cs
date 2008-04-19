@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Frogger.World;
 using Frogger.Utils;
+
 #endregion
 
 namespace FroggerXNA
@@ -59,7 +60,7 @@ namespace FroggerXNA
     public class FroggerXNA : Microsoft.Xna.Framework.Game
     {
 
-        GameState gameState = GameState.GameActive;
+        GameState gameState = GameState.TitleScreen;
 
         Matrix viewMatrix = Matrix.Identity;
         Matrix projMatrix;
@@ -92,6 +93,11 @@ namespace FroggerXNA
 
         List<Line> konamiLineList = new List<Line>();
         Matrix konamiMatrix;
+
+
+        SpriteBatch mBatch;
+        Texture2D mHealthBar;
+        int mCurrentHealth = 100;
 
                 /// <summary>
         /// Constructor.
@@ -128,8 +134,7 @@ namespace FroggerXNA
         {
             // TODO: Add your initialization logic here
 
-            if (gameState == GameState.GameActive)
-            {
+           
 
                 background = new Background(this, graphics);
                 frog = new Frog(this, graphics);
@@ -152,31 +157,36 @@ namespace FroggerXNA
 
                 //this.Components.Add(ship);
 
-                this.Components.Add(frog);
+
+                if (gameState == GameState.GameActive)
+                {
+                    this.Components.Add(frog);
+
+                    // this.Components.Add(car);
+                    this.Components.Add(car2);
+
+                    this.Components.Add(bus);
+
+                    this.Components.Add(fps);
+
+                }
                 
-               // this.Components.Add(car);
-                this.Components.Add(car2);
-
-                this.Components.Add(bus);
-
-                this.Components.Add(fps);
-
                 
-                this.Components.Add(background);
+               // this.Components.Add(background);
                 
 
-            }
+            
 
             Sound.Play(Sounds.Damage);
 
           
 
-            base.Initialize();
+           
 
             // Some static text
             StrokeFont.AddStringCentered("The Fr gger", titleLineList);
             titleMatrix = Matrix.CreateScale(0.01f) * Matrix.CreateTranslation(0, 0.2f, 0);
-
+            
             StrokeFont.AddStringCentered("By Maxime Rauer", authorLineList);
             authorMatrix = Matrix.CreateScale(0.004f) * Matrix.CreateTranslation(0, -0.3f, 0);
 
@@ -185,7 +195,10 @@ namespace FroggerXNA
 
             StrokeFont.AddStringCentered("Based on Konami'game@1984", konamiLineList);
             konamiMatrix = Matrix.CreateScale(0.003f) * Matrix.CreateTranslation(0, 0.7f, 0);
- 
+
+
+            base.Initialize();
+
         }
 
 
@@ -193,6 +206,8 @@ namespace FroggerXNA
         void NewGame()
         {
             gameState = GameState.GameActive;
+
+
 
           //  player = new Player();
         }
@@ -209,14 +224,25 @@ namespace FroggerXNA
         protected override void LoadGraphicsContent(bool loadAllContent)
         {
 
-            graphics.GraphicsDevice.RenderState.CullMode = CullMode.None;
+           
 
             if (loadAllContent)
             {
+                graphics.GraphicsDevice.RenderState.CullMode = CullMode.None;
+                //Initialize the Sprite batch
+                mBatch = new SpriteBatch(this.graphics.GraphicsDevice);
+
+                //Create the content manager to load the images
+                ContentManager aLoader = new ContentManager(this.Services);
+
+                //Load the HealthBar image from the disk into the Texture2D object
+                mHealthBar = aLoader.Load<Texture2D>("content/HealthBar") as Texture2D;
+                
+                
                 // TODO: Load any ResourceManagementMode.Automatic content
             }
 
-            Create2DProjectionMatrix();
+            //Create2DProjectionMatrix();
 
             // TODO: Load any ResourceManagementMode.Manual content
         }
@@ -240,29 +266,7 @@ namespace FroggerXNA
             // TODO: Unload any ResourceManagementMode.Manual content
         }
 
-        public void Create2DProjectionMatrix()
-        {
-            // Projection matrix ignores Z and just squishes X or Y to balance the upcoming viewport stretch
-            float projScaleX;
-            float projScaleY;
-            float width = graphics.GraphicsDevice.Viewport.Width;
-            float height = graphics.GraphicsDevice.Viewport.Height;
-            if (width > height)
-            {
-                // Wide window
-                projScaleX = height / width;
-                projScaleY = 1.0f;
-            }
-            else
-            {
-                // Tall window
-                projScaleX = 1.0f;
-                projScaleY = width / height;
-            }
-            projMatrix = Matrix.CreateScale(projScaleX, projScaleY, 0.0f);
-            projMatrix.M43 = 0.5f;
-        }
-
+   
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input and playing audio.
@@ -295,10 +299,39 @@ namespace FroggerXNA
 
             }
 
-            if (bus.Location == frog.Location)
+
+            if (keyboardState.IsKeyDown(Keys.Up) == true)
+            {
+                mCurrentHealth += 1;
+            }
+
+            //If the Down Arrowis pressed, decrease the Health bar
+            if (keyboardState.IsKeyDown(Keys.Down) == true)
+            {
+                mCurrentHealth -= 1;
+            }
+
+            //Force the health to remain between 0 and 100
+            mCurrentHealth = (int)MathHelper.Clamp(mCurrentHealth, 0, 100);
+           
+            
+           if(keyboardState.IsKeyDown(Keys.C)==true)
+            {
+                frog.mLocation.X = 100;
+           }
+
+
+           if (frog.mLocation.X == 200)
+           {
+               frog.mLocation.X = 100;
+           }
+
+
+           /* if (bus.I)
             {
                 Exit();
-            }
+            }*/
+
 
 
             // TODO: Add your update logic here
@@ -323,11 +356,32 @@ namespace FroggerXNA
             if (gameState == GameState.TitleScreen)
             {
 
-                lineManager.Draw(titleLineList, 1.5f, Color.BlanchedAlmond.ToVector4(), viewMatrix, projMatrix, 0, null, titleMatrix, 0.90f);
-                lineManager.Draw(authorLineList, 1.5f, Color.CornflowerBlue.ToVector4(), viewMatrix, projMatrix, 0, null, authorMatrix, 0.80f);
-                lineManager.Draw(versionLineList, 2.0f, new Vector4(0.4f, 0.4f, 0.4f, 1), viewMatrix, projMatrix, 0, null, versionMatrix, 0.60f);
-                lineManager.Draw(konamiLineList, 1.0f, new Vector4(0.4f, 0.4f, 0.4f, 1), viewMatrix, projMatrix, 0, null, konamiMatrix, 0.30f);
-                
+                //  lineManager.Draw(titleLineList, 1.5f, Color.BlanchedAlmond.ToVector4(), viewMatrix, projMatrix, 0, null, titleMatrix, 0.90f);
+                //lineManager.Draw(authorLineList, 1.5f, Color.CornflowerBlue.ToVector4(), viewMatrix, projMatrix, 0, null, authorMatrix, 0.80f);
+                //lineManager.Draw(versionLineList, 2.0f, new Vector4(0.4f, 0.4f, 0.4f, 1), viewMatrix, projMatrix, 0, null, versionMatrix, 0.60f);
+                //lineManager.Draw(konamiLineList, 1.0f, new Vector4(0.4f, 0.4f, 0.4f, 1), viewMatrix, projMatrix, 0, null, konamiMatrix, 0.30f);
+                graphics.GraphicsDevice.Clear(Color.Red);
+            }
+
+
+            //TODO: Add your drawing code here
+            mBatch.Begin();
+
+            //Draw the negative space for the health bar
+            mBatch.Draw(mHealthBar, new Rectangle(this.Window.ClientBounds.Width / 2 - mHealthBar.Width / 2, 30, mHealthBar.Width, 44), new Rectangle(0, 45, mHealthBar.Width, 44), Color.Gray);
+
+            //Draw the current health level based on the current Health
+            mBatch.Draw(mHealthBar, new Rectangle(this.Window.ClientBounds.Width / 2 - mHealthBar.Width / 2, 30, (int)(mHealthBar.Width * ((double)mCurrentHealth / 100)), 44), new Rectangle(0, 45, mHealthBar.Width, 44), Color.Red);
+
+            //Draw the box around the health bar
+            mBatch.Draw(mHealthBar, new Rectangle(this.Window.ClientBounds.Width / 2 - mHealthBar.Width / 2, 30, mHealthBar.Width, 44), new Rectangle(0, 0, mHealthBar.Width, 44), Color.White);
+
+            mBatch.End();
+
+            if (gameState == GameState.GameActive)
+            {
+                bus = new Bus(this, graphics, new Vector2(900, 530));
+                this.Components.Add(bus);
             }
 
             base.Draw(gameTime);
