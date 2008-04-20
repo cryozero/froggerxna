@@ -21,3 +21,4 @@ C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXN
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\obj\x86\Debug\Audio\Frogger.xml
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\bg_level_1.xnb
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\alligator.xnb
+C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\bg_level_3.xnb

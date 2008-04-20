@@ -207,6 +207,12 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Name>bg_level_2</Name>
     </Content>
+    <Content Include="Content\bg_level_3.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>bg_level_3</Name>
+    </Content>
     <Content Include="Content\bus.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
