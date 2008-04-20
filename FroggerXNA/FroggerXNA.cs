@@ -43,7 +43,6 @@ namespace FroggerXNA
     enum GameState
     {
         TitleScreen,
-        GameActive,
         GameOver,
         Level1,
         Level2,
@@ -81,6 +80,8 @@ namespace FroggerXNA
 
         Background intro;
         Background bg_level_1;
+        Background bg_level_2;
+        Background bg_level_3;
 
         int level;
         
@@ -106,6 +107,10 @@ namespace FroggerXNA
 
         Wood wood;
 
+        //Alligators
+
+        Alligator alligator;
+
         //Gateways
 
         Gateway gateway;
@@ -118,7 +123,7 @@ namespace FroggerXNA
         //Level 2 && > Object
         //
 
-        Background bg_level_2;
+        
 
 
          SpriteBatch mBatch;
@@ -156,6 +161,7 @@ namespace FroggerXNA
                 intro = new Background(this, graphics, "Content/intro");
                 bg_level_1 = new Background(this, graphics,"Content/bg_level_1");
                 bg_level_2 = new Background(this, graphics, "Content/bg_level_2");
+                bg_level_3 = new Background(this, graphics, "Content/bg_level_3");
 
                 //The unique Frog !
 
@@ -194,7 +200,13 @@ namespace FroggerXNA
 
                 wood = new Wood(this, graphics, new Vector2(110, 220));
                 this.Components.Add(wood);
-         
+
+                //Alligators
+
+                alligator = new Alligator(this, graphics, new Vector2(660, 290));
+                this.Components.Add(alligator);
+
+
 
                 gateway = new Gateway(this, graphics, new Vector2(200, 20));
                 gateway_2 = new Gateway(this, graphics, new Vector2(400, 20));
@@ -242,7 +254,7 @@ namespace FroggerXNA
         }
 
         //
-        // Create a NewGame
+        // Create a NewGame (Level 1)
         //
 
         void NewGame()
@@ -251,9 +263,28 @@ namespace FroggerXNA
             gameState = GameState.Level1;
         }
 
+        //
+        // Level 2
+        //
+
+
         void Level_2()
         {
             gameState = GameState.Level2;
+            frog.mLocation.X=620;
+            frog.mLocation.Y = 670;
+        }
+
+        //
+        // Level 3
+        //
+
+
+        void Level_3()
+        {
+            gameState = GameState.Level3;
+            frog.mLocation.X = 620;
+            frog.mLocation.Y = 670;
         }
 
         void GameOver()
@@ -487,20 +518,44 @@ namespace FroggerXNA
 
            if (frog.mLocation.X >= gateway.mLocation.X - 50 && frog.mLocation.X <= gateway.mLocation.X + 50
       && frog.mLocation.Y >= gateway.mLocation.Y - 50 && frog.mLocation.Y <= gateway.mLocation.Y + 50
-
+               && gameState==GameState.Level1
              )
            {
                Level_2();
               
            }
 
-
-
-
-
-           if (gameState == GameState.Level1) //When you press on start, the game run
+           if (frog.mLocation.X >= gateway.mLocation.X - 50 && frog.mLocation.X <= gateway.mLocation.X + 50
+      && frog.mLocation.Y >= gateway.mLocation.Y - 50 && frog.mLocation.Y <= gateway.mLocation.Y + 50
+               && gameState == GameState.Level2
+             )
            {
-               float SPEED = 0.5f;
+               Level_3();
+
+           }
+
+
+
+
+           if (gameState == GameState.Level1 || gameState == GameState.Level2 || gameState == GameState.Level3) //When you press on start, the game run
+           {
+
+               float SPEED = 0;
+
+               if (gameState == GameState.Level1)
+               {
+                   SPEED = 0.3f;
+               }
+
+               if (gameState == GameState.Level2)
+               {
+                   SPEED = 0.4f;
+               }
+
+               if (gameState == GameState.Level3)
+               {
+                   SPEED = 0.5f;
+               }
 
                car.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
                car_2.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
@@ -514,6 +569,9 @@ namespace FroggerXNA
 
                wood.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
+
+               alligator.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+              
 
                this.spriteBatch.Begin();
 
