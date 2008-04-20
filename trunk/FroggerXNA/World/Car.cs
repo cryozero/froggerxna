@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Frogger.Utils;
 
 namespace Frogger.World
 {
@@ -73,6 +74,7 @@ namespace Frogger.World
         public Car(Game game, GraphicsDeviceManager graphics, Vector2 location)
             : base(game, graphics, "content/car", true)
         {
+            Sound.Initialize();
             this.mLocation = location;
 
  
@@ -84,11 +86,13 @@ namespace Frogger.World
 
         public override void Update(GameTime gameTime)
         {
+            Sound.Update();
             // mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
             if (mLocation.X <= 10)
             {
                 this.mLocation.X = GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width;
+                //Sound.Play(Sounds.Car);
             }
 
             base.Update(gameTime);
