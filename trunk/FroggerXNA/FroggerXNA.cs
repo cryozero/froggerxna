@@ -91,8 +91,11 @@ namespace FroggerXNA
 
         //Cars
 
-        Car car;
-        Car car_2;
+        List<Car> listCar=new List<Car>();
+        
+
+       // Car car;
+        //Car car_2;
         Car car_3;
         Car car_4;
         Car car_5;
@@ -169,12 +172,21 @@ namespace FroggerXNA
                 this.Components.Add(frog);                 
             
                 //Cars
+            listCar.Add(new Car(this, graphics, new Vector2(120, 410)));
+            listCar.Add(new Car(this, graphics, new Vector2(1000, 420)));
 
-                car = new Car(this, graphics, new Vector2(120, 410));
-                this.Components.Add(car);
+            //listCar.ForEach(delegate(Car c){this.Components.Add(c)};);
+            listCar.ForEach(delegate(Car p) { this.Components.Add(p); });
 
-                car_2 = new Car(this, graphics, new Vector2(1000, 420));
-                this.Components.Add(car_2);
+
+
+       
+
+                //car = new Car(this, graphics, new Vector2(120, 410));
+               // this.Components.Add(car);
+
+               // car_2 = new Car(this, graphics, new Vector2(1000, 420));
+                //this.Components.Add(car_2);
     
                 car_3 = new Car(this, graphics, new Vector2(700, 410));
                 this.Components.Add(car_3);    
@@ -287,6 +299,10 @@ namespace FroggerXNA
             frog.mLocation.Y = 670;
         }
 
+        //
+        // GameOver
+        //
+
         void GameOver()
         {
             gameState = GameState.GameOver;
@@ -309,8 +325,9 @@ namespace FroggerXNA
 
                 //Cars
 
-                car.Visible = true;
-                car_2.Visible = true;
+
+               // car.Visible = true;
+                //car_2.Visible = true;
                 car_3.Visible = true;
                 car_4.Visible = true;
                 car_5.Visible = true;
@@ -342,7 +359,15 @@ namespace FroggerXNA
 
                 
             }
-           
+
+            if (gameState == GameState.Level3)
+            {
+                bg_level_1.Visible = false;
+                bg_level_2.Visible = false;
+                bg_level_3.Visible = true;
+
+            }
+
 
             frog.Visible = true;
         }
@@ -367,8 +392,8 @@ namespace FroggerXNA
             bus_2.Visible = false;
             bus_3.Visible = false;
 
-            car.Visible = false;
-            car_2.Visible = false;
+            //car.Visible = false;
+            //car_2.Visible = false;
             car_3.Visible = false;
             car_4.Visible = false;
             car_5.Visible = false;
@@ -494,9 +519,11 @@ namespace FroggerXNA
             //
 
             //Cars
-            
-            Collision(car);
-            Collision(car_2);
+
+            listCar.ForEach(delegate(Car c) { Collision(c); });
+
+           
+           // Collision(car_2);
             Collision(car_3);
             Collision(car_4);
 
@@ -557,8 +584,10 @@ namespace FroggerXNA
                    SPEED = 0.5f;
                }
 
-               car.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-               car_2.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+               listCar.ForEach(delegate(Car c) { c.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
+
+             //  car.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+               //car_2.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
                car_3.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
                car_4.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
                car_5.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
