@@ -109,6 +109,15 @@
       <Output>bin\x86\Debug\Content\wood.xnb</Output>
       <Time>2008-04-19T23:40:07.625+01:00</Time>
     </Item>
+    <Item>
+      <Source>Content\bg_level_2.png</Source>
+      <Name>Content\bg_level_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\bg_level_2.xnb</Output>
+      <Time>2008-04-20T00:31:12.671875+01:00</Time>
+    </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>

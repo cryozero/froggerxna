@@ -67,6 +67,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Line</Name>
     </Compile>
+    <Compile Include="Utils\Score.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Score</Name>
+    </Compile>
     <Compile Include="Utils\Sound.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Sound</Name>
@@ -157,23 +161,23 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>AddLine</Name>
     </Content>
-    <Content Include="Audio\Damage.wav">
+    <Content Include="Audio\Car.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Damage</Name>
+      <Name>Car</Name>
     </Content>
     <Content Include="Audio\Death.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Death</Name>
-    </Content>
-    <Content Include="Audio\MicrobeEnter.wav">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>MicrobeEnter</Name>
     </Content>
     <Content Include="Audio\MicrobePatrol.xap">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>XactImporter</Importer>
       <Processor>XactProcessor</Processor>
       <Name>MicrobePatrol</Name>
+    </Content>
+    <Content Include="Audio\Music.wav">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Music</Name>
     </Content>
     <Content Include="Audio\NoScore.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -186,6 +190,12 @@
     <Content Include="Audio\Score.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Score</Name>
+    </Content>
+    <Content Include="Content\bg_level_2.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>bg_level_2</Name>
     </Content>
     <Content Include="Content\bus.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
@@ -229,6 +239,24 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Name>HealthBar</Name>
     </Content>
+    <Content Include="Audio\Frogger.xap">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>XactImporter</Importer>
+      <Processor>XactProcessor</Processor>
+      <Name>Frogger</Name>
+    </Content>
+    <None Include="Audio\Win\Frogger.xgs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Frogger</Name>
+    </None>
+    <None Include="Audio\Win\Frogger.xsb">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Frogger</Name>
+    </None>
+    <None Include="Audio\Frogger.xwb">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Frogger</Name>
+    </None>
     <None Include="Audio\MicrobePatrol.xgs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>MicrobePatrol</Name>

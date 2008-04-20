@@ -17,13 +17,7 @@ namespace Frogger.Utils
     /// </summary>
     public enum Sounds
     {
-        MicrobeEnter,
-        Damage,
-        Death,
-        Score,
-        NoScore,
-        PerfectScore,
-        AddLine,
+        Music
     }
 
     /// <summary>
@@ -37,13 +31,7 @@ namespace Frogger.Utils
 
         private static string[] cueNames = new string[]
         {
-            "MicrobeEnter",
-            "Damage",
-            "Death",
-            "Score",
-            "NoScore",
-            "PerfectScore",
-            "AddLine",
+            "Music"
         };
 
 
@@ -75,9 +63,9 @@ namespace Frogger.Utils
         /// </summary>
         public static void Initialize()
         {
-            engine = new AudioEngine(@"audio\MicrobePatrol.xgs");
-            wavebank = new WaveBank(engine, @"audio\MicrobePatrol.xwb");
-            soundbank = new SoundBank(engine, @"audio\MicrobePatrol.xsb");
+            engine = new AudioEngine(@"audio\Frogger.xgs");
+            wavebank = new WaveBank(engine, @"audio\Frogger.xwb");
+            soundbank = new SoundBank(engine, @"audio\Frogger.xsb");
         }
 
 

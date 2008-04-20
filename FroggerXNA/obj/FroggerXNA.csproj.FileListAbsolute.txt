@@ -19,3 +19,8 @@ C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXN
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\gateway.xnb
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\intro.xnb
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\wood.xnb
+C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\bg_level_2.xnb
+C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Audio\Frogger.xgs
+C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Audio\Frogger.xwb
+C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Audio\Frogger.xsb
+C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\obj\x86\Debug\Audio\Frogger.xml

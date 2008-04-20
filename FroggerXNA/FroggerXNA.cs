@@ -32,7 +32,7 @@ namespace FroggerXNA
 
     class Player
     {
-        public int score = 0;
+  
         public int lives = 3;
 
     }
@@ -60,6 +60,8 @@ namespace FroggerXNA
     public class FroggerXNA : Microsoft.Xna.Framework.Game
     {
 
+
+
         GameState gameState = GameState.TitleScreen;
 
 
@@ -71,11 +73,15 @@ namespace FroggerXNA
         ContentManager content;
 
 
-        Background background;
+        Background bg_level_1;
+        Background bg_level_2;
+
         Background intro;
         
         
         Frog frog;
+
+        Score score;
 
         public const float SPEED = 0.05f;
 
@@ -108,17 +114,6 @@ namespace FroggerXNA
         LineManager lineManager = new LineManager();
 
 
-        List<Line> titleLineList = new List<Line>();
-        Matrix titleMatrix;
-        
-        List<Line> authorLineList = new List<Line>();
-        Matrix authorMatrix;
-        
-        List<Line> versionLineList = new List<Line>();
-        Matrix versionMatrix;
-
-        List<Line> konamiLineList = new List<Line>();
-        Matrix konamiMatrix;
 
 
         SpriteBatch mBatch;
@@ -137,6 +132,7 @@ namespace FroggerXNA
         {
 
             Sound.Initialize();
+            
 
             graphics = new GraphicsDeviceManager(this);
             content = new ContentManager(Services);
@@ -160,10 +156,11 @@ namespace FroggerXNA
         {
             // TODO: Add your initialization logic here
 
-           
 
-                background = new Background(this, graphics,"Content/fond");
+            
 
+                bg_level_1 = new Background(this, graphics,"Content/fond");
+                bg_level_2 = new Background(this, graphics, "Content/bg_level_2");
 
                 intro = new Background(this, graphics, "Content/intro");
 
@@ -222,7 +219,7 @@ namespace FroggerXNA
 
                     
                     this.Components.Add(frog);
-            Sound.Play(Sounds.Damage);
+            
 
 
 
@@ -232,7 +229,11 @@ namespace FroggerXNA
                 this.Components.Add(bus);
 
                 FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
-                this.Components.Add(fps);
+
+                Score score = new Score(this, graphics.GraphicsDevice);
+                this.Components.Add(score);
+
+            this.Components.Add(fps);
 
 
                 this.Components.Add(gateway);
@@ -241,26 +242,16 @@ namespace FroggerXNA
                 this.Components.Add(gateway_4);
                 this.Components.Add(gateway_5);
 
-                this.Components.Add(background);
+                this.Components.Add(bg_level_1);
+                this.Components.Add(bg_level_2);
                 this.Components.Add(intro);
            
 
-            // Some static text
-            StrokeFont.AddStringCentered("The Fr gger", titleLineList);
-            titleMatrix = Matrix.CreateScale(0.01f) * Matrix.CreateTranslation(0, 0.2f, 0);
-            
-            StrokeFont.AddStringCentered("By Maxime Rauer", authorLineList);
-            authorMatrix = Matrix.CreateScale(0.004f) * Matrix.CreateTranslation(0, -0.3f, 0);
-
-            StrokeFont.AddStringCentered("Version 1.0\nApril 15, 2008", versionLineList);
-            versionMatrix = Matrix.CreateScale(0.002f) * Matrix.CreateTranslation(0, -0.6f, 0);
-
-            StrokeFont.AddStringCentered("Based on Konami'game@1984", konamiLineList);
-            konamiMatrix = Matrix.CreateScale(0.003f) * Matrix.CreateTranslation(0, 0.7f, 0);
 
 
             base.Initialize();
 
+            Sound.Play(Sounds.Music);
         }
 
 
@@ -268,8 +259,8 @@ namespace FroggerXNA
         void NewGame()
         {
 
-            
 
+            
             gameState = GameState.Level1;
            
             
@@ -277,6 +268,10 @@ namespace FroggerXNA
           //  player = new Player();
         }
 
+        void Level_2()
+        {
+            gameState = GameState.Level2;
+        }
 
         void GameOver()
         {
@@ -286,25 +281,35 @@ namespace FroggerXNA
 
         void Diplayed()
         {
-            gateway.Visible = true;
-            gateway_2.Visible = true;
-            gateway_3.Visible = true;
-            gateway_4.Visible = true;
-            gateway_5.Visible = true;
+           
 
+            if (gameState == GameState.Level1)
+            {
+                intro.Visible = false;
+                bg_level_1.Visible = true;
 
-            background.Visible = true;
-            bus.Visible = true;
+                gateway.Visible = true;
+                gateway_2.Visible = true;
+                gateway_3.Visible = true;
+                gateway_4.Visible = true;
+                gateway_5.Visible = true;
 
-            car.Visible = true;
-            car_2.Visible = true;
-            car_3.Visible = true;
-            car_4.Visible = true;
-            car_5.Visible = true;
+                car.Visible = true;
+                car_2.Visible = true;
+                car_3.Visible = true;
+                car_4.Visible = true;
+                car_5.Visible = true;
 
+                bus.Visible = true;
+            }
 
-            wood.Visible = true;
+            if (gameState == GameState.Level2)
+            {
+                bg_level_1.Visible = false;
+                bg_level_2.Visible = true;
 
+                wood.Visible = true;
+            }
            
 
             frog.Visible = true;
@@ -312,13 +317,17 @@ namespace FroggerXNA
 
         void Hidden()
         {
+
+            bg_level_1.Visible = false;
+            bg_level_2.Visible = false;
+
             gateway.Visible = false;
             gateway_2.Visible = false;
             gateway_3.Visible = false;
             gateway_4.Visible = false;
             gateway_5.Visible = false;
 
-            background.Visible = false;
+            
             bus.Visible = false;
 
             car.Visible = false;
@@ -399,6 +408,7 @@ namespace FroggerXNA
         protected override void Update(GameTime gameTime)
         {
             Sound.Update();
+            
             KeyboardState keyboardState = Keyboard.GetState(); //Keyboard state
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
 
@@ -409,9 +419,9 @@ namespace FroggerXNA
                 this.Exit();
             }
 
-            if (keyboardState.IsKeyDown(Keys.Space)) //When you press on start, the game run
+            if (keyboardState.IsKeyDown(Keys.Space) || gameState != GameState.TitleScreen) //When you press on start, the game run
             {
-                if (gameState != GameState.GameActive)
+        
                     NewGame(); //New game
                 
             }
@@ -419,6 +429,7 @@ namespace FroggerXNA
 
             if (keyboardState.IsKeyDown(Keys.A)) //When you press on start, the game run
             {
+                score.ScoreValue = score.ScoreValue + 500;
                 gameState=GameState.Level2;
 
             }
@@ -459,7 +470,8 @@ namespace FroggerXNA
 
              )
            {
-               gameState = GameState.Level2;
+               Level_2();
+              
            }
 
 
@@ -490,7 +502,7 @@ namespace FroggerXNA
             base.Update(gameTime);
         }
 
-
+      //  
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -507,11 +519,6 @@ namespace FroggerXNA
             if (gameState == GameState.TitleScreen)
             {
 
-                //  lineManager.Draw(titleLineList, 1.5f, Color.BlanchedAlmond.ToVector4(), viewMatrix, projMatrix, 0, null, titleMatrix, 0.90f);
-                //lineManager.Draw(authorLineList, 1.5f, Color.CornflowerBlue.ToVector4(), viewMatrix, projMatrix, 0, null, authorMatrix, 0.80f);
-                //lineManager.Draw(versionLineList, 2.0f, new Vector4(0.4f, 0.4f, 0.4f, 1), viewMatrix, projMatrix, 0, null, versionMatrix, 0.60f);
-                //lineManager.Draw(konamiLineList, 1.0new Vector4(0.4f, 0.4f, 0.4f, 1), viewMatrix, projMatrix, 0, null, konamiMatrix, 0.30f);
-                graphics.GraphicsDevice.Clear(Color.Black);
 
                 Hidden();
 
@@ -532,34 +539,24 @@ namespace FroggerXNA
 
             }
 
+            if (gameState == GameState.Level2)
+            {
+                Diplayed();
+            }
+
+
+
             if (gameState == GameState.GameOver)
             {
                 graphics.GraphicsDevice.Clear(Color.Black);
 
                 Hidden();
 
-                background.Visible = false;
                 spriteBatch.Begin();
                 spriteBatch.DrawString(mBitmapFont, "Game Over", new Vector2(480.0f, 300.0f), Color.MediumSlateBlue);
                 spriteBatch.End();
             }
 
-
-            /*
-            //TODO: Add your drawing code here
-            mBatch.Begin();
-
-            //Draw the negative space for the health bar
-            mBatch.Draw(mHealthBar, new Rectangle(this.Window.ClientBounds.Width / 2 - mHealthBar.Width / 2, 30, mHealthBar.Width, 44), new Rectangle(0, 45, mHealthBar.Width, 44), Color.Gray);
-
-            //Draw the current health level based on the current Health
-            mBatch.Draw(mHealthBar, new Rectangle(this.Window.ClientBounds.Width / 2 - mHealthBar.Width / 2, 30, (int)(mHealthBar.Width * ((double)mCurrentHealth / 100)), 44), new Rectangle(0, 45, mHealthBar.Width, 44), Color.Red);
-
-            //Draw the box around the health bar
-            mBatch.Draw(mHealthBar, new Rectangle(this.Window.ClientBounds.Width / 2 - mHealthBar.Width / 2, 30, mHealthBar.Width, 44), new Rectangle(0, 0, mHealthBar.Width, 44), Color.White);
-
-            mBatch.End();
-            */
 
             
 
