@@ -89,22 +89,11 @@ namespace FroggerXNA
 
         Score score;
 
-        //Cars
+        //Objects
 
         List<Car> listCar=new List<Car>();
-        
+        List<Bus> listBus = new List<Bus>();
 
-       // Car car;
-        //Car car_2;
-        Car car_3;
-        Car car_4;
-        Car car_5;
-
-        //Buses
-
-        Bus bus;
-        Bus bus_2;
-        Bus bus_3;
 
         //Woods
 
@@ -172,41 +161,20 @@ namespace FroggerXNA
                 this.Components.Add(frog);                 
             
                 //Cars
-            listCar.Add(new Car(this, graphics, new Vector2(120, 410)));
-            listCar.Add(new Car(this, graphics, new Vector2(1000, 420)));
+                listCar.Add(new Car(this, graphics, new Vector2(120, 410)));
+                listCar.Add(new Car(this, graphics, new Vector2(1000, 420)));
+                listCar.Add(new Car(this, graphics, new Vector2(700, 410)));
+                listCar.Add(new Car(this, graphics, new Vector2(800, 530)));
+                listCar.Add(new Car(this, graphics, new Vector2(610, 420)));
 
-            //listCar.ForEach(delegate(Car c){this.Components.Add(c)};);
-            listCar.ForEach(delegate(Car p) { this.Components.Add(p); });
-
-
-
-       
-
-                //car = new Car(this, graphics, new Vector2(120, 410));
-               // this.Components.Add(car);
-
-               // car_2 = new Car(this, graphics, new Vector2(1000, 420));
-                //this.Components.Add(car_2);
-    
-                car_3 = new Car(this, graphics, new Vector2(700, 410));
-                this.Components.Add(car_3);    
-
-                car_4 = new Car(this, graphics, new Vector2(800, 530));
-                this.Components.Add(car_4);   
-
-                car_5 = new Car(this, graphics, new Vector2(610, 420));
-                this.Components.Add(car_5);
+                listCar.ForEach(delegate(Car c) { this.Components.Add(c); });
 
                 //Buses
+                listBus.Add(new Bus(this, graphics, new Vector2(900, 530)));
+                listBus.Add(new Bus(this, graphics, new Vector2(300, 410)));
+                listBus.Add(new Bus(this, graphics, new Vector2(300, 520)));
 
-                bus = new Bus(this, graphics, new Vector2(900, 530));
-                this.Components.Add(bus);
-
-                bus_2 = new Bus(this, graphics, new Vector2(300, 410));
-                this.Components.Add(bus_2);
-
-                bus_3 = new Bus(this, graphics, new Vector2(300, 410));
-                this.Components.Add(bus_3);
+                listBus.ForEach(delegate(Bus b) { this.Components.Add(b); });
 
                 //Woods
 
@@ -322,21 +290,9 @@ namespace FroggerXNA
 
                 frog.Enabled = true;
 
-
-                //Cars
-
-
-               // car.Visible = true;
-                //car_2.Visible = true;
-                car_3.Visible = true;
-                car_4.Visible = true;
-                car_5.Visible = true;
-
-                //Buses
-
-                bus.Visible = true;
-                bus_2.Visible = true;
-                bus_3.Visible = true;
+                listCar.ForEach(delegate(Car c) { c.Visible=true; });
+                listBus.ForEach(delegate(Bus b) { b.Visible = true; });
+              
 
                 //Woods
 
@@ -388,15 +344,8 @@ namespace FroggerXNA
             gateway_5.Visible = false;
 
 
-            bus.Visible = false;
-            bus_2.Visible = false;
-            bus_3.Visible = false;
-
-            //car.Visible = false;
-            //car_2.Visible = false;
-            car_3.Visible = false;
-            car_4.Visible = false;
-            car_5.Visible = false;
+            listCar.ForEach(delegate(Car c) { c.Visible = false; });
+            listBus.ForEach(delegate(Bus b) { b.Visible = false; });
 
             wood.Visible = false;
 
@@ -517,21 +466,10 @@ namespace FroggerXNA
             //
             // All the collisions
             //
-
-            //Cars
-
             listCar.ForEach(delegate(Car c) { Collision(c); });
-
+            listBus.ForEach(delegate(Bus b) { Collision(b); });
            
-           // Collision(car_2);
-            Collision(car_3);
-            Collision(car_4);
-
-            //Buses
-
-            Collision(bus);
-            Collision(bus_2);
-            Collision(bus_3);
+ 
 
             //After 20 seconds, the game is over
 
@@ -584,17 +522,13 @@ namespace FroggerXNA
                    SPEED = 0.5f;
                }
 
+               //
+               // Movement and Speed
+               //
+
                listCar.ForEach(delegate(Car c) { c.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
-
-             //  car.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-               //car_2.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-               car_3.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-               car_4.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-               car_5.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-
-               bus.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-               bus_2.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-               bus_3.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+               listBus.ForEach(delegate(Bus b) { b.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
+    
 
                wood.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
