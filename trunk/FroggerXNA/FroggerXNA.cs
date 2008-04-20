@@ -52,6 +52,7 @@ namespace FroggerXNA
         Level5
     };
 
+   
 
 
     /// <summary>
@@ -64,6 +65,17 @@ namespace FroggerXNA
         ContentManager content;
         SpriteBatch spriteBatch;
         SpriteFont mBitmapFont;
+        SpriteFont sSpriteFont;
+
+        
+        
+
+        public int ScoreValue = 0;
+        
+
+
+         ContentManager sContent;
+        SpriteBatch sSpriteBatch;
 
         //Backgrounds
 
@@ -201,8 +213,10 @@ namespace FroggerXNA
 
                 FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
 
-                Score score = new Score(this, graphics.GraphicsDevice, mCurrentHealth,level);
-                this.Components.Add(score);
+               
+
+              Score score = new Score(this, graphics.GraphicsDevice,  ScoreValue);
+              this.Components.Add(score);
 
             this.Components.Add(fps);
 
@@ -227,18 +241,14 @@ namespace FroggerXNA
             
         }
 
-
+        //
+        // Create a NewGame
+        //
 
         void NewGame()
         {
-
-
-
+            System.Diagnostics.Stopwatch.StartNew();
             gameState = GameState.Level1;
-           
-            
-
-          //  player = new Player();
         }
 
         void Level_2()
@@ -263,6 +273,7 @@ namespace FroggerXNA
                 intro.Visible = false;
                 bg_level_1.Visible = true;
 
+                frog.Enabled = true;
 
 
                 //Cars
@@ -311,13 +322,16 @@ namespace FroggerXNA
             bg_level_1.Visible = false;
             bg_level_2.Visible = false;
 
+    
+
+
             gateway.Visible = false;
             gateway_2.Visible = false;
             gateway_3.Visible = false;
             gateway_4.Visible = false;
             gateway_5.Visible = false;
 
-            
+
             bus.Visible = false;
             bus_2.Visible = false;
             bus_3.Visible = false;
@@ -330,9 +344,9 @@ namespace FroggerXNA
 
             wood.Visible = false;
 
-          
 
             frog.Visible = false;
+
         }
 
 
@@ -367,6 +381,7 @@ namespace FroggerXNA
 
             if (loadAllContent)
             {
+
                 graphics.GraphicsDevice.RenderState.CullMode = CullMode.None;
                 //Initialize the Sprite batch
                 mBatch = new SpriteBatch(this.graphics.GraphicsDevice);
@@ -379,6 +394,10 @@ namespace FroggerXNA
 
                 spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
                 mBitmapFont = content.Load<SpriteFont>("fonts/space");
+
+                sSpriteFont = content.Load<SpriteFont>("Content/SpriteFont");
+
+               
 
             }
         }
@@ -400,43 +419,40 @@ namespace FroggerXNA
         protected override void Update(GameTime gameTime)
         {
             //Sound.Update();
-            
-            KeyboardState keyboardState = Keyboard.GetState(); //Keyboard state
-            GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
 
-            //Exit 
-            if (gamePadState.Buttons.Back == ButtonState.Pressed ||
-                keyboardState.IsKeyDown(Keys.Escape))
+            //Keyboard state
+
+            KeyboardState keyboardState = Keyboard.GetState();
+
+            //If escape is pressed => Exit 
+
+            if (keyboardState.IsKeyDown(Keys.Escape))
             {
                 this.Exit();
             }
 
-            if (keyboardState.IsKeyDown(Keys.Space) || gameState != GameState.TitleScreen) //When you press on start, the game run
+            //If space is pressed => NewGame  
+
+            if (gameState == GameState.TitleScreen &&  keyboardState.IsKeyDown(Keys.Space)) //When you press on start, the game run
             {
-        
-                    NewGame(); //New game
-                
+                NewGame();
+            }
+
+            //If the game is over, press on N to play again and space to exit
+            
+            if (gameState == GameState.GameOver && keyboardState.IsKeyDown(Keys.N))
+            {
+                NewGame();
+            }
+
+            if (gameState == GameState.GameOver && keyboardState.IsKeyDown(Keys.Space))
+            {
+                Exit();
             }
 
 
-            if (keyboardState.IsKeyDown(Keys.A)) //When you press on start, the game run
-            {
-                score.ScoreValue = score.ScoreValue + 500;
-                gameState=GameState.Level2;
-
-            }
 
 
-            if (keyboardState.IsKeyDown(Keys.Up) == true)
-            {
-                mCurrentHealth += 1;
-            }
-
-            //If the Down Arrowis pressed, decrease the Health bar
-            if (keyboardState.IsKeyDown(Keys.Down) == true)
-            {
-                mCurrentHealth -= 1;
-            }
 
             //Force the health to remain between 0 and 100
             mCurrentHealth = (int)MathHelper.Clamp(mCurrentHealth, 0, 100);
@@ -459,15 +475,13 @@ namespace FroggerXNA
             Collision(bus_2);
             Collision(bus_3);
 
+            //After 20 seconds, the game is over
+
             if (gameState == GameState.Level1 && gameTime.TotalGameTime.TotalSeconds>=20)
             {
                 GameOver();
             }
 
-            if (gameTime.TotalGameTime.TotalSeconds >= 3)
-            {
-                this.level = 2;
-            }
 
 
 
@@ -499,10 +513,22 @@ namespace FroggerXNA
                bus_3.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
                wood.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-           
+
+
+               this.spriteBatch.Begin();
+
+               this.spriteBatch.DrawString(sSpriteFont,
+                            String.Format("Level : {0}", level),
+                            new Vector2(1150, 750), Color.White);
+
+               this.spriteBatch.End();
+
            }
 
-      
+
+
+
+
 
             base.Update(gameTime);
         }
@@ -551,14 +577,22 @@ namespace FroggerXNA
 
 
 
+
+            //
+            // GameOver Draw
+            //
+
             if (gameState == GameState.GameOver)
             {
                 graphics.GraphicsDevice.Clear(Color.Black);
 
                 Hidden();
+                frog.Enabled = false;
+                
 
                 spriteBatch.Begin();
-                spriteBatch.DrawString(mBitmapFont, "Game Over", new Vector2(480.0f, 300.0f), Color.MediumSlateBlue);
+                spriteBatch.DrawString(mBitmapFont, "Game Over", new Vector2(470.0f, 200.0f), Color.White);
+                spriteBatch.DrawString(mBitmapFont, "Your score is 0", new Vector2(420.0f, 400.0f), Color.White);
                 spriteBatch.End();
             }
 

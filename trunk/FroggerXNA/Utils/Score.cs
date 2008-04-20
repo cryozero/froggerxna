@@ -23,7 +23,9 @@ namespace Frogger.Utils
 
         double TimeLastDraw = 0;
 
-        int level;
+        public int level;
+
+        
 
         #endregion
 
@@ -34,13 +36,12 @@ namespace Frogger.Utils
         /// </summary>
         /// <param name="game"></param>
         /// <param name="graphicDevice"></param>
-        public Score(Game game, GraphicsDevice graphicDevice,int ScoreValue,int level)
+        public Score(Game game, GraphicsDevice graphicDevice,int ScoreValue)
             : base(game)
         {
             this.mContent = new ContentManager(game.Services);
             this.mSpriteBatch = new SpriteBatch(graphicDevice);
             this.ScoreValue = ScoreValue;
-            this.level = level;
         }
 
         /// <summary>
@@ -66,10 +67,10 @@ namespace Frogger.Utils
         public override void Draw(GameTime gameTime)
         {
 
-                        double timeElapsed = gameTime.TotalGameTime.TotalMilliseconds - TimeLastDraw;
+            ScoreValue = ScoreValue + 100;
 
-            if (timeElapsed > 1000)
-            {
+           
+             
             this.mSpriteBatch.Begin();
             this.mSpriteBatch.DrawString(mSpriteFont,
                                          String.Format("Score : {0}", ScoreValue),
@@ -78,17 +79,25 @@ namespace Frogger.Utils
                                          String.Format("Time : {0}", gameTime.TotalGameTime.TotalSeconds),
                                          new Vector2(350, 750), Color.White);
 
-            this.mSpriteBatch.DrawString(mSpriteFont,
-                         String.Format("Level : {0}", level),
-                         new Vector2(1150, 750), Color.White);
+           // this.mSpriteBatch.DrawString(mSpriteFont,
+             //            String.Format("Level : {0}", level),
+               //          new Vector2(1150, 750), Color.White);
 
 
 
                 this.mSpriteBatch.End();
-        }
+       
            
 
         }
+
+
+
+        public void ScoreUpdate(int ScoreValue)
+        {
+            this.ScoreValue = ScoreValue;
+        }
+
 
         /// <summary>
         /// Update the framerate
@@ -96,6 +105,9 @@ namespace Frogger.Utils
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
+           // ScoreValue = 0;
+
+            
 
                 Draw(gameTime);
             }
