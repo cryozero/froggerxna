@@ -91,31 +91,12 @@ namespace FroggerXNA
 
         //Objects
 
+        List<Gateway> listGateway = new List<Gateway>();
+
         List<Car> listCar=new List<Car>();
         List<Bus> listBus = new List<Bus>();
-
-
-        //Woods
-
-        Wood wood;
-
-        //Alligators
-
-        Alligator alligator;
-
-        //Gateways
-
-        Gateway gateway;
-        Gateway gateway_2;
-        Gateway gateway_3;
-        Gateway gateway_4;
-        Gateway gateway_5;
-
-        //
-        //Level 2 && > Object
-        //
-
-        
+        List<Wood> listWood = new List<Wood>();
+        List<Alligator> listAlligator = new List<Alligator>();     
 
 
          SpriteBatch mBatch;
@@ -158,8 +139,17 @@ namespace FroggerXNA
                 //The unique Frog !
 
                 frog = new Frog(this, graphics);
-                this.Components.Add(frog);                 
-            
+                this.Components.Add(frog);
+
+                //Gateways
+                listGateway.Add(new Gateway(this, graphics, new Vector2(200, 20)));
+                listGateway.Add(new Gateway(this, graphics, new Vector2(400, 20)));
+                listGateway.Add(new Gateway(this, graphics, new Vector2(600, 20)));
+                listGateway.Add(new Gateway(this, graphics, new Vector2(800, 20)));
+                listGateway.Add(new Gateway(this, graphics, new Vector2(1000, 20)));
+
+                listGateway.ForEach(delegate(Gateway g) { this.Components.Add(g); });
+
                 //Cars
                 listCar.Add(new Car(this, graphics, new Vector2(120, 410)));
                 listCar.Add(new Car(this, graphics, new Vector2(1000, 420)));
@@ -177,23 +167,23 @@ namespace FroggerXNA
                 listBus.ForEach(delegate(Bus b) { this.Components.Add(b); });
 
                 //Woods
+                listWood.Add(new Wood(this, graphics, new Vector2(110, 220)));
+                listWood.Add(new Wood(this, graphics, new Vector2(650, 280)));
+                listWood.Add(new Wood(this, graphics, new Vector2(310, 320)));
+                listWood.Add(new Wood(this, graphics, new Vector2(510, 300)));
+                listWood.Add(new Wood(this, graphics, new Vector2(910, 270)));
 
-                wood = new Wood(this, graphics, new Vector2(110, 220));
-                this.Components.Add(wood);
+                listWood.ForEach(delegate(Wood w) { this.Components.Add(w); });
 
                 //Alligators
+                listAlligator.Add(new Alligator(this, graphics, new Vector2(790, 290)));
+                listAlligator.Add(new Alligator(this, graphics, new Vector2(990, 200)));
 
-                alligator = new Alligator(this, graphics, new Vector2(660, 290));
-                this.Components.Add(alligator);
+                listAlligator.ForEach(delegate(Alligator a) { this.Components.Add(a); });
 
 
 
-                gateway = new Gateway(this, graphics, new Vector2(200, 20));
-                gateway_2 = new Gateway(this, graphics, new Vector2(400, 20));
-                gateway_3 = new Gateway(this, graphics, new Vector2(600, 20));
-                gateway_4 = new Gateway(this, graphics, new Vector2(800, 20));
-                gateway_5 = new Gateway(this, graphics, new Vector2(1000, 20));
-
+             
                 
             
 
@@ -212,12 +202,7 @@ namespace FroggerXNA
 
             this.Components.Add(fps);
 
-          
-                this.Components.Add(gateway);
-                this.Components.Add(gateway_2);
-                this.Components.Add(gateway_3);
-                this.Components.Add(gateway_4);
-                this.Components.Add(gateway_5);
+         
 
                 this.Components.Add(bg_level_1);
                 this.Components.Add(bg_level_2);
@@ -290,22 +275,10 @@ namespace FroggerXNA
 
                 frog.Enabled = true;
 
+                listGateway.ForEach(delegate(Gateway g) { g.Visible = true; });
                 listCar.ForEach(delegate(Car c) { c.Visible=true; });
                 listBus.ForEach(delegate(Bus b) { b.Visible = true; });
-              
-
-                //Woods
-
-                wood.Visible = true;
-
-                gateway.Visible = true;
-                gateway_2.Visible = true;
-                gateway_3.Visible = true;
-                gateway_4.Visible = true;
-                gateway_5.Visible = true;
-
-
-
+                listWood.ForEach(delegate(Wood w) { w.Visible = true; });
             }
 
             if (gameState == GameState.Level2)
@@ -313,7 +286,7 @@ namespace FroggerXNA
                 bg_level_1.Visible = false;
                 bg_level_2.Visible = true;
 
-                
+                listAlligator.ForEach(delegate(Alligator a) { a.Visible = true; });
             }
 
             if (gameState == GameState.Level3)
@@ -334,21 +307,11 @@ namespace FroggerXNA
             bg_level_1.Visible = false;
             bg_level_2.Visible = false;
 
-    
-
-
-            gateway.Visible = false;
-            gateway_2.Visible = false;
-            gateway_3.Visible = false;
-            gateway_4.Visible = false;
-            gateway_5.Visible = false;
-
-
+            listGateway.ForEach(delegate(Gateway g) { g.Visible = false; });
             listCar.ForEach(delegate(Car c) { c.Visible = false; });
             listBus.ForEach(delegate(Bus b) { b.Visible = false; });
-
-            wood.Visible = false;
-
+            listWood.ForEach(delegate(Wood w) { w.Visible = false; });
+            listAlligator.ForEach(delegate(Alligator a) { a.Visible = false; });
 
             frog.Visible = false;
 
@@ -479,25 +442,35 @@ namespace FroggerXNA
             }
 
 
+            listGateway.ForEach(delegate(Gateway g) {
 
 
-           if (frog.mLocation.X >= gateway.mLocation.X - 50 && frog.mLocation.X <= gateway.mLocation.X + 50
-      && frog.mLocation.Y >= gateway.mLocation.Y - 50 && frog.mLocation.Y <= gateway.mLocation.Y + 50
-               && gameState==GameState.Level1
-             )
-           {
-               Level_2();
-              
-           }
+                if (frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
+       && frog.mLocation.Y >= g.mLocation.Y - 50 && frog.mLocation.Y <= g.mLocation.Y + 50
+                && gameState == GameState.Level1
+              )
+                {
+                    Level_2();
 
-           if (frog.mLocation.X >= gateway.mLocation.X - 50 && frog.mLocation.X <= gateway.mLocation.X + 50
-      && frog.mLocation.Y >= gateway.mLocation.Y - 50 && frog.mLocation.Y <= gateway.mLocation.Y + 50
-               && gameState == GameState.Level2
-             )
-           {
-               Level_3();
+                }
+            
+            });
 
-           }
+
+            listGateway.ForEach(delegate(Gateway g)
+            {
+
+
+                if (frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
+       && frog.mLocation.Y >= g.mLocation.Y - 50 && frog.mLocation.Y <= g.mLocation.Y + 50
+                && gameState == GameState.Level2
+              )
+                {
+                    Level_3();
+
+                }
+
+            });
 
 
 
@@ -528,12 +501,10 @@ namespace FroggerXNA
 
                listCar.ForEach(delegate(Car c) { c.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
                listBus.ForEach(delegate(Bus b) { b.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
+               listWood.ForEach(delegate(Wood w) { w.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
+               listAlligator.ForEach(delegate(Alligator a) { a.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
     
-
-               wood.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-
-
-               alligator.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+               //alligator.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
               
 
                this.spriteBatch.Begin();
@@ -597,7 +568,10 @@ namespace FroggerXNA
             }
 
 
-
+            if (gameState == GameState.Level3)
+            {
+                Diplayed();
+            }
 
             //
             // GameOver Draw
