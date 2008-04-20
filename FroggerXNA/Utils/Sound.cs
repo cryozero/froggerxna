@@ -17,7 +17,9 @@ namespace Frogger.Utils
     /// </summary>
     public enum Sounds
     {
-        Music
+        Music,
+        Car,
+        Frog
     }
 
     /// <summary>
@@ -31,7 +33,9 @@ namespace Frogger.Utils
 
         private static string[] cueNames = new string[]
         {
-            "Music"
+            "Music",
+            "Car",
+            "Frog"
         };
 
 
