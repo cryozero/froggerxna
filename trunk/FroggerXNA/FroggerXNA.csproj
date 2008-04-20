@@ -79,6 +79,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>StrokeFont</Name>
     </Compile>
+    <Compile Include="World\Alligator.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Alligator</Name>
+    </Compile>
     <Compile Include="World\Background.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Background</Name>
@@ -160,6 +164,12 @@
     <Content Include="Audio\AddLine.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>AddLine</Name>
+    </Content>
+    <Content Include="Content\alligator.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>alligator</Name>
     </Content>
     <Content Include="Audio\Car.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
