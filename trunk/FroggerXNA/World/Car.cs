@@ -92,7 +92,7 @@ namespace Frogger.World
             if (mLocation.X <= 10)
             {
                 this.mLocation.X = GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width;
-                //Sound.Play(Sounds.Car);
+                Sound.Play(Sounds.Car);
             }
 
             base.Update(gameTime);

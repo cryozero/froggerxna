@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Frogger.Effects;
+using Frogger.Utils;
 
 namespace Frogger.World
 {
@@ -31,7 +32,7 @@ namespace Frogger.World
         /// <summary>
         /// time when the player shot for the last time
         /// </summary>
-        double mTimeLastShoot = 0;
+        double TimeLastSound= 0;
 
         ParticlesEmitter mEngineEffect;
 
@@ -87,24 +88,37 @@ namespace Frogger.World
             {
                // if (mLocation.X < Background.BACKGROUND_WIDTH - Size.X)
                     mLocation.X += (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+                  
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 if (mLocation.X > 0)
                     mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+                
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
                 if (mLocation.Y > 0)
                     mLocation.Y -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+                
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
                // if (mLocation.Y < Background.BACKGROUND_HEIGHT - Size.Y)
                     mLocation.Y += (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+                    
             }
 
+                        double timeElapsed = gameTime.TotalGameTime.TotalMilliseconds - TimeLastSound;
+
+                        if (timeElapsed > 1000 && Keyboard.GetState().IsKeyDown(Keys.Up) )
+                         {
+                             Sound.Play(Sounds.Frog);
+                             TimeLastSound = gameTime.TotalGameTime.TotalMilliseconds;
+                         }
+
+            /*
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 double timeElapsed = gameTime.TotalGameTime.TotalMilliseconds - mTimeLastShoot;
@@ -116,7 +130,7 @@ namespace Frogger.World
 
                     mTimeLastShoot = gameTime.TotalGameTime.TotalMilliseconds;
                 }
-            }
+            }*/
 
             base.Update(gameTime);
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Frogger.Utils;
 
 namespace Frogger.World
 {
@@ -88,11 +89,13 @@ namespace Frogger.World
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-           // mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+            Sound.Update();
+            // mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
             if (mLocation.X <= 10)
             {
                 this.mLocation.X = GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width;
+                Sound.Play(Sounds.Car);
             }
 
             base.Update(gameTime);

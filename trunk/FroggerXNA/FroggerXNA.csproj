@@ -169,19 +169,13 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Death</Name>
     </Content>
-    <Content Include="Audio\MicrobePatrol.xap">
-      <XNAUseContentPipeline>true</XNAUseContentPipeline>
-      <Importer>XactImporter</Importer>
-      <Processor>XactProcessor</Processor>
-      <Name>MicrobePatrol</Name>
+    <Content Include="Audio\Frog.wav">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Frog</Name>
     </Content>
     <Content Include="Audio\Music.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Music</Name>
-    </Content>
-    <Content Include="Audio\NoScore.wav">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>NoScore</Name>
     </Content>
     <Content Include="Audio\PerfectScore.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -190,6 +184,12 @@
     <Content Include="Audio\Score.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Score</Name>
+    </Content>
+    <Content Include="Content\bg_level_1.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>bg_level_1</Name>
     </Content>
     <Content Include="Content\bg_level_2.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
@@ -221,12 +221,6 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Name>fireball</Name>
     </Content>
-    <Content Include="Content\fond.png">
-      <XNAUseContentPipeline>true</XNAUseContentPipeline>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Name>fond</Name>
-    </Content>
     <Content Include="Content\frog.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
@@ -256,18 +250,6 @@
     <None Include="Audio\Frogger.xwb">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Frogger</Name>
-    </None>
-    <None Include="Audio\MicrobePatrol.xgs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>MicrobePatrol</Name>
-    </None>
-    <None Include="Audio\MicrobePatrol.xsb">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>MicrobePatrol</Name>
-    </None>
-    <None Include="Audio\MicrobePatrol.xwb">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>MicrobePatrol</Name>
     </None>
     <Content Include="Content\intro.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
