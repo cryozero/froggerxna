@@ -41,7 +41,8 @@ namespace FroggerXNA
         Level2,
         Level3,
         Level4,
-        Level5
+        Level5,
+        GameWin
     };
 
   
@@ -66,8 +67,8 @@ namespace FroggerXNA
         
 
 
-         ContentManager sContent;
-        SpriteBatch sSpriteBatch;
+        // ContentManager sContent;
+        //SpriteBatch sSpriteBatch;
 
         //Backgrounds
 
@@ -75,12 +76,14 @@ namespace FroggerXNA
         Background bg_level_1;
         Background bg_level_2;
         Background bg_level_3;
+        Background bg_level_4;
+        Background bg_level_5;
 
-        int level;
+        //int level;
         
         Frog frog;
 
-        Score score;
+       // Score score;
 
         //Objects
 
@@ -89,8 +92,8 @@ namespace FroggerXNA
         List<Car> listCar=new List<Car>();
         List<Bus> listBus = new List<Bus>();
         List<Wood> listWood = new List<Wood>();
-        List<Alligator> listAlligator = new List<Alligator>();     
-
+        List<Alligator> listAlligator = new List<Alligator>();
+        List<Turtle> listTurtle = new List<Turtle>();  
 
          SpriteBatch mBatch;
         Texture2D mHealthBar;
@@ -130,6 +133,8 @@ namespace FroggerXNA
                 bg_level_1 = new Background(this, graphics,"Content/bg_level_1");
                 bg_level_2 = new Background(this, graphics, "Content/bg_level_2");
                 bg_level_3 = new Background(this, graphics, "Content/bg_level_3");
+                bg_level_4 = new Background(this, graphics, "Content/bg_level_2");
+                bg_level_5 = new Background(this, graphics, "Content/bg_level_1");
 
                 //The unique Frog !
 
@@ -176,6 +181,13 @@ namespace FroggerXNA
 
                 listAlligator.ForEach(delegate(Alligator a) { this.Components.Add(a); });
 
+
+                //Turtles
+                listTurtle.Add(new Turtle(this, graphics, new Vector2(780, 290)));
+
+                listTurtle.ForEach(delegate(Turtle a) { this.Components.Add(a); });
+
+
                 FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
 
 
@@ -189,6 +201,12 @@ namespace FroggerXNA
 
                 this.Components.Add(bg_level_1);
                 this.Components.Add(bg_level_2);
+                this.Components.Add(bg_level_3);
+                this.Components.Add(bg_level_4);
+                this.Components.Add(bg_level_5);
+
+
+
                 this.Components.Add(intro);
 
              
@@ -250,6 +268,31 @@ namespace FroggerXNA
         }
 
         //
+        // Level 4
+        //
+
+
+        void Level_4()
+        {
+            gameState = GameState.Level4;
+            frog.mLocation.X = 620;
+            frog.mLocation.Y = 670;
+        }
+
+
+        //
+        // Level 5
+        //
+
+
+        void Level_5()
+        {
+            gameState = GameState.Level5;
+            frog.mLocation.X = 620;
+            frog.mLocation.Y = 670;
+        }
+
+        //
         // GameOver
         //
 
@@ -292,6 +335,25 @@ namespace FroggerXNA
                 bg_level_2.Visible = false;
                 bg_level_3.Visible = true;
 
+                listTurtle.ForEach(delegate(Turtle a) { a.Visible = true; });
+
+            }
+
+            if (gameState == GameState.Level4)
+            {
+                bg_level_1.Visible = false;
+                bg_level_2.Visible = false;
+                bg_level_4.Visible = true;
+
+            }
+
+
+            if (gameState == GameState.Level5)
+            {
+                bg_level_1.Visible = false;
+                bg_level_2.Visible = false;
+                bg_level_5.Visible = true;
+
             }
 
 
@@ -303,12 +365,16 @@ namespace FroggerXNA
 
             bg_level_1.Visible = false;
             bg_level_2.Visible = false;
+            bg_level_3.Visible = false;
+            bg_level_4.Visible = false;
+            bg_level_5.Visible = false;
 
             listGateway.ForEach(delegate(Gateway g) { g.Visible = false; });
             listCar.ForEach(delegate(Car c) { c.Visible = false; });
             listBus.ForEach(delegate(Bus b) { b.Visible = false; });
             listWood.ForEach(delegate(Wood w) { w.Visible = false; });
             listAlligator.ForEach(delegate(Alligator a) { a.Visible = false; });
+            listTurtle.ForEach(delegate(Turtle a) { a.Visible = false; });
 
             frog.Visible = false;
 
@@ -424,7 +490,13 @@ namespace FroggerXNA
                 Exit();
             }
 
+            //Cheat
 
+            if (keyboardState.IsKeyDown(Keys.C) && keyboardState.IsKeyDown(Keys.H))
+            {
+                //Level_2();
+                //gameState.
+            }
 
 
 
@@ -481,6 +553,39 @@ namespace FroggerXNA
 
 
 
+            listGateway.ForEach(delegate(Gateway g)
+            {
+
+
+                if (frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
+       && frog.mLocation.Y >= g.mLocation.Y - 50 && frog.mLocation.Y <= g.mLocation.Y + 50
+                && gameState == GameState.Level3
+              )
+                {
+                    Level_4();
+
+                }
+
+            });
+
+
+
+            listGateway.ForEach(delegate(Gateway g)
+            {
+
+
+                if (frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
+       && frog.mLocation.Y >= g.mLocation.Y - 50 && frog.mLocation.Y <= g.mLocation.Y + 50
+                && gameState == GameState.Level4
+              )
+                {
+                    Level_5();
+
+                }
+
+            });
+
+
            if (gameState == GameState.Level1 || gameState == GameState.Level2 || gameState == GameState.Level3) //When you press on start, the game run
            {
 
@@ -501,6 +606,16 @@ namespace FroggerXNA
                    SPEED = 0.5f;
                }
 
+               if (gameState == GameState.Level4)
+               {
+                   SPEED = 0.6f;
+               }
+
+               if (gameState == GameState.Level5)
+               {
+                   SPEED = 0.7f;
+               }
+               
                //
                // Movement and Speed
                //
@@ -509,15 +624,17 @@ namespace FroggerXNA
                listBus.ForEach(delegate(Bus b) { b.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
                listWood.ForEach(delegate(Wood w) { w.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
                listAlligator.ForEach(delegate(Alligator a) { a.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
-    
+               listTurtle.ForEach(delegate(Turtle a) { a.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
+  
+  
                //alligator.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
               
 
                this.spriteBatch.Begin();
 
-               this.spriteBatch.DrawString(sSpriteFont,
-                            String.Format("Level : {0}", level),
-                            new Vector2(1150, 750), Color.White);
+               //this.spriteBatch.DrawString(sSpriteFont,
+                 //           String.Format("Level : {0}", level),
+                   //         new Vector2(1150, 750), Color.White);
 
                this.spriteBatch.End();
 
@@ -563,7 +680,7 @@ namespace FroggerXNA
                 Diplayed();
 
                 spriteBatch.Begin();
-                spriteBatch.DrawString(mBitmapFont, "Level " + level.ToString(), new Vector2(150.0f, 700.0f), Color.BurlyWood);
+                //spriteBatch.DrawString(mBitmapFont, "Level " + level.ToString(), new Vector2(150.0f, 700.0f), Color.BurlyWood);
                 spriteBatch.End();
 
                
@@ -581,7 +698,7 @@ namespace FroggerXNA
             }
 
 
-            if (gameState == GameState.Level3)
+            if (gameState == GameState.Level3 && gameState == GameState.Level4 && gameState == GameState.Level5)
             {
                 Diplayed();
             }

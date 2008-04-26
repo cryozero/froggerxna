@@ -10,7 +10,7 @@
     <AssemblyName>FroggerXNA</AssemblyName>
     <XnaFrameworkVersion>v1.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <ApplicationIcon>Game.ico</ApplicationIcon>
+    <ApplicationIcon>Frog.ico</ApplicationIcon>
     <XNAGlobalContentPipelineAssemblies>Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</XNAGlobalContentPipelineAssemblies>
     <XNAProjectContentPipelineAssemblies>
     </XNAProjectContentPipelineAssemblies>
@@ -62,6 +62,10 @@
     <Compile Include="Effects\ParticlesEmitter.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>ParticlesEmitter</Name>
+    </Compile>
+    <Compile Include="Utils\Level.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Level</Name>
     </Compile>
     <Compile Include="Utils\Line.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -127,6 +131,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Taxi</Name>
     </Compile>
+    <Compile Include="World\Turtle.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Turtle</Name>
+    </Compile>
     <Compile Include="World\Truck.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Truck</Name>
@@ -141,10 +149,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Game.ico">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Game</Name>
-    </Content>
     <Content Include="GameThumbnail.png">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
@@ -273,6 +277,10 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Name>intro</Name>
     </Content>
+    <Content Include="Content\turtle.gif">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>turtle</Name>
+    </Content>
     <Content Include="Content\wood.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
@@ -290,6 +298,10 @@
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
       <Name>gateway</Name>
+    </Content>
+    <Content Include="Frog.ico">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Frog</Name>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
