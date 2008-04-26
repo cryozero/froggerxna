@@ -12,8 +12,8 @@ Global Settings
     Header File = Frogger.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 29926015;
-    Last Modified High = 2281175810;
+    Last Modified Low = 2281175810;
+    Last Modified High = 29926015;
 
     Category
     {
@@ -269,9 +269,9 @@ Wave Bank
     Wave
     {
         Name = Frog;
-        File = ..\..\..\..\..\..\Desktop\Frog.wav;
-        Build Settings Last Modified Low = 844976722;
-        Build Settings Last Modified High = 29926093;
+        File = Frog.wav;
+        Build Settings Last Modified Low = 455402490;
+        Build Settings Last Modified High = 29927310;
 
         Cache
         {
@@ -284,7 +284,7 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 180757972;
+            Last Modified Low = 1538101722;
             Last Modified High = 29926093;
         }
     }
@@ -295,6 +295,10 @@ Sound Bank
     Name = Frogger;
     Xbox File = Xbox\Sound Bank.xsb;
     Windows File = Win\Frogger.xsb;
+    Bank Last Modified Low = 0;
+    Bank Last Modified High = 0;
+    Header Last Modified High = 0;
+    Header Last Modified Low = 0;
 
     Sound
     {
