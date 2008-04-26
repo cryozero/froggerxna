@@ -30,13 +30,6 @@ namespace FroggerXNA
     }
 
 
-    class Player
-    {
-  
-        public int lives = 3;
-
-    }
-
 
     /// Different states for the game (include levels)
 
@@ -51,7 +44,7 @@ namespace FroggerXNA
         Level5
     };
 
-   
+  
 
 
     /// <summary>
@@ -67,7 +60,7 @@ namespace FroggerXNA
         SpriteFont sSpriteFont;
 
         
-        
+        public int lives = 3; //Number of lives
 
         public int ScoreValue = 0;
         
@@ -121,6 +114,7 @@ namespace FroggerXNA
             content = new ContentManager(Services);
 
 
+            
             graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             graphics.IsFullScreen = true;
@@ -129,6 +123,7 @@ namespace FroggerXNA
 
         protected override void Initialize()
         {
+                
                 //Backgrounds
 
                 intro = new Background(this, graphics, "Content/intro");
@@ -181,7 +176,20 @@ namespace FroggerXNA
 
                 listAlligator.ForEach(delegate(Alligator a) { this.Components.Add(a); });
 
+                FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
 
+
+
+            //    Score score = new Score(this, graphics.GraphicsDevice, ScoreValue);
+              //this.Components.Add(score);
+
+                this.Components.Add(fps);
+
+
+
+                this.Components.Add(bg_level_1);
+                this.Components.Add(bg_level_2);
+                this.Components.Add(intro);
 
              
                 
@@ -193,20 +201,7 @@ namespace FroggerXNA
    
               
 
-                FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
 
-               
-
-              Score score = new Score(this, graphics.GraphicsDevice,  ScoreValue);
-              this.Components.Add(score);
-
-            this.Components.Add(fps);
-
-         
-
-                this.Components.Add(bg_level_1);
-                this.Components.Add(bg_level_2);
-                this.Components.Add(intro);
 
                 base.Initialize();
 
@@ -226,6 +221,8 @@ namespace FroggerXNA
         {
             System.Diagnostics.Stopwatch.StartNew();
             gameState = GameState.Level1;
+            //score.m_level = 1;
+             
         }
 
         //
@@ -324,8 +321,17 @@ namespace FroggerXNA
          && frog.mLocation.Y >= enemy.Location.Y-50 && frog.mLocation.Y <= enemy.Location.Y + 50
                )
            {
-               GameOver();
-            }
+               if (lives == 0)
+               {
+                   GameOver();
+               }
+               else
+               {
+                   lives = lives - 1;
+                   frog.mLocation.X = 620;
+                   frog.mLocation.Y = 670;
+               }
+                }
             
             }
 
@@ -560,10 +566,17 @@ namespace FroggerXNA
                 spriteBatch.DrawString(mBitmapFont, "Level " + level.ToString(), new Vector2(150.0f, 700.0f), Color.BurlyWood);
                 spriteBatch.End();
 
+               
+
             }
 
             if (gameState == GameState.Level2)
             {
+                spriteBatch.Begin();
+                spriteBatch.DrawString(mBitmapFont, "Game Over", new Vector2(470.0f, 200.0f), Color.White);
+                spriteBatch.DrawString(mBitmapFont, "Your score is 0", new Vector2(420.0f, 400.0f), Color.White);
+                spriteBatch.End();
+                
                 Diplayed();
             }
 

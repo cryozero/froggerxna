@@ -23,9 +23,19 @@ namespace Frogger.Utils
 
         double TimeLastDraw = 0;
 
-        public int level;
+        //public int level;
 
-        
+        public int m_level;
+
+        public int level
+        {
+            // Determines the Y map coordinate.  Y=0 is the top-most tile on
+            // the map.  The Y coordinate represents the Y value of the left-most
+            // displayed map tile.
+            get { return this.m_level; }
+            set { this.m_level = value; }
+        }
+
 
         #endregion
 
@@ -79,9 +89,9 @@ namespace Frogger.Utils
                                          String.Format("Time : {0}", gameTime.TotalGameTime.TotalSeconds),
                                          new Vector2(350, 750), Color.White);
 
-           // this.mSpriteBatch.DrawString(mSpriteFont,
-             //            String.Format("Level : {0}", level),
-               //          new Vector2(1150, 750), Color.White);
+           this.mSpriteBatch.DrawString(mSpriteFont,
+                        String.Format("Level : {0}", m_level),
+                         new Vector2(1150, 750), Color.White);
 
 
 

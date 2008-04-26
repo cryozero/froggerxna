@@ -57,9 +57,9 @@
     Wave
     {
         Name = Frog;
-        File = ..\..\..\..\..\..\Desktop\Frog.wav;
-        Build Settings Last Modified Low = 844976722;
-        Build Settings Last Modified High = 29926093;
+        File = Frog.wav;
+        Build Settings Last Modified Low = 455402490;
+        Build Settings Last Modified High = 29927310;
 
         Cache
         {
@@ -72,7 +72,7 @@
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 180757972;
+            Last Modified Low = 1538101722;
             Last Modified High = 29926093;
         }
     }
