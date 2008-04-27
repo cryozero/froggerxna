@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
 <GameStatus>
-  <Level>Level2</Level>
+  <Level>Level1</Level>
+  <Score>70000</Score>
 </GameStatus>

@@ -44,7 +44,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\frog.xnb</Output>
-      <Time>2008-04-27T10:57:26.359375+01:00</Time>
+      <Time>2008-04-27T11:57:53.46875+01:00</Time>
     </Item>
     <Item>
       <Source>Content\bus.png</Source>
@@ -81,15 +81,6 @@
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\gateway.xnb</Output>
       <Time>2008-04-27T10:57:26.375+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Content\intro.png</Source>
-      <Name>Content\intro</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>bin\x86\Debug\Content\intro.xnb</Output>
-      <Time>2008-04-27T11:03:55.125+01:00</Time>
     </Item>
     <Item>
       <Source>Content\wood.png</Source>
@@ -144,6 +135,33 @@
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\turtle.xnb</Output>
       <Time>2008-04-27T11:03:55.109375+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\bluefrog.png</Source>
+      <Name>Content\bluefrog</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\bluefrog.xnb</Output>
+      <Time>2008-04-27T11:59:53.625+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\redfrog.png</Source>
+      <Name>Content\redfrog</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\redfrog.xnb</Output>
+      <Time>2008-04-27T11:58:27.703125+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\bg_intro.png</Source>
+      <Name>Content\bg_intro</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\bg_intro.xnb</Output>
+      <Time>2008-04-27T11:03:55.125+01:00</Time>
     </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

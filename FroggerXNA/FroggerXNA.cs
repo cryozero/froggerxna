@@ -60,8 +60,8 @@ namespace FroggerXNA
         SpriteBatch spriteBatch;
         SpriteFont mBitmapFont;
         SpriteFont sSpriteFont;
-
-        
+        Cue music = null;
+        SoundBank soundBank;
         public int lives = 3; //Number of lives
 
         public int ScoreValue = 0;
@@ -73,7 +73,7 @@ namespace FroggerXNA
 
         //Backgrounds
 
-        Background intro;
+        Background bg_intro;
         Background bg_level_1;
         Background bg_level_2;
         Background bg_level_3;
@@ -83,6 +83,8 @@ namespace FroggerXNA
         //int level;
         
         Frog frog;
+        Frog redfrog;
+        Frog bluefrog;
 
        // Score score;
 
@@ -104,6 +106,12 @@ namespace FroggerXNA
         /// Constructor.
         /// </summary>
 
+        SpriteFont mSpriteFont;
+
+        private SpriteBatch mSpriteBatch;
+
+
+        private ContentManager mContent;
 
 
         #region Initialization
@@ -128,19 +136,29 @@ namespace FroggerXNA
         protected override void Initialize()
         {
                 
-                //Backgrounds
+                //All the Backgrounds
 
-                intro = new Background(this, graphics, "Content/intro");
+                bg_intro = new Background(this, graphics, "Content/bg_intro");
                 bg_level_1 = new Background(this, graphics,"Content/bg_level_1");
                 bg_level_2 = new Background(this, graphics, "Content/bg_level_2");
                 bg_level_3 = new Background(this, graphics, "Content/bg_level_3");
                 bg_level_4 = new Background(this, graphics, "Content/bg_level_2");
                 bg_level_5 = new Background(this, graphics, "Content/bg_level_1");
 
-                //The unique Frog !
+                //The unique green Frog !
 
-                frog = new Frog(this, graphics);
+                frog = new Frog(this, graphics,"Content/frog","C");
                 this.Components.Add(frog);
+
+                //The red Frog (Mutliplayer)
+
+                redfrog = new Frog(this, graphics, "Content/redfrog","L");
+                this.Components.Add(redfrog);
+
+                //The blue Frog (Mutliplayer)
+
+                bluefrog = new Frog(this, graphics, "Content/bluefrog", "R");
+                this.Components.Add(bluefrog);
 
                 //Gateways
                 listGateway.Add(new Gateway(this, graphics, new Vector2(200, 20)));
@@ -188,48 +206,36 @@ namespace FroggerXNA
 
                 listTurtle.ForEach(delegate(Turtle a) { this.Components.Add(a); });
 
+                Info info = new Info(this, graphics.GraphicsDevice, ScoreValue.ToString());
+                this.Components.Add(info);
 
-                FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
+
+                this.mContent = new ContentManager(this.Services);
+                this.mSpriteBatch = new SpriteBatch(graphics.GraphicsDevice);
+                //this.max = max;
+
+               // FPSManager fps = new FPSManager(this, graphics.GraphicsDevice,ScoreValue.ToString());
 
 
 
             //    Score score = new Score(this, graphics.GraphicsDevice, ScoreValue);
               //this.Components.Add(score);
 
-                this.Components.Add(fps);
+               //this.Components.Add(fps);
 
 
+                //Backgrounds
 
+                this.Components.Add(bg_intro);
                 this.Components.Add(bg_level_1);
                 this.Components.Add(bg_level_2);
                 this.Components.Add(bg_level_3);
                 this.Components.Add(bg_level_4);
                 this.Components.Add(bg_level_5);
 
-
-
-                this.Components.Add(intro);
-
-             
-                
-            
-
-
-
-
-   
-              
-
-
+                //Initialize
 
                 base.Initialize();
-
-                
-                
-
-                
-            
-            
         }
 
         //
@@ -238,11 +244,10 @@ namespace FroggerXNA
 
         void NewGame()
         {
-            System.Diagnostics.Stopwatch.StartNew();
             gameState = GameState.Level1;
-            //score.m_level = 1;
-            
-             
+
+            frog.Enabled = true;
+            frog.Visible = true;
         }
 
         //
@@ -312,10 +317,8 @@ namespace FroggerXNA
 
             if (gameState == GameState.Level1)
             {
-                intro.Visible = false;
+                bg_intro.Visible = false;
                 bg_level_1.Visible = true;
-
-                frog.Enabled = true;
 
                 listGateway.ForEach(delegate(Gateway g) { g.Visible = true; });
                 listCar.ForEach(delegate(Car c) { c.Visible=true; });
@@ -359,7 +362,7 @@ namespace FroggerXNA
             }
 
 
-            frog.Visible = true;
+           
         }
 
         void Hidden()
@@ -378,9 +381,31 @@ namespace FroggerXNA
             listAlligator.ForEach(delegate(Alligator a) { a.Visible = false; });
             listTurtle.ForEach(delegate(Turtle a) { a.Visible = false; });
 
+            frog.Enabled= false;
             frog.Visible = false;
 
+            redfrog.Enabled = false;
+            redfrog.Visible = false;
+
+            bluefrog.Enabled = false;
+            bluefrog.Visible = false;
+
         }
+
+        void Multiplayer()
+    {
+        frog.Enabled = false;
+        frog.Visible = false;
+
+        redfrog.Enabled = true;
+        redfrog.Visible = true;
+
+        bluefrog.Enabled = true;
+        bluefrog.Visible = true;
+
+        gameState = GameState.Level1;
+
+    }
 
 
         void Collision(WorldEntity enemy)
@@ -423,6 +448,13 @@ namespace FroggerXNA
 
             xmlelem = xmldoc.CreateElement("", "Level", "");
             xmltext = xmldoc.CreateTextNode(gameState.ToString());
+            xmlelem.AppendChild(xmltext);
+            xmldoc.ChildNodes.Item(1).AppendChild(xmlelem);
+
+            //Score
+
+            xmlelem = xmldoc.CreateElement("", "Score", "");
+            xmltext = xmldoc.CreateTextNode(ScoreValue.ToString());
             xmlelem.AppendChild(xmltext);
             xmldoc.ChildNodes.Item(1).AppendChild(xmlelem);
 
@@ -473,6 +505,10 @@ namespace FroggerXNA
 
                 sSpriteFont = content.Load<SpriteFont>("Content/SpriteFont");
 
+                this.mSpriteFont = mContent.Load<SpriteFont>("Content/SpriteFont");
+
+
+
                 Sound.Play(Sounds.Music);
 
             }
@@ -494,7 +530,18 @@ namespace FroggerXNA
 
         protected override void Update(GameTime gameTime)
         {
-            Sound.Update();
+            //Sound.Update();
+
+/*
+            if (music == null)
+            {
+                //music = soundBank.GetCue("Audio/Music");
+                music.Play();
+            }
+            else if (music.IsPaused)
+            {
+                music.Resume();
+            }*/
 
             //Keyboard state
 
@@ -506,6 +553,21 @@ namespace FroggerXNA
             {
                 this.Exit();
             }
+
+
+
+                        TimeSpan  mElapsedTime = gameTime.ElapsedGameTime;
+
+                        if (mElapsedTime > TimeSpan.FromSeconds(5))
+                        {
+
+                            FPSManager fps = new FPSManager(this, graphics.GraphicsDevice, ScoreValue.ToString());
+                            this.Components.Add(fps);
+                        }
+
+
+
+
 
             //If space is pressed => NewGame  
 
@@ -533,6 +595,13 @@ namespace FroggerXNA
                 SaveGame();
             }
 
+            //Mutliplayer
+
+            if (gameState == GameState.TitleScreen && keyboardState.IsKeyDown(Keys.M))
+            {
+                Multiplayer();
+            }
+
 
             //Cheat
 
@@ -540,6 +609,7 @@ namespace FroggerXNA
             {
                 //Level_2();
                 //gameState.
+                this.ScoreValue = this.ScoreValue + 5000;
             }
 
 
@@ -551,9 +621,9 @@ namespace FroggerXNA
             //
             // All the collisions
             //
-            listCar.ForEach(delegate(Car c) { Collision(c); });
-            listBus.ForEach(delegate(Bus b) { Collision(b); });
-           
+            listCar.ForEach(delegate(Car c) { Collision(c); }); //Cars
+            listBus.ForEach(delegate(Bus b) { Collision(b); }); //Buses
+            listWood.ForEach(delegate(Wood w) { Collision(w); }); //Woods
  
 
             //After 20 seconds, the game is over
@@ -572,6 +642,7 @@ namespace FroggerXNA
                 && gameState == GameState.Level1
               )
                 {
+                    ScoreValue = ScoreValue + 750;
                     Level_2();
 
                 }
@@ -701,6 +772,11 @@ namespace FroggerXNA
         {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            this.mSpriteBatch.Begin();
+            this.mSpriteBatch.DrawString(mSpriteFont,
+                                         String.Format("aaP "),
+                                         new Vector2(800, 750), Color.White);
+            this.mSpriteBatch.End();
 
 
 
@@ -761,14 +837,12 @@ namespace FroggerXNA
 
                 spriteBatch.Begin();
                 spriteBatch.DrawString(mBitmapFont, "Game Over", new Vector2(470.0f, 200.0f), Color.White);
-                spriteBatch.DrawString(mBitmapFont, "Your score is 0", new Vector2(420.0f, 400.0f), Color.White);
+                spriteBatch.DrawString(mBitmapFont, "Your score is "+ScoreValue.ToString(), new Vector2(420.0f, 400.0f), Color.White);
                 spriteBatch.End();
             }
-
-
             
-
-
+            //Draw
+            
             base.Draw(gameTime);
         }
 
