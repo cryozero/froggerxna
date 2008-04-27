@@ -83,10 +83,10 @@ namespace Frogger.World
 
             this.mSpriteBatch.Begin();
 
-            this.mSpriteBatch.DrawString(mSpriteFont,
+           /* this.mSpriteBatch.DrawString(mSpriteFont,
                                          String.Format("To save the game, press P {0}", this.max),
                                          new Vector2(300, 750), Color.White);
-
+            */
 
 
             this.mSpriteBatch.End();

@@ -293,6 +293,12 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Frogger</Name>
     </None>
+    <Content Include="Fonts\ScoreFont.spritefont">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Name>ScoreFont</Name>
+    </Content>
     <Content Include="Content\bg_intro.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
