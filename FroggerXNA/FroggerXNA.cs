@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Frogger.World;
 using Frogger.Utils;
+using System.Xml;
 
 #endregion
 
@@ -403,6 +404,40 @@ namespace FroggerXNA
             }
 
 
+
+        void SaveGame()
+        {
+            XmlDocument xmldoc = new XmlDocument();
+            XmlNode xmlnode = xmldoc.CreateNode(XmlNodeType.XmlDeclaration, "", "");
+            XmlElement xmlelem;
+            XmlText xmltext;
+            xmldoc.AppendChild(xmlnode);
+
+            xmlelem = xmldoc.CreateElement("", "GameStatus", "");
+            xmltext = xmldoc.CreateTextNode("");
+            xmlelem.AppendChild(xmltext);
+            xmldoc.AppendChild(xmlelem);
+
+
+            //Level
+
+            xmlelem = xmldoc.CreateElement("", "Level", "");
+            xmltext = xmldoc.CreateTextNode(gameState.ToString());
+            xmlelem.AppendChild(xmltext);
+            xmldoc.ChildNodes.Item(1).AppendChild(xmlelem);
+
+
+            xmldoc.Save("save.xml");
+
+        }
+
+
+
+
+
+
+
+
   
 
 
@@ -490,6 +525,14 @@ namespace FroggerXNA
             {
                 Exit();
             }
+
+            //Save the game
+
+            if (keyboardState.IsKeyDown(Keys.P))
+            {
+                SaveGame();
+            }
+
 
             //Cheat
 
