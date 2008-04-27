@@ -142,8 +142,8 @@ namespace FroggerXNA
                 bg_level_1 = new Background(this, graphics,"Content/bg_level_1");
                 bg_level_2 = new Background(this, graphics, "Content/bg_level_2");
                 bg_level_3 = new Background(this, graphics, "Content/bg_level_3");
-                bg_level_4 = new Background(this, graphics, "Content/bg_level_2");
-                bg_level_5 = new Background(this, graphics, "Content/bg_level_1");
+                bg_level_4 = new Background(this, graphics, "Content/bg_level_4");
+                bg_level_5 = new Background(this, graphics, "Content/bg_level_5");
 
                 //The unique green Frog !
 
@@ -284,6 +284,12 @@ namespace FroggerXNA
             gameState = GameState.Level4;
             frog.mLocation.X = 620;
             frog.mLocation.Y = 670;
+            bg_level_1.Visible = false;
+            bg_level_2.Visible = false;
+            bg_level_3.Visible = false;
+            bg_level_4.Visible = true;
+
+
         }
 
 
@@ -344,13 +350,6 @@ namespace FroggerXNA
 
             }
 
-            if (gameState == GameState.Level4)
-            {
-                bg_level_1.Visible = false;
-                bg_level_2.Visible = false;
-                bg_level_4.Visible = true;
-
-            }
 
 
             if (gameState == GameState.Level5)
