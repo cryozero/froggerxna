@@ -363,6 +363,15 @@ namespace FroggerXNA
 
             }
 
+            if (gameState == GameState.Level4)
+            {
+                bg_level_1.Visible = false;
+                bg_level_2.Visible = false;
+                bg_level_3.Visible = false;
+                bg_level_4.Visible = true;
+                bg_level_5.Visible = false;
+
+            }
 
 
             if (gameState == GameState.Level5)
@@ -722,7 +731,7 @@ namespace FroggerXNA
             });
 
 
-           if (gameState == GameState.Level1 || gameState == GameState.Level2 || gameState == GameState.Level3) //When you press on start, the game run
+            if (gameState == GameState.Level1 || gameState == GameState.Level2 || gameState == GameState.Level3 || gameState == GameState.Level4 || gameState == GameState.Level5) //When you press on start, the game run
            {
 
                float SPEED = 0;

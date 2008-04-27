@@ -18,7 +18,7 @@ namespace Frogger.World
         /// <summary>
         /// Default speed of the ship
         /// </summary>
-        const float SPEED = 0.3f;
+        const float SPEED = 0.4f;
         String position;
 
         #endregion
