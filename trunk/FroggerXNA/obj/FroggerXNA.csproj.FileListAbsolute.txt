@@ -25,3 +25,5 @@ C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXN
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\bluefrog.xnb
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\redfrog.xnb
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\bg_intro.xnb
+C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\bg_level_4.xnb
+C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\bg_level_5.xnb
