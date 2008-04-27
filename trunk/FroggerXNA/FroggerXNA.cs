@@ -173,15 +173,15 @@ namespace FroggerXNA
                 listCar.Add(new Car(this, graphics, new Vector2(120, 410)));
                 listCar.Add(new Car(this, graphics, new Vector2(1000, 420)));
                 listCar.Add(new Car(this, graphics, new Vector2(700, 410)));
-                listCar.Add(new Car(this, graphics, new Vector2(800, 530)));
+                listCar.Add(new Car(this, graphics, new Vector2(800, 440)));
                 listCar.Add(new Car(this, graphics, new Vector2(610, 420)));
 
                 listCar.ForEach(delegate(Car c) { this.Components.Add(c); });
 
                 //Buses
-                listBus.Add(new Bus(this, graphics, new Vector2(900, 530)));
+                listBus.Add(new Bus(this, graphics, new Vector2(900, 480)));
                 listBus.Add(new Bus(this, graphics, new Vector2(300, 410)));
-                listBus.Add(new Bus(this, graphics, new Vector2(300, 520)));
+                listBus.Add(new Bus(this, graphics, new Vector2(100, 470)));
 
                 listBus.ForEach(delegate(Bus b) { this.Components.Add(b); });
 
@@ -212,6 +212,9 @@ namespace FroggerXNA
 
                 this.mContent = new ContentManager(this.Services);
                 this.mSpriteBatch = new SpriteBatch(graphics.GraphicsDevice);
+            
+
+
                 //this.max = max;
 
                // FPSManager fps = new FPSManager(this, graphics.GraphicsDevice,ScoreValue.ToString());
@@ -505,7 +508,7 @@ namespace FroggerXNA
                 sSpriteFont = content.Load<SpriteFont>("Content/SpriteFont");
 
                 this.mSpriteFont = mContent.Load<SpriteFont>("Content/SpriteFont");
-
+               
 
 
                 Sound.Play(Sounds.Music);
@@ -769,7 +772,7 @@ namespace FroggerXNA
 
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+            graphics.GraphicsDevice.Clear(Color.Black);
 
             this.mSpriteBatch.Begin();
             this.mSpriteBatch.DrawString(mSpriteFont,
@@ -839,7 +842,13 @@ namespace FroggerXNA
                 spriteBatch.DrawString(mBitmapFont, "Your score is "+ScoreValue.ToString(), new Vector2(420.0f, 400.0f), Color.White);
                 spriteBatch.End();
             }
-            
+
+            spriteBatch.Begin();
+            spriteBatch.DrawString(mBitmapFont, "Your score is " + ScoreValue.ToString(), new Vector2(300, 750), Color.White);
+            spriteBatch.End();
+
+
+
             //Draw
             
             base.Draw(gameTime);

@@ -15,7 +15,7 @@ namespace Frogger.World
     {
         #region Constants
 
-        public int BACKGROUND_HEIGHT = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+        public int BACKGROUND_HEIGHT = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height-50;
         public  int BACKGROUND_WIDTH = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         
         #endregion
@@ -50,7 +50,7 @@ namespace Frogger.World
         public Background(Game game, GraphicsDeviceManager graphics,String image)
             : base(game, graphics, image, false)
         {
-           
+            this.DrawOrder = 0;
         }
 
         #endregion
