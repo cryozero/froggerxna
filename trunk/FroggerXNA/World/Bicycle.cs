@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Frogger.Utils;
 
 namespace Frogger.World
 {
@@ -10,7 +11,7 @@ namespace Frogger.World
     /// <summary>
     /// Represents the ship of the player
     /// </summary>
-    class Wood : WorldEntity
+    class Bicycle : WorldEntity
     {
         #region Enum
 
@@ -36,8 +37,6 @@ namespace Frogger.World
 
         #region Variables
 
-
-
         /// <summary>
         /// location of the ship
         /// </summary>
@@ -60,16 +59,17 @@ namespace Frogger.World
         /// </summary>
         public override Vector2 Size
         {
-            get { return new Vector2(120, 15); }
+            get { return new Vector2(64, 40); }
         }
         #endregion
 
         #region Initialization
 
 
-        public Wood(Game game, GraphicsDeviceManager graphics, Vector2 location)
-            : base(game, graphics, "content/wood", true)
+        public Bicycle(Game game, GraphicsDeviceManager graphics, Vector2 location)
+            : base(game, graphics, "content/Bicycle", true)
         {
+            Sound.Initialize();
             this.mLocation = location;
 
 
@@ -81,11 +81,15 @@ namespace Frogger.World
 
         public override void Update(GameTime gameTime)
         {
+            //Sound.Update();
             // mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+
+
 
             if (mLocation.X <= 10)
             {
                 this.mLocation.X = GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width;
+                //Sound.Play(Sounds.Bicycle);
             }
 
             base.Update(gameTime);

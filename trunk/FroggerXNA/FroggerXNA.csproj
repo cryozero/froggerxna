@@ -63,17 +63,9 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>ParticlesEmitter</Name>
     </Compile>
-    <Compile Include="Utils\Line.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Line</Name>
-    </Compile>
     <Compile Include="Utils\Sound.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Sound</Name>
-    </Compile>
-    <Compile Include="Utils\StrokeFont.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>StrokeFont</Name>
     </Compile>
     <Compile Include="World\Alligator.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -83,9 +75,9 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Background</Name>
     </Compile>
-    <Compile Include="World\Bicyclist.cs">
+    <Compile Include="World\Bicycle.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Bicyclist</Name>
+      <Name>Bicycle</Name>
     </Compile>
     <Compile Include="World\Bus.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -118,10 +110,6 @@
     <Compile Include="World\Gateway.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Gateway</Name>
-    </Compile>
-    <Compile Include="World\Info.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Info</Name>
     </Compile>
     <Compile Include="World\Taxi.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -161,6 +149,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bicycle.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>bicycle</Name>
+    </Content>
     <Content Include="Audio\Collision.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Collision</Name>
@@ -225,7 +219,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Name>bus</Name>
     </Content>
-    <Content Include="Content\car.jpg">
+    <Content Include="Content\car.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>

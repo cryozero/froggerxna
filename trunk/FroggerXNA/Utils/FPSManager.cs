@@ -21,7 +21,6 @@ namespace Frogger.Utils
         private int mFrameCount;
         private int mFrameRate;
         TimeSpan mElapsedTime;
-        String max;
 
         #endregion
 
