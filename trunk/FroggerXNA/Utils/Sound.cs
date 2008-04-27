@@ -19,7 +19,8 @@ namespace Frogger.Utils
     {
         Music,
         Car,
-        Frog
+        Frog,
+        Collision
     }
 
     /// <summary>
@@ -35,7 +36,8 @@ namespace Frogger.Utils
         {
             "Music",
             "Car",
-            "Frog"
+            "Frog",
+            "Collision"
         };
 
 

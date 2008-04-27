@@ -32,12 +32,12 @@ namespace Frogger.Utils
         /// </summary>
         /// <param name="game"></param>
         /// <param name="graphicDevice"></param>
-        public FPSManager(Game game , GraphicsDevice graphicDevice,String max)
+        public FPSManager(Game game , GraphicsDevice graphicDevice)
             : base(game)
         {
             this.mContent = new ContentManager(game.Services);
             this.mSpriteBatch = new SpriteBatch(graphicDevice);
-            this.max = max;
+           
         }
 
         /// <summary>
@@ -66,14 +66,9 @@ namespace Frogger.Utils
             this.mSpriteBatch.Begin();
             this.mSpriteBatch.DrawString(mSpriteFont,
                                          String.Format("FPS : {0}", mFrameRate),
-                                         new Vector2(10, 750), Color.White);
+                                         new Vector2(50, 50), Color.WhiteSmoke);
 
 
-            /*this.mSpriteBatch.DrawString(mSpriteFont,
-                                         String.Format("To save the game, press P {0}",max),
-                                         new Vector2(300, 750), Color.White);
-
-            */
             
             this.mSpriteBatch.End();
 

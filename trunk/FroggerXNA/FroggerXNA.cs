@@ -73,7 +73,7 @@ namespace FroggerXNA
         public int ScoreValue = 500; //Score value
         public int Level = 0; //Level
         public int lives = 3; //Number of lives
-        public int Revision = 31; //Subversion revision
+        public int Revision = 38; //Subversion revision
 
         //Backgrounds
 
@@ -100,7 +100,9 @@ namespace FroggerXNA
         List<Bus> listBus = new List<Bus>();
         List<Wood> listWood = new List<Wood>();
         List<Alligator> listAlligator = new List<Alligator>();
-        List<Turtle> listTurtle = new List<Turtle>();  
+        List<Turtle> listTurtle = new List<Turtle>();
+        List<Taxi> listTaxi = new List<Taxi>();  
+
 
          SpriteBatch mBatch;
         Texture2D mHealthBar;
@@ -210,8 +212,13 @@ namespace FroggerXNA
 
                 listTurtle.ForEach(delegate(Turtle a) { this.Components.Add(a); });
 
-                Info info = new Info(this, graphics.GraphicsDevice, ScoreValue.ToString());
-                this.Components.Add(info);
+                //Taxis
+                listTaxi.Add(new Taxi(this, graphics, new Vector2(700, 220)));
+
+                listTaxi.ForEach(delegate(Taxi t) { this.Components.Add(t); });
+
+               // Info info = new Info(this, graphics.GraphicsDevice, ScoreValue.ToString());
+                //this.Components.Add(info);
 
 
                 this.mContent = new ContentManager(this.Services);
@@ -221,14 +228,14 @@ namespace FroggerXNA
 
                 //this.max = max;
 
-               // FPSManager fps = new FPSManager(this, graphics.GraphicsDevice,ScoreValue.ToString());
+               FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
 
 
 
             //    Score score = new Score(this, graphics.GraphicsDevice, ScoreValue);
               //this.Components.Add(score);
 
-               //this.Components.Add(fps);
+               this.Components.Add(fps);
 
 
                 //Backgrounds
@@ -297,6 +304,8 @@ namespace FroggerXNA
             gameState = GameState.Level4;
             frog.mLocation.X = 620;
             frog.mLocation.Y = 670;
+            Level = 4;
+
             bg_level_1.Visible = false;
             bg_level_2.Visible = false;
             bg_level_3.Visible = false;
@@ -314,6 +323,8 @@ namespace FroggerXNA
         void Level_5()
         {
             gameState = GameState.Level5;
+            Level = 5;
+
             frog.mLocation.X = 620;
             frog.mLocation.Y = 670;
         }
@@ -325,6 +336,15 @@ namespace FroggerXNA
         void GameOver()
         {
             gameState = GameState.GameOver;
+        }
+
+        //
+        // You Win
+        //
+
+        void YouWin()
+        {
+            gameState = GameState.GameWin;
         }
 
         //
@@ -371,6 +391,7 @@ namespace FroggerXNA
                 bg_level_4.Visible = true;
                 bg_level_5.Visible = false;
 
+                listTaxi.ForEach(delegate(Taxi t) { t.Visible = true; });
             }
 
 
@@ -378,6 +399,9 @@ namespace FroggerXNA
             {
                 bg_level_1.Visible = false;
                 bg_level_2.Visible = false;
+                bg_level_3.Visible = false;
+                bg_level_4.Visible = false;
+
                 bg_level_5.Visible = true;
 
             }
@@ -401,6 +425,8 @@ namespace FroggerXNA
             listWood.ForEach(delegate(Wood w) { w.Visible = false; });
             listAlligator.ForEach(delegate(Alligator a) { a.Visible = false; });
             listTurtle.ForEach(delegate(Turtle a) { a.Visible = false; });
+            listTaxi.ForEach(delegate(Taxi t) { t.Visible = false; });
+
 
             frog.Enabled= false;
             frog.Visible = false;
@@ -451,6 +477,7 @@ namespace FroggerXNA
                }
                else
                {
+                   Sound.Play(Sounds.Collision);
                    lives = lives - 1;
                    frog.mLocation.X = 620;
                    frog.mLocation.Y = 670;
@@ -563,7 +590,13 @@ namespace FroggerXNA
         {
             //Sound.Update();
 
+
+ 
+
 /*
+ * 
+ * 
+ * 
             if (music == null)
             {
                 //music = soundBank.GetCue("Audio/Music");
@@ -592,7 +625,7 @@ namespace FroggerXNA
                         if (mElapsedTime > TimeSpan.FromSeconds(5))
                         {
 
-                            FPSManager fps = new FPSManager(this, graphics.GraphicsDevice, ScoreValue.ToString());
+                            FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
                             this.Components.Add(fps);
                         }
 
@@ -731,6 +764,22 @@ namespace FroggerXNA
             });
 
 
+
+
+            listGateway.ForEach(delegate(Gateway g)
+{
+
+                            if (frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
+       && frog.mLocation.Y >= g.mLocation.Y - 50 && frog.mLocation.Y <= g.mLocation.Y + 50
+                && gameState == GameState.Level5
+              )
+                {
+                    YouWin();
+
+                }
+
+            });
+
             if (gameState == GameState.Level1 || gameState == GameState.Level2 || gameState == GameState.Level3 || gameState == GameState.Level4 || gameState == GameState.Level5) //When you press on start, the game run
            {
 
@@ -770,6 +819,7 @@ namespace FroggerXNA
                listWood.ForEach(delegate(Wood w) { w.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
                listAlligator.ForEach(delegate(Alligator a) { a.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
                listTurtle.ForEach(delegate(Turtle a) { a.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
+               listTaxi.ForEach(delegate(Taxi t) { t.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
   
  
                //alligator.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
@@ -802,11 +852,7 @@ namespace FroggerXNA
         {
             graphics.GraphicsDevice.Clear(Color.Black);
 
-            this.mSpriteBatch.Begin();
-            this.mSpriteBatch.DrawString(mSpriteFont,
-                                         String.Format("aaP "),
-                                         new Vector2(800, 750), Color.White);
-            this.mSpriteBatch.End();
+
 
 
 
@@ -814,36 +860,16 @@ namespace FroggerXNA
 
             if (gameState == GameState.TitleScreen)
             {
-
-
                 Hidden();
-
-                spriteBatch.Begin();
-                spriteBatch.DrawString(mBitmapFont, "Press on space to start the game", new Vector2(250.0f, 700.0f), Color.BurlyWood);
-                spriteBatch.End();
-
             }
 
             if (gameState == GameState.Level1)
             {
-
-                Diplayed();
-
-                spriteBatch.Begin();
-                //spriteBatch.DrawString(mBitmapFont, "Level " + level.ToString(), new Vector2(150.0f, 700.0f), Color.BurlyWood);
-                spriteBatch.End();
-
-               
-
+                Diplayed();             
             }
 
             if (gameState == GameState.Level2)
-            {
-                spriteBatch.Begin();
-                spriteBatch.DrawString(mBitmapFont, "Game Over", new Vector2(470.0f, 200.0f), Color.White);
-                spriteBatch.DrawString(mBitmapFont, "Your score is 0", new Vector2(420.0f, 400.0f), Color.White);
-                spriteBatch.End();
-                
+            {              
                 Diplayed();
             }
 
@@ -871,17 +897,39 @@ namespace FroggerXNA
                 spriteBatch.End();
             }
 
+
+            //
+            // GameWin
+            //
+
+            if (gameState == GameState.GameWin)
+            {
+                graphics.GraphicsDevice.Clear(Color.Black);
+
+                Hidden();
+                frog.Enabled = false;
+
+
+                spriteBatch.Begin();
+                spriteBatch.DrawString(mBitmapFont, "You win !!", new Vector2(490.0f, 200.0f), Color.White);
+                spriteBatch.DrawString(mBitmapFont, "Your score is " + ScoreValue.ToString(), new Vector2(420.0f, 400.0f), Color.White);
+                spriteBatch.End();
+            }
+
+
             //Display Score (ScoreValue) and Level (Level)
+
+            double TimeLeft=20.0-gameTime.TotalGameTime.TotalSeconds;
 
             spriteBatch.Begin();
             spriteBatch.DrawString(ScoreFont, "Score: " + ScoreValue.ToString(), new Vector2(20, 760), Color.White);
             spriteBatch.DrawString(ScoreFont, "Level: " + Level.ToString(), new Vector2(170, 760), Color.White);
             spriteBatch.DrawString(ScoreFont, "Live(s): " + lives.ToString(), new Vector2(300, 760), Color.White);
-            spriteBatch.DrawString(ScoreFont, "Time left: " + gameTime.TotalGameTime.TotalSeconds.ToString(), new Vector2(450, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Time left: " + TimeLeft.ToString()+" s", new Vector2(450, 760), Color.White);
             spriteBatch.DrawString(ScoreFont, "Konami@1981", new Vector2(850, 760), Color.White);
             spriteBatch.DrawString(ScoreFont, "Revision: " + Revision.ToString(), new Vector2(1050, 760), Color.White);
             spriteBatch.End();
-
+            
             //Draw
             
             base.Draw(gameTime);

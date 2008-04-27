@@ -63,7 +63,7 @@ namespace Frogger.World
         /// </summary>
         public override Vector2 Size
         {
-            get { return new Vector2(120, 20); }
+            get { return new Vector2(120, 15); }
         }
         #endregion
 
