@@ -127,6 +127,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Gateway</Name>
     </Compile>
+    <Compile Include="World\Info.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Info</Name>
+    </Compile>
     <Compile Include="World\Taxi.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Taxi</Name>
@@ -217,6 +221,12 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Name>bg_level_3</Name>
     </Content>
+    <Content Include="Content\bluefrog.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>bluefrog</Name>
+    </Content>
     <Content Include="Content\bus.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
@@ -271,11 +281,17 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Frogger</Name>
     </None>
-    <Content Include="Content\intro.png">
+    <Content Include="Content\bg_intro.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
-      <Name>intro</Name>
+      <Name>bg_intro</Name>
+    </Content>
+    <Content Include="Content\redfrog.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>redfrog</Name>
     </Content>
     <Content Include="Content\turtle.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>

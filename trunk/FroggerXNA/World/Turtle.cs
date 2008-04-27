@@ -37,14 +37,7 @@ namespace Frogger.World
 
         #region Variables
 
-        /// <summary>
-        /// Current AI state of this ship
-        /// </summary>
-        AIState mCurrentState;
 
-        /// <summary>
-        /// location of the ship
-        /// </summary>
         public Vector2 mLocation;
 
         #endregion

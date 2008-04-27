@@ -19,6 +19,7 @@ namespace Frogger.World
         /// Default speed of the ship
         /// </summary>
         const float SPEED = 0.3f;
+        String position;
 
         #endregion
 
@@ -61,10 +62,27 @@ namespace Frogger.World
         #region Initialization
 
    
-        public Frog(Game game, GraphicsDeviceManager graphics)
-            : base(game, graphics, "content/frog", true)
+        public Frog(Game game, GraphicsDeviceManager graphics,String image,String position)
+            : base(game, graphics, image, true)
         {
-            this.mLocation = new Vector2(620, 670);
+
+            if (position == "C")
+            {
+                this.mLocation = new Vector2(620, 670);
+            }
+
+            if (position == "L")
+            {
+                this.mLocation = new Vector2(520, 670);
+            }
+
+            if (position == "R")
+            {
+                this.mLocation = new Vector2(720, 670);
+            }
+
+
+            this.position=position;
 
           //  mEngineEffect = new ParticlesEmitter(game, graphics, new Vector2(this.Location.X + this.Size.X / 2f,
                                                              //   this.Location.Y + this.Size.Y));
@@ -84,31 +102,71 @@ namespace Frogger.World
         {
             //mEngineEffect.Location = new Vector2(this.Location.X + this.Size.X / 2f, this.Location.Y + this.Size.Y);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            if (this.position == "C" || this.position == "R")
             {
-               // if (mLocation.X < Background.BACKGROUND_WIDTH - Size.X)
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                {
+                    // if (mLocation.X < Background.BACKGROUND_WIDTH - Size.X)
                     mLocation.X += (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-                  
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                if (mLocation.X > 0)
-                    mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-                
+
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                {
+                    if (mLocation.X > 0)
+                        mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                {
+                    if (mLocation.Y > 0)
+                        mLocation.Y -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                {
+                    // if (mLocation.Y < Background.BACKGROUND_HEIGHT - Size.Y)
+                    mLocation.Y += (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+
+                }
+
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+
+
+
+            if (this.position == "L")
             {
-                if (mLocation.Y > 0)
-                    mLocation.Y -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-                
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-               // if (mLocation.Y < Background.BACKGROUND_HEIGHT - Size.Y)
+                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    // if (mLocation.X < Background.BACKGROUND_WIDTH - Size.X)
+                    mLocation.X += (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                {
+                    if (mLocation.X > 0)
+                        mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Z))
+                {
+                    if (mLocation.Y > 0)
+                        mLocation.Y -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.S))
+                {
+                    // if (mLocation.Y < Background.BACKGROUND_HEIGHT - Size.Y)
                     mLocation.Y += (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-                    
+
+                }
+
             }
+
+
+
 
                         double timeElapsed = gameTime.TotalGameTime.TotalMilliseconds - TimeLastSound;
 
