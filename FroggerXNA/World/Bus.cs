@@ -37,10 +37,7 @@ namespace Frogger.World
 
         #region Variables
 
-        /// <summary>
-        /// Current AI state of this ship
-        /// </summary>
-        AIState mCurrentState;
+
 
         /// <summary>
         /// location of the ship
@@ -64,7 +61,7 @@ namespace Frogger.World
         /// </summary>
         public override Vector2 Size
         {
-            get { return new Vector2(64, 64); }
+            get { return new Vector2(64, 40); }
         }
         #endregion
 

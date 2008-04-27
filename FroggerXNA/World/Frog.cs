@@ -35,7 +35,7 @@ namespace Frogger.World
         /// </summary>
         double TimeLastSound= 0;
 
-        ParticlesEmitter mEngineEffect;
+
 
         #endregion
 

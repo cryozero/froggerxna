@@ -66,8 +66,7 @@ namespace FroggerXNA
 
 
         SpriteFont sSpriteFont;
-        Cue music = null;
-        SoundBank soundBank;
+ 
         
 
         public int ScoreValue = 500; //Score value
@@ -101,8 +100,8 @@ namespace FroggerXNA
         List<Wood> listWood = new List<Wood>();
         List<Alligator> listAlligator = new List<Alligator>();
         List<Turtle> listTurtle = new List<Turtle>();
-        List<Taxi> listTaxi = new List<Taxi>();  
-
+        List<Taxi> listTaxi = new List<Taxi>();
+        List<Bicycle> listBicycle = new List<Bicycle>();
 
          SpriteBatch mBatch;
         Texture2D mHealthBar;
@@ -217,8 +216,12 @@ namespace FroggerXNA
 
                 listTaxi.ForEach(delegate(Taxi t) { this.Components.Add(t); });
 
-               // Info info = new Info(this, graphics.GraphicsDevice, ScoreValue.ToString());
-                //this.Components.Add(info);
+                //Bicycle
+                listBicycle.Add(new Bicycle(this, graphics, new Vector2(110, 460)));
+
+                listBicycle.ForEach(delegate(Bicycle b) { this.Components.Add(b); });
+
+
 
 
                 this.mContent = new ContentManager(this.Services);
@@ -347,6 +350,56 @@ namespace FroggerXNA
             gameState = GameState.GameWin;
         }
 
+
+        void LoadGame()
+        {
+            //Level_5();
+            bg_intro.Visible = false;
+            NewGame();
+            //Level_2();
+
+            XmlDocument myXmlDocument = new XmlDocument();
+
+            try
+            {
+                myXmlDocument.Load("save.xml");
+
+
+                XmlNode node;
+                node = myXmlDocument.DocumentElement;
+
+               
+
+                foreach (XmlNode node1 in node.ChildNodes)
+                {
+                    if (node1.Name == "Level")
+                    {
+                        Level = Int32.Parse(node1.InnerText.ToString());
+                    }
+
+                    if (node1.Name == "Score")
+                    {
+                        ScoreValue = Int32.Parse(node1.InnerText.ToString());
+                    }
+
+                    if (node1.Name == "Live")
+                    {
+                        lives = Int32.Parse(node1.InnerText.ToString());
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+            }
+
+            
+
+        }
+
         //
         //This function diplayed Entity
         //
@@ -392,6 +445,7 @@ namespace FroggerXNA
                 bg_level_5.Visible = false;
 
                 listTaxi.ForEach(delegate(Taxi t) { t.Visible = true; });
+                listBicycle.ForEach(delegate(Bicycle b) { b.Visible = true; });
             }
 
 
@@ -426,7 +480,7 @@ namespace FroggerXNA
             listAlligator.ForEach(delegate(Alligator a) { a.Visible = false; });
             listTurtle.ForEach(delegate(Turtle a) { a.Visible = false; });
             listTaxi.ForEach(delegate(Taxi t) { t.Visible = false; });
-
+            listBicycle.ForEach(delegate(Bicycle b) { b.Visible = false; });
 
             frog.Enabled= false;
             frog.Visible = false;
@@ -505,7 +559,7 @@ namespace FroggerXNA
             //Level
 
             xmlelem = xmldoc.CreateElement("", "Level", "");
-            xmltext = xmldoc.CreateTextNode(gameState.ToString());
+            xmltext = xmldoc.CreateTextNode(Level.ToString());
             xmlelem.AppendChild(xmltext);
             xmldoc.ChildNodes.Item(1).AppendChild(xmlelem);
 
@@ -516,6 +570,12 @@ namespace FroggerXNA
             xmlelem.AppendChild(xmltext);
             xmldoc.ChildNodes.Item(1).AppendChild(xmlelem);
 
+            //Live
+
+            xmlelem = xmldoc.CreateElement("", "Live", "");
+            xmltext = xmldoc.CreateTextNode(lives.ToString());
+            xmlelem.AppendChild(xmltext);
+            xmldoc.ChildNodes.Item(1).AppendChild(xmlelem);
 
             xmldoc.Save("save.xml");
 
@@ -593,19 +653,6 @@ namespace FroggerXNA
 
  
 
-/*
- * 
- * 
- * 
-            if (music == null)
-            {
-                //music = soundBank.GetCue("Audio/Music");
-                music.Play();
-            }
-            else if (music.IsPaused)
-            {
-                music.Resume();
-            }*/
 
             //Keyboard state
 
@@ -667,13 +714,27 @@ namespace FroggerXNA
             }
 
 
+            //Load Gale
+
+            if (gameState == GameState.TitleScreen && keyboardState.IsKeyDown(Keys.L))
+            {
+                LoadGame();
+            }
+
+
             //Cheat
 
             if (keyboardState.IsKeyDown(Keys.C) && keyboardState.IsKeyDown(Keys.H))
             {
-                Cheat();
-              
+                if (gameTime.ElapsedGameTime > TimeSpan.FromSeconds(1))
+                {
+                    Cheat();
+                }
+
             }
+
+
+
 
 
 
@@ -783,35 +844,16 @@ namespace FroggerXNA
             if (gameState == GameState.Level1 || gameState == GameState.Level2 || gameState == GameState.Level3 || gameState == GameState.Level4 || gameState == GameState.Level5) //When you press on start, the game run
            {
 
-               float SPEED = 0;
+               float SPEED = 0; //Declaration
 
-               if (gameState == GameState.Level1)
-               {
-                   SPEED = 0.3f;
-               }
-
-               if (gameState == GameState.Level2)
-               {
-                   SPEED = 0.4f;
-               }
-
-               if (gameState == GameState.Level3)
-               {
-                   SPEED = 0.5f;
-               }
-
-               if (gameState == GameState.Level4)
-               {
-                   SPEED = 0.6f;
-               }
-
-               if (gameState == GameState.Level5)
-               {
-                   SPEED = 0.7f;
-               }
+               if (gameState == GameState.Level1) { SPEED = 0.3f;} //Level 1 Speed
+               if (gameState == GameState.Level2) { SPEED = 0.4f; } //Level 2 Speed
+               if (gameState == GameState.Level3) { SPEED = 0.5f; } //Level 3 Speed
+               if (gameState == GameState.Level4) { SPEED = 0.6f; } //Level 4 Speed
+               if (gameState == GameState.Level5) { SPEED = 0.7f; } //Level 5 Speed
                
                //
-               // Movement and Speed
+               // Objects movement and Speed
                //
 
                listCar.ForEach(delegate(Car c) { c.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
@@ -820,19 +862,8 @@ namespace FroggerXNA
                listAlligator.ForEach(delegate(Alligator a) { a.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
                listTurtle.ForEach(delegate(Turtle a) { a.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
                listTaxi.ForEach(delegate(Taxi t) { t.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
+               listBicycle.ForEach(delegate(Bicycle b) { b.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
   
- 
-               //alligator.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-              
-
-               this.spriteBatch.Begin();
-
-               //this.spriteBatch.DrawString(sSpriteFont,
-                 //           String.Format("Level : {0}", level),
-                   //         new Vector2(1150, 750), Color.White);
-
-               this.spriteBatch.End();
-
            }
 
 
@@ -863,18 +894,8 @@ namespace FroggerXNA
                 Hidden();
             }
 
-            if (gameState == GameState.Level1)
-            {
-                Diplayed();             
-            }
 
-            if (gameState == GameState.Level2)
-            {              
-                Diplayed();
-            }
-
-
-            if (gameState == GameState.Level3 || gameState == GameState.Level4 || gameState == GameState.Level5)
+            if (gameState == GameState.Level1 || gameState == GameState.Level2 || gameState == GameState.Level3 || gameState == GameState.Level4 || gameState == GameState.Level5)
             {
                 Diplayed();
             }
@@ -923,11 +944,12 @@ namespace FroggerXNA
 
             spriteBatch.Begin();
             spriteBatch.DrawString(ScoreFont, "Score: " + ScoreValue.ToString(), new Vector2(20, 760), Color.White);
-            spriteBatch.DrawString(ScoreFont, "Level: " + Level.ToString(), new Vector2(170, 760), Color.White);
-            spriteBatch.DrawString(ScoreFont, "Live(s): " + lives.ToString(), new Vector2(300, 760), Color.White);
-            spriteBatch.DrawString(ScoreFont, "Time left: " + TimeLeft.ToString()+" s", new Vector2(450, 760), Color.White);
-            spriteBatch.DrawString(ScoreFont, "Konami@1981", new Vector2(850, 760), Color.White);
-            spriteBatch.DrawString(ScoreFont, "Revision: " + Revision.ToString(), new Vector2(1050, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Level: " + Level.ToString(), new Vector2(140, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Live(s): " + lives.ToString(), new Vector2(250, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Time left: " + TimeLeft.ToString()+" s", new Vector2(350, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "To save game, press P", new Vector2(650, 760), Color.Turquoise);
+            spriteBatch.DrawString(ScoreFont, "Konami@1981", new Vector2(950, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Revision: " + Revision.ToString(), new Vector2(1150, 760), Color.White);
             spriteBatch.End();
             
             //Draw
