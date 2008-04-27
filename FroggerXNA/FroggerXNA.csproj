@@ -63,17 +63,9 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>ParticlesEmitter</Name>
     </Compile>
-    <Compile Include="Utils\Level.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Level</Name>
-    </Compile>
     <Compile Include="Utils\Line.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Line</Name>
-    </Compile>
-    <Compile Include="Utils\Score.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Score</Name>
     </Compile>
     <Compile Include="Utils\Sound.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -169,9 +161,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Audio\AddLine.wav">
+    <Content Include="Audio\Collision.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>AddLine</Name>
+      <Name>Collision</Name>
     </Content>
     <Content Include="Content\alligator.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
@@ -183,10 +175,6 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Car</Name>
     </Content>
-    <Content Include="Audio\Death.wav">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Death</Name>
-    </Content>
     <Content Include="Audio\Frog.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Frog</Name>
@@ -194,14 +182,6 @@
     <Content Include="Audio\Music.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Music</Name>
-    </Content>
-    <Content Include="Audio\PerfectScore.wav">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>PerfectScore</Name>
-    </Content>
-    <Content Include="Audio\Score.wav">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Score</Name>
     </Content>
     <Content Include="Content\bg_level_1.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
@@ -293,6 +273,12 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Frogger</Name>
     </None>
+    <Content Include="Content\taxi.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>taxi</Name>
+    </Content>
     <Content Include="Fonts\ScoreFont.spritefont">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>FontDescriptionImporter</Importer>

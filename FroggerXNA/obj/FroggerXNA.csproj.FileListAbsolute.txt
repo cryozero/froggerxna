@@ -28,3 +28,4 @@ C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXN
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\bg_level_4.xnb
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\bg_level_5.xnb
 C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Fonts\ScoreFont.xnb
+C:\Documents and Settings\Max\My Documents\Visual Studio 2005\Projects\FroggerXNA\FroggerXNA\bin\x86\Debug\Content\taxi.xnb
