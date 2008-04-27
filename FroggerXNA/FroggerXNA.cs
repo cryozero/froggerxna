@@ -73,6 +73,7 @@ namespace FroggerXNA
         public int ScoreValue = 500; //Score value
         public int Level = 0; //Level
         public int lives = 3; //Number of lives
+        public int Revision = 31; //Subversion revision
 
         //Backgrounds
 
@@ -418,6 +419,16 @@ namespace FroggerXNA
 
     }
 
+        void Cheat()
+        {
+            if (Level == 1) { Level_2(); } //Next level is 2
+            if (Level == 2) { Level_3(); } //Next level is 3
+            if (Level == 3) { Level_4(); } //Next level is 4
+            if (Level == 4) { Level_5(); } //Next level is 5
+
+            ScoreValue = ScoreValue + 5000; //Bonus during the cheat (most than 5000)
+        }
+
 
         void Collision(WorldEntity enemy)
         {
@@ -618,9 +629,8 @@ namespace FroggerXNA
 
             if (keyboardState.IsKeyDown(Keys.C) && keyboardState.IsKeyDown(Keys.H))
             {
-                //Level_2();
-                //gameState.
-                this.ScoreValue = this.ScoreValue + 5000;
+                Cheat();
+              
             }
 
 
@@ -752,7 +762,7 @@ namespace FroggerXNA
                listAlligator.ForEach(delegate(Alligator a) { a.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
                listTurtle.ForEach(delegate(Turtle a) { a.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
   
-  
+ 
                //alligator.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
               
 
@@ -859,6 +869,8 @@ namespace FroggerXNA
             spriteBatch.DrawString(ScoreFont, "Level: " + Level.ToString(), new Vector2(170, 760), Color.White);
             spriteBatch.DrawString(ScoreFont, "Live(s): " + lives.ToString(), new Vector2(300, 760), Color.White);
             spriteBatch.DrawString(ScoreFont, "Time left: " + gameTime.TotalGameTime.TotalSeconds.ToString(), new Vector2(450, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Konami@1981", new Vector2(850, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Revision: " + Revision.ToString(), new Vector2(1050, 760), Color.White);
             spriteBatch.End();
 
             //Draw
