@@ -72,7 +72,7 @@ namespace Frogger.World
 
 
         public Turtle(Game game, GraphicsDeviceManager graphics, Vector2 location)
-            : base(game, graphics, "content/car", true)
+            : base(game, graphics, "content/turtle", true)
         {
             Sound.Initialize();
             this.mLocation = location;

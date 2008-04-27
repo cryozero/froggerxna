@@ -277,8 +277,10 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Name>intro</Name>
     </Content>
-    <Content Include="Content\turtle.gif">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+    <Content Include="Content\turtle.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
       <Name>turtle</Name>
     </Content>
     <Content Include="Content\wood.png">

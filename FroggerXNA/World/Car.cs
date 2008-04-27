@@ -76,7 +76,7 @@ namespace Frogger.World
         {
             Sound.Initialize();
             this.mLocation = location;
-
+            
  
 
         }
@@ -86,8 +86,10 @@ namespace Frogger.World
 
         public override void Update(GameTime gameTime)
         {
-            Sound.Update();
+            //Sound.Update();
             // mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
+
+            
 
             if (mLocation.X <= 10)
             {
