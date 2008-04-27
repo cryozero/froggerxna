@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Frogger.Utils;
 
 namespace Frogger.World
 {
@@ -49,7 +50,7 @@ namespace Frogger.World
         public Background(Game game, GraphicsDeviceManager graphics,String image)
             : base(game, graphics, image, false)
         {
-
+           
         }
 
         #endregion

@@ -183,7 +183,7 @@ namespace FroggerXNA
 
 
                 //Turtles
-                listTurtle.Add(new Turtle(this, graphics, new Vector2(780, 290)));
+                listTurtle.Add(new Turtle(this, graphics, new Vector2(780, 220)));
 
                 listTurtle.ForEach(delegate(Turtle a) { this.Components.Add(a); });
 
@@ -223,7 +223,7 @@ namespace FroggerXNA
 
                 base.Initialize();
 
-                Sound.Play(Sounds.Music);
+                
                 
 
                 
@@ -240,6 +240,7 @@ namespace FroggerXNA
             System.Diagnostics.Stopwatch.StartNew();
             gameState = GameState.Level1;
             //score.m_level = 1;
+            
              
         }
 
@@ -437,7 +438,7 @@ namespace FroggerXNA
 
                 sSpriteFont = content.Load<SpriteFont>("Content/SpriteFont");
 
-               
+                Sound.Play(Sounds.Music);
 
             }
         }
@@ -458,7 +459,7 @@ namespace FroggerXNA
 
         protected override void Update(GameTime gameTime)
         {
-            //Sound.Update();
+            Sound.Update();
 
             //Keyboard state
 
@@ -473,7 +474,7 @@ namespace FroggerXNA
 
             //If space is pressed => NewGame  
 
-            if (gameState == GameState.TitleScreen &&  keyboardState.IsKeyDown(Keys.Space)) //When you press on start, the game run
+            if (gameState == GameState.TitleScreen &&  keyboardState.IsKeyDown(Keys.S)) //When you press on start, the game run
             {
                 NewGame();
             }
@@ -698,7 +699,7 @@ namespace FroggerXNA
             }
 
 
-            if (gameState == GameState.Level3 && gameState == GameState.Level4 && gameState == GameState.Level5)
+            if (gameState == GameState.Level3 || gameState == GameState.Level4 || gameState == GameState.Level5)
             {
                 Diplayed();
             }

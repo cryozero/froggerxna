@@ -35,22 +35,22 @@
     {
         Name = Music;
         File = Music.wav;
-        Build Settings Last Modified Low = 3019333558;
-        Build Settings Last Modified High = 29926102;
+        Build Settings Last Modified Low = 3912927946;
+        Build Settings Last Modified High = 29927349;
 
         Cache
         {
             Format Tag = 0;
-            Channels = 1;
-            Sampling Rate = 11025;
+            Channels = 2;
+            Sampling Rate = 44100;
             Bits Per Sample = 1;
             Play Region Offset = 44;
-            Play Region Length = 8448;
+            Play Region Length = 601260;
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 3805499722;
-            Last Modified High = 29925593;
+            Last Modified Low = 3774334196;
+            Last Modified High = 29927349;
         }
     }
 
