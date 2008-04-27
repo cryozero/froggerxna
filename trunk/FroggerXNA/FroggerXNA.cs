@@ -58,18 +58,21 @@ namespace FroggerXNA
         GraphicsDeviceManager graphics;
         ContentManager content;
         SpriteBatch spriteBatch;
+        
+        
         SpriteFont mBitmapFont;
+
+        SpriteFont ScoreFont; //Score font
+
+
         SpriteFont sSpriteFont;
         Cue music = null;
         SoundBank soundBank;
-        public int lives = 3; //Number of lives
-
-        public int ScoreValue = 0;
         
 
-
-        // ContentManager sContent;
-        //SpriteBatch sSpriteBatch;
+        public int ScoreValue = 500; //Score value
+        public int Level = 0; //Level
+        public int lives = 3; //Number of lives
 
         //Backgrounds
 
@@ -247,7 +250,8 @@ namespace FroggerXNA
 
         void NewGame()
         {
-            gameState = GameState.Level1;
+            gameState = GameState.Level1; //Game state is level1
+            Level = 1; //Level 1
 
             frog.Enabled = true;
             frog.Visible = true;
@@ -261,8 +265,11 @@ namespace FroggerXNA
         void Level_2()
         {
             gameState = GameState.Level2;
+            Level = 2;
+
             frog.mLocation.X=620;
             frog.mLocation.Y = 670;
+
         }
 
         //
@@ -273,6 +280,8 @@ namespace FroggerXNA
         void Level_3()
         {
             gameState = GameState.Level3;
+            Level = 3;
+            
             frog.mLocation.X = 620;
             frog.mLocation.Y = 670;
         }
@@ -508,8 +517,8 @@ namespace FroggerXNA
                 sSpriteFont = content.Load<SpriteFont>("Content/SpriteFont");
 
                 this.mSpriteFont = mContent.Load<SpriteFont>("Content/SpriteFont");
-               
 
+                this.ScoreFont = mContent.Load<SpriteFont>("Fonts/ScoreFont");
 
                 Sound.Play(Sounds.Music);
 
@@ -843,11 +852,14 @@ namespace FroggerXNA
                 spriteBatch.End();
             }
 
+            //Display Score (ScoreValue) and Level (Level)
+
             spriteBatch.Begin();
-            spriteBatch.DrawString(mBitmapFont, "Your score is " + ScoreValue.ToString(), new Vector2(300, 750), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Score: " + ScoreValue.ToString(), new Vector2(20, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Level: " + Level.ToString(), new Vector2(170, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Live(s): " + lives.ToString(), new Vector2(300, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Time left: " + gameTime.TotalGameTime.TotalSeconds.ToString(), new Vector2(450, 760), Color.White);
             spriteBatch.End();
-
-
 
             //Draw
             

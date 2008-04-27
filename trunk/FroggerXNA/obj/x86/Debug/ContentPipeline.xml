@@ -181,6 +181,15 @@
       <Output>bin\x86\Debug\Content\bg_level_5.xnb</Output>
       <Time>2008-04-27T13:40:22.21875+01:00</Time>
     </Item>
+    <Item>
+      <Source>Fonts\ScoreFont.spritefont</Source>
+      <Name>Fonts\ScoreFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Fonts\ScoreFont.xnb</Output>
+      <Time>2008-04-27T17:44:59.265625+01:00</Time>
+    </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>

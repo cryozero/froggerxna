@@ -69,11 +69,11 @@ namespace Frogger.Utils
                                          new Vector2(10, 750), Color.White);
 
 
-            this.mSpriteBatch.DrawString(mSpriteFont,
+            /*this.mSpriteBatch.DrawString(mSpriteFont,
                                          String.Format("To save the game, press P {0}",max),
                                          new Vector2(300, 750), Color.White);
 
-
+            */
             
             this.mSpriteBatch.End();
 
