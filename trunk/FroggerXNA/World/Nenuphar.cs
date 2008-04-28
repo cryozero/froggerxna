@@ -11,7 +11,7 @@ namespace Frogger.World
     /// <summary>
     /// Represents the ship of the player
     /// </summary>
-    class Taxi : WorldEntity
+    class Nenuphar : WorldEntity
     {
         #region Enum
 
@@ -38,7 +38,6 @@ namespace Frogger.World
         #region Variables
 
 
-
         /// <summary>
         /// location of the ship
         /// </summary>
@@ -61,15 +60,15 @@ namespace Frogger.World
         /// </summary>
         public override Vector2 Size
         {
-            get { return new Vector2(64, 30); }
+            get { return new Vector2(64, 40); }
         }
         #endregion
 
         #region Initialization
 
 
-        public Taxi(Game game, GraphicsDeviceManager graphics, Vector2 location)
-            : base(game, graphics, "content/Taxi", true)
+        public Nenuphar(Game game, GraphicsDeviceManager graphics, Vector2 location)
+            : base(game, graphics, "content/Nenuphar", true)
         {
             Sound.Initialize();
             this.mLocation = location;
@@ -91,7 +90,7 @@ namespace Frogger.World
             if (mLocation.X <= 10)
             {
                 this.mLocation.X = GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width;
-                Sound.Play(Sounds.Car);
+              // Sound.Play(Sounds.Nenuphar);
             }
 
             base.Update(gameTime);
