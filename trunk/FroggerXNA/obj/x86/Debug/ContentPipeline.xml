@@ -11,24 +11,6 @@
       <Time>2008-04-17T23:25:09.4375+01:00</Time>
     </Item>
     <Item>
-      <Source>Content\fireball.bmp</Source>
-      <Name>Content\fireball</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>bin\x86\Debug\Content\fireball.xnb</Output>
-      <Time>2008-04-17T23:25:09.453125+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Content\evilFighter.png</Source>
-      <Name>Content\evilFighter</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>bin\x86\Debug\Content\evilFighter.xnb</Output>
-      <Time>2008-04-17T23:25:09.4375+01:00</Time>
-    </Item>
-    <Item>
       <Source>Content\frog.png</Source>
       <Name>Content\frog</Name>
       <Importer>TextureImporter</Importer>
@@ -45,15 +27,6 @@
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\bus.xnb</Output>
       <Time>2008-04-27T20:17:05.25+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Content\HealthBar.png</Source>
-      <Name>Content\HealthBar</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>bin\x86\Debug\Content\HealthBar.xnb</Output>
-      <Time>2008-04-19T20:43:57.5+01:00</Time>
     </Item>
     <Item>
       <Source>Fonts\space.spritefont</Source>
