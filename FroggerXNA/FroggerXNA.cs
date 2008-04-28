@@ -1,4 +1,5 @@
 #region Using Statements
+
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -102,6 +103,7 @@ namespace FroggerXNA
         List<Turtle> listTurtle = new List<Turtle>();
         List<Taxi> listTaxi = new List<Taxi>();
         List<Bicycle> listBicycle = new List<Bicycle>();
+        List<Nenuphar> listNenuphar = new List<Nenuphar>();
 
          SpriteBatch mBatch;
         Texture2D mHealthBar;
@@ -207,20 +209,30 @@ namespace FroggerXNA
 
 
                 //Turtles
-                listTurtle.Add(new Turtle(this, graphics, new Vector2(780, 220)));
+                listTurtle.Add(new Turtle(this, graphics, new Vector2(780, 230)));
+                listTurtle.Add(new Turtle(this, graphics, new Vector2(30, 210)));
+                listTurtle.Add(new Turtle(this, graphics, new Vector2(710, 210)));
+
 
                 listTurtle.ForEach(delegate(Turtle a) { this.Components.Add(a); });
 
                 //Taxis
-                listTaxi.Add(new Taxi(this, graphics, new Vector2(700, 220)));
+                listTaxi.Add(new Taxi(this, graphics, new Vector2(10, 420)));
+                listTaxi.Add(new Taxi(this, graphics, new Vector2(900, 425)));
+                listTaxi.Add(new Taxi(this, graphics, new Vector2(30, 450)));
 
                 listTaxi.ForEach(delegate(Taxi t) { this.Components.Add(t); });
+
 
                 //Bicycle
                 listBicycle.Add(new Bicycle(this, graphics, new Vector2(110, 460)));
 
                 listBicycle.ForEach(delegate(Bicycle b) { this.Components.Add(b); });
 
+                //Nenuphar
+                listNenuphar.Add(new Nenuphar(this, graphics, new Vector2(110, 460)));
+
+                listNenuphar.ForEach(delegate(Nenuphar n) { this.Components.Add(n); });
 
 
 
@@ -255,17 +267,24 @@ namespace FroggerXNA
                 base.Initialize();
         }
 
-        //
+
+        //Initial location of the green frog
+
+        void SingleFrogLocation()
+        {
+            frog.Enabled = true;
+            frog.Visible = true;
+            frog.mLocation.X = 620; //Position X
+            frog.mLocation.Y = 670; // Position Y 
+        }
+
         // Create a NewGame (Level 1)
-        //
 
         void NewGame()
         {
             gameState = GameState.Level1; //Game state is level1
             Level = 1; //Level 1
-
-            frog.Enabled = true;
-            frog.Visible = true;
+            SingleFrogLocation(); //Initial location of the green frog
         }
 
         //
@@ -277,9 +296,8 @@ namespace FroggerXNA
         {
             gameState = GameState.Level2;
             Level = 2;
+            SingleFrogLocation();
 
-            frog.mLocation.X=620;
-            frog.mLocation.Y = 670;
 
         }
 
@@ -292,9 +310,8 @@ namespace FroggerXNA
         {
             gameState = GameState.Level3;
             Level = 3;
-            
-            frog.mLocation.X = 620;
-            frog.mLocation.Y = 670;
+
+            SingleFrogLocation();
         }
 
         //
@@ -305,8 +322,7 @@ namespace FroggerXNA
         void Level_4()
         {
             gameState = GameState.Level4;
-            frog.mLocation.X = 620;
-            frog.mLocation.Y = 670;
+            SingleFrogLocation();
             Level = 4;
 
             bg_level_1.Visible = false;
@@ -458,6 +474,9 @@ namespace FroggerXNA
 
                 bg_level_5.Visible = true;
 
+                listNenuphar.ForEach(delegate(Nenuphar n) { n.Visible = true; });
+
+
             }
 
 
@@ -481,6 +500,7 @@ namespace FroggerXNA
             listTurtle.ForEach(delegate(Turtle a) { a.Visible = false; });
             listTaxi.ForEach(delegate(Taxi t) { t.Visible = false; });
             listBicycle.ForEach(delegate(Bicycle b) { b.Visible = false; });
+            listNenuphar.ForEach(delegate(Nenuphar b) { b.Visible = false; });
 
             frog.Enabled= false;
             frog.Visible = false;
@@ -521,9 +541,17 @@ namespace FroggerXNA
 
         void Collision(WorldEntity enemy)
         {
-            if(frog.mLocation.X>=enemy.Location.X-50 && frog.mLocation.X <= enemy.Location.X+50
-         && frog.mLocation.Y >= enemy.Location.Y-50 && frog.mLocation.Y <= enemy.Location.Y + 50
-               )
+            if(
+              
+  
+         (frog.mLocation.X>=enemy.Location.X-50 && frog.mLocation.X <= enemy.Location.X+50
+         && frog.mLocation.Y >= enemy.Location.Y-50 && frog.mLocation.Y <= enemy.Location.Y + 50)     
+          ||
+          (redfrog.mLocation.X >= enemy.Location.X - 50 && redfrog.mLocation.X <= enemy.Location.X + 50
+         && redfrog.mLocation.Y >= enemy.Location.Y - 50 && redfrog.mLocation.Y <= enemy.Location.Y + 50)   
+                
+                
+                )
            {
                if (lives == 0)
                {
@@ -533,6 +561,7 @@ namespace FroggerXNA
                {
                    Sound.Play(Sounds.Collision);
                    lives = lives - 1;
+                   ScoreValue = ScoreValue - 100;
                    frog.mLocation.X = 620;
                    frog.mLocation.Y = 670;
                }
@@ -733,22 +762,13 @@ namespace FroggerXNA
 
             }
 
-
-
-
-
-
-            //Force the health to remain between 0 and 100
-            mCurrentHealth = (int)MathHelper.Clamp(mCurrentHealth, 0, 100);
-           
-
             //
             // All the collisions
             //
             listCar.ForEach(delegate(Car c) { Collision(c); }); //Cars
             listBus.ForEach(delegate(Bus b) { Collision(b); }); //Buses
             listWood.ForEach(delegate(Wood w) { Collision(w); }); //Woods
- 
+            listTaxi.ForEach(delegate(Taxi t) { Collision(t); }); //Taxis
 
             //After 20 seconds, the game is over
 
@@ -945,8 +965,8 @@ namespace FroggerXNA
             spriteBatch.Begin();
             spriteBatch.DrawString(ScoreFont, "Score: " + ScoreValue.ToString(), new Vector2(20, 760), Color.White);
             spriteBatch.DrawString(ScoreFont, "Level: " + Level.ToString(), new Vector2(140, 760), Color.White);
-            spriteBatch.DrawString(ScoreFont, "Live(s): " + lives.ToString(), new Vector2(250, 760), Color.White);
-            spriteBatch.DrawString(ScoreFont, "Time left: " + TimeLeft.ToString()+" s", new Vector2(350, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Live(s) left: " + lives.ToString(), new Vector2(250, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Time left: " + TimeLeft.ToString()+" s", new Vector2(390, 760), Color.White);
             spriteBatch.DrawString(ScoreFont, "To save game, press P", new Vector2(650, 760), Color.Turquoise);
             spriteBatch.DrawString(ScoreFont, "Konami@1981", new Vector2(950, 760), Color.White);
             spriteBatch.DrawString(ScoreFont, "Revision: " + Revision.ToString(), new Vector2(1150, 760), Color.White);
