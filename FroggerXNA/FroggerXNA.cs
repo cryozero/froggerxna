@@ -67,12 +67,16 @@ namespace FroggerXNA
 
 
         SpriteFont sSpriteFont;
- 
-        
 
-        public int ScoreValue = 500; //Score value
-        public int Level = 0; //Level
-        public int lives = 3; //Number of lives
+
+        double time = 0;
+
+        int BestScore;
+
+
+        public double ScoreValue = 500; //Score value
+        public double Level = 0; //Level
+        public double lives = 3; //Number of lives
         public int Revision = 38; //Subversion revision
 
         //Backgrounds
@@ -107,8 +111,7 @@ namespace FroggerXNA
 
          SpriteBatch mBatch;
         Texture2D mHealthBar;
-        int mCurrentHealth = 100;
-
+      
                 /// <summary>
         /// Constructor.
         /// </summary>
@@ -265,10 +268,11 @@ namespace FroggerXNA
                 //Initialize
 
                 base.Initialize();
-        }
+            }
 
+            #region functions
 
-        //Initial location of the green frog
+            //Initial location of the green frog
 
         void SingleFrogLocation()
         {
@@ -282,23 +286,25 @@ namespace FroggerXNA
 
         void NewGame()
         {
+            BestScoreLoad();
+            this.time = 0; //Time is 0
             gameState = GameState.Level1; //Game state is level1
             Level = 1; //Level 1
             SingleFrogLocation(); //Initial location of the green frog
+            ScoreValue = 500;
+            lives = 3;
         }
 
-        //
         // Level 2
-        //
-
 
         void Level_2()
         {
-            gameState = GameState.Level2;
-            Level = 2;
+
+            this.time = 0; //Time is 0
+            gameState = GameState.Level2; //Game state is level2
+            Level = 2; //Level 2
             SingleFrogLocation();
-
-
+            BestScoreLoad();
         }
 
         //
@@ -308,6 +314,8 @@ namespace FroggerXNA
 
         void Level_3()
         {
+            BestScoreLoad();
+            this.time = 0; //Time is 0
             gameState = GameState.Level3;
             Level = 3;
 
@@ -321,14 +329,12 @@ namespace FroggerXNA
 
         void Level_4()
         {
+            this.time = 0; //Time is 0
             gameState = GameState.Level4;
             SingleFrogLocation();
             Level = 4;
 
-            bg_level_1.Visible = false;
-            bg_level_2.Visible = false;
-            bg_level_3.Visible = false;
-            bg_level_4.Visible = true;
+
 
 
         }
@@ -341,11 +347,11 @@ namespace FroggerXNA
 
         void Level_5()
         {
+            this.time = 0; //Time is 0
             gameState = GameState.Level5;
             Level = 5;
 
-            frog.mLocation.X = 620;
-            frog.mLocation.Y = 670;
+            SingleFrogLocation();
         }
 
         //
@@ -528,15 +534,7 @@ namespace FroggerXNA
 
     }
 
-        void Cheat()
-        {
-            if (Level == 1) { Level_2(); } //Next level is 2
-            if (Level == 2) { Level_3(); } //Next level is 3
-            if (Level == 3) { Level_4(); } //Next level is 4
-            if (Level == 4) { Level_5(); } //Next level is 5
 
-            ScoreValue = ScoreValue + 5000; //Bonus during the cheat (most than 5000)
-        }
 
 
         void Collision(WorldEntity enemy)
@@ -553,7 +551,7 @@ namespace FroggerXNA
                 
                 )
            {
-               if (lives == 0)
+               if (lives == 1)
                {
                    GameOver();
                }
@@ -568,6 +566,62 @@ namespace FroggerXNA
                 }
             
             }
+
+
+        void BestScoreLoad()
+        {
+
+            XmlDocument myXmlDocument = new XmlDocument();
+
+            try
+            {
+                myXmlDocument.Load("bestscore.xml");
+
+
+                XmlNode node;
+                node = myXmlDocument.DocumentElement;
+
+
+
+                foreach (XmlNode node1 in node.ChildNodes)
+                {
+                    if (node1.Name == "Score")
+                    {
+                        this.BestScore = Int32.Parse(node1.InnerText.ToString());
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+            }
+        }
+
+        void BestScoreSave()
+        {
+            XmlDocument xmldoc = new XmlDocument();
+            XmlNode xmlnode = xmldoc.CreateNode(XmlNodeType.XmlDeclaration, "", "");
+            XmlElement xmlelem;
+            XmlText xmltext;
+            xmldoc.AppendChild(xmlnode);
+
+            xmlelem = xmldoc.CreateElement("", "BestScoreFile", "");
+            xmltext = xmldoc.CreateTextNode("");
+            xmlelem.AppendChild(xmltext);
+            xmldoc.AppendChild(xmlelem);
+
+            //Score
+
+            xmlelem = xmldoc.CreateElement("", "Score", "");
+            xmltext = xmldoc.CreateTextNode(ScoreValue.ToString());
+            xmlelem.AppendChild(xmltext);
+            xmldoc.ChildNodes.Item(1).AppendChild(xmlelem);
+
+            xmldoc.Save("bestscore.xml");
+        }
 
 
 
@@ -609,18 +663,6 @@ namespace FroggerXNA
             xmldoc.Save("save.xml");
 
         }
-
-
-
-
-
-
-
-
-  
-
-
-
         #endregion
 
         /// <summary>
@@ -644,9 +686,7 @@ namespace FroggerXNA
                 //Create the content manager to load the images
                 ContentManager aLoader = new ContentManager(this.Services);
 
-                //Load the HealthBar image from the disk into the Texture2D object
-                mHealthBar = aLoader.Load<Texture2D>("content/HealthBar") as Texture2D;
-
+  
                 spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
                 mBitmapFont = content.Load<SpriteFont>("fonts/space");
 
@@ -680,7 +720,22 @@ namespace FroggerXNA
             //Sound.Update();
 
 
- 
+            //double RealTime = gameTime.TotalGameTime.TotalSeconds;
+
+            time = time + 1*0.02;
+
+            //if(==1)
+            //{
+          //  time = this.time;
+
+
+            if (ScoreValue > BestScore)
+            {
+                BestScoreSave();
+            }
+
+            
+            //}
 
 
             //Keyboard state
@@ -689,10 +744,7 @@ namespace FroggerXNA
 
             //If escape is pressed => Exit 
 
-            if (keyboardState.IsKeyDown(Keys.Escape))
-            {
-                this.Exit();
-            }
+            if (keyboardState.IsKeyDown(Keys.Escape)){this.Exit();}
 
 
 
@@ -714,18 +766,6 @@ namespace FroggerXNA
             if (gameState == GameState.TitleScreen &&  keyboardState.IsKeyDown(Keys.S)) //When you press on start, the game run
             {
                 NewGame();
-            }
-
-            //If the game is over, press on N to play again and space to exit
-            
-            if (gameState == GameState.GameOver && keyboardState.IsKeyDown(Keys.N))
-            {
-                NewGame();
-            }
-
-            if (gameState == GameState.GameOver && keyboardState.IsKeyDown(Keys.Space))
-            {
-                Exit();
             }
 
             //Save the game
@@ -750,17 +790,33 @@ namespace FroggerXNA
                 LoadGame();
             }
 
+            #region cheats
 
-            //Cheat
+            //One live bonus
 
-            if (keyboardState.IsKeyDown(Keys.C) && keyboardState.IsKeyDown(Keys.H))
+            if (keyboardState.IsKeyDown(Keys.C) && keyboardState.IsKeyDown(Keys.Space))
             {
-                if (gameTime.ElapsedGameTime > TimeSpan.FromSeconds(1))
-                {
-                    Cheat();
-                }
-
+                lives = lives+1*0.1;//Combinaison C + Space = +1 live
             }
+
+            //Increase the score
+
+            if (keyboardState.IsKeyDown(Keys.C) && keyboardState.IsKeyDown(Keys.O))
+            {
+                ScoreValue = ScoreValue + 1000*0.1;
+            }
+
+            //Increase the time
+
+            if (keyboardState.IsKeyDown(Keys.C) && keyboardState.IsKeyDown(Keys.T))
+            {
+                time = time - 10;
+            }
+
+
+            #endregion
+
+
 
             //
             // All the collisions
@@ -770,12 +826,12 @@ namespace FroggerXNA
             listWood.ForEach(delegate(Wood w) { Collision(w); }); //Woods
             listTaxi.ForEach(delegate(Taxi t) { Collision(t); }); //Taxis
 
-            //After 20 seconds, the game is over
 
-            if (gameState == GameState.Level1 && gameTime.TotalGameTime.TotalSeconds>=20)
-            {
-                GameOver();
-            }
+
+
+            //After 10 seconds, the game is over
+
+            if (time>=10){GameOver();}
 
 
             listGateway.ForEach(delegate(Gateway g) {
@@ -887,7 +943,7 @@ namespace FroggerXNA
            }
 
 
-
+           if (gameState == GameState.GameOver && keyboardState.IsKeyDown(Keys.S)) { NewGame(); }
 
 
 
@@ -911,7 +967,17 @@ namespace FroggerXNA
 
             if (gameState == GameState.TitleScreen)
             {
+                BestScoreLoad();
                 Hidden();
+
+
+                spriteBatch.Begin();
+                spriteBatch.DrawString(ScoreFont, "The Frogger by Maxime Rauer", new Vector2(20, 760), Color.White);
+                spriteBatch.DrawString(ScoreFont, "Actual Bestscore is: "+BestScore, new Vector2(450, 760), Color.YellowGreen);
+                spriteBatch.DrawString(ScoreFont, "Konami@1981", new Vector2(950, 760), Color.White);
+                spriteBatch.DrawString(ScoreFont, "Revision: " + Revision.ToString(), new Vector2(1150, 760), Color.White);
+                spriteBatch.End();
+            
             }
 
 
@@ -934,7 +1000,9 @@ namespace FroggerXNA
 
                 spriteBatch.Begin();
                 spriteBatch.DrawString(mBitmapFont, "Game Over", new Vector2(470.0f, 200.0f), Color.White);
-                spriteBatch.DrawString(mBitmapFont, "Your score is "+ScoreValue.ToString(), new Vector2(420.0f, 400.0f), Color.White);
+                spriteBatch.DrawString(mBitmapFont, "Your score is "+ScoreValue.ToString(), new Vector2(400.0f, 400.0f), Color.White);
+                spriteBatch.DrawString(ScoreFont, "Press escape to leave the game", new Vector2(470, 460), Color.DarkGoldenrod);
+                spriteBatch.DrawString(ScoreFont, "Press on S to start a new game", new Vector2(470, 490), Color.RoyalBlue);
                 spriteBatch.End();
             }
 
@@ -954,24 +1022,29 @@ namespace FroggerXNA
                 spriteBatch.Begin();
                 spriteBatch.DrawString(mBitmapFont, "You win !!", new Vector2(490.0f, 200.0f), Color.White);
                 spriteBatch.DrawString(mBitmapFont, "Your score is " + ScoreValue.ToString(), new Vector2(420.0f, 400.0f), Color.White);
+                
                 spriteBatch.End();
             }
 
 
             //Display Score (ScoreValue) and Level (Level)
 
-            double TimeLeft=20.0-gameTime.TotalGameTime.TotalSeconds;
+            if (gameState != GameState.GameOver && gameState != GameState.TitleScreen && gameState != GameState.GameWin)
+            {
+
+            double TimeLeft=10.0-Math.Round(time);
 
             spriteBatch.Begin();
             spriteBatch.DrawString(ScoreFont, "Score: " + ScoreValue.ToString(), new Vector2(20, 760), Color.White);
-            spriteBatch.DrawString(ScoreFont, "Level: " + Level.ToString(), new Vector2(140, 760), Color.White);
-            spriteBatch.DrawString(ScoreFont, "Live(s) left: " + lives.ToString(), new Vector2(250, 760), Color.White);
-            spriteBatch.DrawString(ScoreFont, "Time left: " + TimeLeft.ToString()+" s", new Vector2(390, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Level: " + Math.Round(Level), new Vector2(140, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Live(s) left: " + Math.Round(lives), new Vector2(250, 760), Color.White);
+            spriteBatch.DrawString(ScoreFont, "Time left: " + TimeLeft.ToString()+"s", new Vector2(390, 760), Color.White);
             spriteBatch.DrawString(ScoreFont, "To save game, press P", new Vector2(650, 760), Color.Turquoise);
             spriteBatch.DrawString(ScoreFont, "Konami@1981", new Vector2(950, 760), Color.White);
             spriteBatch.DrawString(ScoreFont, "Revision: " + Revision.ToString(), new Vector2(1150, 760), Color.White);
             spriteBatch.End();
-            
+            }
+
             //Draw
             
             base.Draw(gameTime);
@@ -981,3 +1054,4 @@ namespace FroggerXNA
 
     }
 }
+        #endregion

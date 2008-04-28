@@ -87,10 +87,6 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Car</Name>
     </Compile>
-    <Compile Include="World\EnnemyShip.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>EnnemyShip</Name>
-    </Compile>
     <Compile Include="World\Frog.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Frog</Name>
@@ -229,29 +225,11 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Name>car</Name>
     </Content>
-    <Content Include="Content\evilFighter.png">
-      <XNAUseContentPipeline>true</XNAUseContentPipeline>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Name>evilFighter</Name>
-    </Content>
-    <Content Include="Content\fireball.bmp">
-      <XNAUseContentPipeline>true</XNAUseContentPipeline>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Name>fireball</Name>
-    </Content>
     <Content Include="Content\frog.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
       <Name>frog</Name>
-    </Content>
-    <Content Include="Content\HealthBar.png">
-      <XNAUseContentPipeline>true</XNAUseContentPipeline>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Name>HealthBar</Name>
     </Content>
     <Content Include="Audio\Frogger.xap">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
