@@ -20,7 +20,7 @@ namespace FroggerXNA
     static class Program
     {
 
-        /// The main entry point for the application.
+     /// The main entry point for the application.
 
         static void Main(string[] args)
         {
@@ -33,7 +33,9 @@ namespace FroggerXNA
 
 
 
-    /// Different states for the game (include levels)
+    /// Differents states (include levels)
+
+    #region enum
 
     enum GameState
     {
@@ -44,15 +46,15 @@ namespace FroggerXNA
         Level3,
         Level4,
         Level5,
-        GameWin
+        GameWin,
+        Bonus
     };
 
-  
+    #endregion
 
 
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
+    //Class FroggerXNA
+
     public class FroggerXNA : Microsoft.Xna.Framework.Game
     {
         GameState gameState = GameState.TitleScreen;
@@ -87,19 +89,19 @@ namespace FroggerXNA
         Background bg_level_3;
         Background bg_level_4;
         Background bg_level_5;
+        Background bg_bonus;
 
         //int level;
         
-        Frog frog;
-        Frog redfrog;
-        Frog bluefrog;
+        Frog frog; //Green Frog
+        Frog redfrog; //Red Frog
+        Frog bluefrog; //Blue Frog
 
        // Score score;
 
         //Objects
 
         List<Gateway> listGateway = new List<Gateway>();
-
         List<Car> listCar=new List<Car>();
         List<Bus> listBus = new List<Bus>();
         List<Wood> listWood = new List<Wood>();
@@ -108,9 +110,9 @@ namespace FroggerXNA
         List<Taxi> listTaxi = new List<Taxi>();
         List<Bicycle> listBicycle = new List<Bicycle>();
         List<Nenuphar> listNenuphar = new List<Nenuphar>();
+        List<Cow> listCow = new List<Cow>();
 
          SpriteBatch mBatch;
-        Texture2D mHealthBar;
       
                 /// <summary>
         /// Constructor.
@@ -154,6 +156,7 @@ namespace FroggerXNA
                 bg_level_3 = new Background(this, graphics, "Content/bg_level_3");
                 bg_level_4 = new Background(this, graphics, "Content/bg_level_4");
                 bg_level_5 = new Background(this, graphics, "Content/bg_level_5");
+                bg_bonus = new Background(this, graphics, "Content/bg_bonus");
 
                 //The unique green Frog !
 
@@ -216,7 +219,6 @@ namespace FroggerXNA
                 listTurtle.Add(new Turtle(this, graphics, new Vector2(30, 210)));
                 listTurtle.Add(new Turtle(this, graphics, new Vector2(710, 210)));
 
-
                 listTurtle.ForEach(delegate(Turtle a) { this.Components.Add(a); });
 
                 //Taxis
@@ -237,25 +239,41 @@ namespace FroggerXNA
 
                 listNenuphar.ForEach(delegate(Nenuphar n) { this.Components.Add(n); });
 
+                //Cow
+                listCow.Add(new Cow(this, graphics, new Vector2(100, 460)));
+                listCow.Add(new Cow(this, graphics, new Vector2(130, 360)));
+                listCow.Add(new Cow(this, graphics, new Vector2(500, 440)));
+                listCow.Add(new Cow(this, graphics, new Vector2(600, 420)));
+                listCow.Add(new Cow(this, graphics, new Vector2(900, 960)));
+                listCow.Add(new Cow(this, graphics, new Vector2(600, 650)));
+                listCow.Add(new Cow(this, graphics, new Vector2(200, 490)));
+                listCow.Add(new Cow(this, graphics, new Vector2(150, 120)));
+                listCow.Add(new Cow(this, graphics, new Vector2(710, 460)));
+                listCow.Add(new Cow(this, graphics, new Vector2(190, 960)));
+                listCow.Add(new Cow(this, graphics, new Vector2(830, 260)));
+                listCow.Add(new Cow(this, graphics, new Vector2(500, 450)));
+                listCow.Add(new Cow(this, graphics, new Vector2(130, 360)));
+                listCow.Add(new Cow(this, graphics, new Vector2(560, 470)));
+                listCow.Add(new Cow(this, graphics, new Vector2(800, 480)));
+                listCow.Add(new Cow(this, graphics, new Vector2(990, 990)));
+                listCow.Add(new Cow(this, graphics, new Vector2(620, 620)));
+                listCow.Add(new Cow(this, graphics, new Vector2(400, 440)));
+                listCow.Add(new Cow(this, graphics, new Vector2(550, 520)));
+                listCow.Add(new Cow(this, graphics, new Vector2(710, 760)));
+                listCow.Add(new Cow(this, graphics, new Vector2(197, 970)));
+                listCow.Add(new Cow(this, graphics, new Vector2(330, 240)));
+
+                listCow.ForEach(delegate(Cow w) { this.Components.Add(w); });
+
+                //Frames per second
+
+                FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
+                this.Components.Add(fps);
 
 
                 this.mContent = new ContentManager(this.Services);
                 this.mSpriteBatch = new SpriteBatch(graphics.GraphicsDevice);
-            
-
-
-                //this.max = max;
-
-               FPSManager fps = new FPSManager(this, graphics.GraphicsDevice);
-
-
-
-            //    Score score = new Score(this, graphics.GraphicsDevice, ScoreValue);
-              //this.Components.Add(score);
-
-               this.Components.Add(fps);
-
-
+                  
                 //Backgrounds
 
                 this.Components.Add(bg_intro);
@@ -264,6 +282,7 @@ namespace FroggerXNA
                 this.Components.Add(bg_level_3);
                 this.Components.Add(bg_level_4);
                 this.Components.Add(bg_level_5);
+                this.Components.Add(bg_bonus);
 
                 //Initialize
 
@@ -276,81 +295,98 @@ namespace FroggerXNA
 
         void SingleFrogLocation()
         {
-            frog.Enabled = true;
-            frog.Visible = true;
+
             frog.mLocation.X = 620; //Position X
             frog.mLocation.Y = 670; // Position Y 
         }
 
-        // Create a NewGame (Level 1)
+        //Initial location of the red frog
+
+        void MultiplayerRedFrogLocation()
+        {
+            redfrog.mLocation.X = 520; //Position X
+            redfrog.mLocation.Y = 670; // Position Y 
+        }
+
+        //Initial location of the blue frog
+
+        void MultiplayerBlueFrogLocation()
+        {
+            bluefrog.mLocation.X = 720; //Position X
+            bluefrog.mLocation.Y = 670; // Position Y 
+        }
+
+        // Create a NewGame (Level 1, "The Wood")
 
         void NewGame()
         {
-            BestScoreLoad();
+            frog.Enabled = true; //Frog can move
+            frog.Visible = true; //Frog is visible
             this.time = 0; //Time is 0
             gameState = GameState.Level1; //Game state is level1
             Level = 1; //Level 1
             SingleFrogLocation(); //Initial location of the green frog
-            ScoreValue = 500;
-            lives = 3;
+            ScoreValue = 500; //Initial score is 500
+            lives = 3; //You have 3 lives
         }
 
-        // Level 2
+        // Level 2 ("Dali")
 
         void Level_2()
         {
-
             this.time = 0; //Time is 0
             gameState = GameState.Level2; //Game state is level2
             Level = 2; //Level 2
             SingleFrogLocation();
-            BestScoreLoad();
+            MultiplayerBlueFrogLocation();
+            MultiplayerRedFrogLocation();
         }
 
-        //
-        // Level 3
-        //
+        // Level 3 ("London")
 
-
-        void Level_3()
+        void Level_3() 
         {
             BestScoreLoad();
             this.time = 0; //Time is 0
             gameState = GameState.Level3;
             Level = 3;
-
             SingleFrogLocation();
+            MultiplayerBlueFrogLocation();
+            MultiplayerRedFrogLocation();
         }
 
-        //
-        // Level 4
-        //
-
+        // Level 4 ("Space")
 
         void Level_4()
         {
             this.time = 0; //Time is 0
             gameState = GameState.Level4;
-            SingleFrogLocation();
             Level = 4;
-
-
-
-
+            SingleFrogLocation();
+            MultiplayerBlueFrogLocation();
+            MultiplayerRedFrogLocation();
         }
 
-
-        //
-        // Level 5
-        //
-
+        // Level 5 ("Mario")
 
         void Level_5()
         {
             this.time = 0; //Time is 0
             gameState = GameState.Level5;
             Level = 5;
+            SingleFrogLocation();
+            MultiplayerBlueFrogLocation();
+            MultiplayerRedFrogLocation();
+        }
 
+
+        void bonus()
+        {
+            Hidden();
+            
+            this.time = 0; //Time is 0
+            gameState = GameState.Bonus;
+            bg_bonus.Enabled = true;
             SingleFrogLocation();
         }
 
@@ -442,9 +478,14 @@ namespace FroggerXNA
 
             if (gameState == GameState.Level2)
             {
+                bg_intro.Visible = false;
                 bg_level_1.Visible = false;
                 bg_level_2.Visible = true;
 
+                listGateway.ForEach(delegate(Gateway g) { g.Visible = true; });
+                listCar.ForEach(delegate(Car c) { c.Visible = true; });
+                listBus.ForEach(delegate(Bus b) { b.Visible = true; });
+                listWood.ForEach(delegate(Wood w) { w.Visible = true; });
                 listAlligator.ForEach(delegate(Alligator a) { a.Visible = true; });
             }
 
@@ -454,6 +495,11 @@ namespace FroggerXNA
                 bg_level_2.Visible = false;
                 bg_level_3.Visible = true;
 
+                listGateway.ForEach(delegate(Gateway g) { g.Visible = true; });
+                listCar.ForEach(delegate(Car c) { c.Visible = true; });
+                listBus.ForEach(delegate(Bus b) { b.Visible = true; });
+                listWood.ForEach(delegate(Wood w) { w.Visible = true; });
+                listAlligator.ForEach(delegate(Alligator a) { a.Visible = true; });
                 listTurtle.ForEach(delegate(Turtle a) { a.Visible = true; });
 
             }
@@ -466,6 +512,12 @@ namespace FroggerXNA
                 bg_level_4.Visible = true;
                 bg_level_5.Visible = false;
 
+                listGateway.ForEach(delegate(Gateway g) { g.Visible = true; });
+                listCar.ForEach(delegate(Car c) { c.Visible = true; });
+                listBus.ForEach(delegate(Bus b) { b.Visible = true; });
+                listWood.ForEach(delegate(Wood w) { w.Visible = true; });
+                listAlligator.ForEach(delegate(Alligator a) { a.Visible = true; });
+                listTurtle.ForEach(delegate(Turtle a) { a.Visible = true; });
                 listTaxi.ForEach(delegate(Taxi t) { t.Visible = true; });
                 listBicycle.ForEach(delegate(Bicycle b) { b.Visible = true; });
             }
@@ -480,6 +532,14 @@ namespace FroggerXNA
 
                 bg_level_5.Visible = true;
 
+                listGateway.ForEach(delegate(Gateway g) { g.Visible = true; });
+                listCar.ForEach(delegate(Car c) { c.Visible = true; });
+                listBus.ForEach(delegate(Bus b) { b.Visible = true; });
+                listWood.ForEach(delegate(Wood w) { w.Visible = true; });
+                listAlligator.ForEach(delegate(Alligator a) { a.Visible = true; });
+                listTurtle.ForEach(delegate(Turtle a) { a.Visible = true; });
+                listTaxi.ForEach(delegate(Taxi t) { t.Visible = true; });
+                listBicycle.ForEach(delegate(Bicycle b) { b.Visible = true; });
                 listNenuphar.ForEach(delegate(Nenuphar n) { n.Visible = true; });
 
 
@@ -497,6 +557,7 @@ namespace FroggerXNA
             bg_level_3.Visible = false;
             bg_level_4.Visible = false;
             bg_level_5.Visible = false;
+            bg_bonus.Visible = false;
 
             listGateway.ForEach(delegate(Gateway g) { g.Visible = false; });
             listCar.ForEach(delegate(Car c) { c.Visible = false; });
@@ -507,6 +568,9 @@ namespace FroggerXNA
             listTaxi.ForEach(delegate(Taxi t) { t.Visible = false; });
             listBicycle.ForEach(delegate(Bicycle b) { b.Visible = false; });
             listNenuphar.ForEach(delegate(Nenuphar b) { b.Visible = false; });
+            listCow.ForEach(delegate(Cow c) { c.Visible = false; });
+
+
 
             frog.Enabled= false;
             frog.Visible = false;
@@ -532,6 +596,10 @@ namespace FroggerXNA
 
         gameState = GameState.Level1;
 
+        ScoreValue = 500;
+        lives = 5;
+        Level = 1;
+
     }
 
 
@@ -546,8 +614,11 @@ namespace FroggerXNA
          && frog.mLocation.Y >= enemy.Location.Y-50 && frog.mLocation.Y <= enemy.Location.Y + 50)     
           ||
           (redfrog.mLocation.X >= enemy.Location.X - 50 && redfrog.mLocation.X <= enemy.Location.X + 50
-         && redfrog.mLocation.Y >= enemy.Location.Y - 50 && redfrog.mLocation.Y <= enemy.Location.Y + 50)   
-                
+         && redfrog.mLocation.Y >= enemy.Location.Y - 50 && redfrog.mLocation.Y <= enemy.Location.Y + 50)
+                          ||
+          (bluefrog.mLocation.X >= enemy.Location.X - 50 && bluefrog.mLocation.X <= enemy.Location.X + 50
+         && bluefrog.mLocation.Y >= enemy.Location.Y - 50 && bluefrog.mLocation.Y <= enemy.Location.Y + 50)   
+              
                 
                 )
            {
@@ -560,8 +631,13 @@ namespace FroggerXNA
                    Sound.Play(Sounds.Collision);
                    lives = lives - 1;
                    ScoreValue = ScoreValue - 100;
+
                    frog.mLocation.X = 620;
-                   frog.mLocation.Y = 670;
+                   frog.mLocation.Y=570;
+
+                   MultiplayerBlueFrogLocation();
+                   MultiplayerRedFrogLocation();
+
                }
                 }
             
@@ -727,8 +803,11 @@ namespace FroggerXNA
             //if(==1)
             //{
           //  time = this.time;
-
-
+            if (time >= 2 || time <= 4)
+            {
+                BestScoreLoad();
+            }
+          
             if (ScoreValue > BestScore)
             {
                 BestScoreSave();
@@ -736,6 +815,9 @@ namespace FroggerXNA
 
             
             //}
+
+
+
 
 
             //Keyboard state
@@ -759,6 +841,11 @@ namespace FroggerXNA
 
 
 
+
+             if (Level == 2 && keyboardState.IsKeyDown(Keys.L)) {Level_2();}
+             if (Level == 3 && keyboardState.IsKeyDown(Keys.L)) { Level_3(); }
+             if (Level == 4 && keyboardState.IsKeyDown(Keys.L)) { Level_4(); }
+             if (Level == 5 && keyboardState.IsKeyDown(Keys.L)) { Level_5(); }
 
 
             //If space is pressed => NewGame  
@@ -813,6 +900,13 @@ namespace FroggerXNA
                 time = time - 10;
             }
 
+            //Bonus level
+
+            if (keyboardState.IsKeyDown(Keys.C) && keyboardState.IsKeyDown(Keys.B))
+            {
+                bonus();
+            }
+
 
             #endregion
 
@@ -837,10 +931,21 @@ namespace FroggerXNA
             listGateway.ForEach(delegate(Gateway g) {
 
 
-                if (frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
+                if ((frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
        && frog.mLocation.Y >= g.mLocation.Y - 50 && frog.mLocation.Y <= g.mLocation.Y + 50
                 && gameState == GameState.Level1
               )
+              ||
+              (
+              redfrog.mLocation.X >= g.mLocation.X - 50 && redfrog.mLocation.X <= g.mLocation.X + 50
+       && redfrog.mLocation.Y >= g.mLocation.Y - 50 && redfrog.mLocation.Y <= g.mLocation.Y + 50
+                &&
+                             bluefrog.mLocation.X >= g.mLocation.X - 50 && bluefrog.mLocation.X <= g.mLocation.X + 50
+       && bluefrog.mLocation.Y >= g.mLocation.Y - 50 && bluefrog.mLocation.Y <= g.mLocation.Y + 50
+                && gameState == GameState.Level1
+              )
+               )
+
                 {
                     ScoreValue = ScoreValue + 750;
                     Level_2();
@@ -854,11 +959,22 @@ namespace FroggerXNA
             {
 
 
-                if (frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
+                if ((frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
        && frog.mLocation.Y >= g.mLocation.Y - 50 && frog.mLocation.Y <= g.mLocation.Y + 50
                 && gameState == GameState.Level2
               )
+              ||
+              (
+              redfrog.mLocation.X >= g.mLocation.X - 50 && redfrog.mLocation.X <= g.mLocation.X + 50
+       && redfrog.mLocation.Y >= g.mLocation.Y - 50 && redfrog.mLocation.Y <= g.mLocation.Y + 50
+                &&
+                             bluefrog.mLocation.X >= g.mLocation.X - 50 && bluefrog.mLocation.X <= g.mLocation.X + 50
+       && bluefrog.mLocation.Y >= g.mLocation.Y - 50 && bluefrog.mLocation.Y <= g.mLocation.Y + 50
+                && gameState == GameState.Level2
+              )
+               )
                 {
+                    ScoreValue = ScoreValue + 750;
                     Level_3();
 
                 }
@@ -872,11 +988,22 @@ namespace FroggerXNA
             {
 
 
-                if (frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
+                if ((frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
        && frog.mLocation.Y >= g.mLocation.Y - 50 && frog.mLocation.Y <= g.mLocation.Y + 50
                 && gameState == GameState.Level3
               )
+              ||
+              (
+              redfrog.mLocation.X >= g.mLocation.X - 50 && redfrog.mLocation.X <= g.mLocation.X + 50
+       && redfrog.mLocation.Y >= g.mLocation.Y - 50 && redfrog.mLocation.Y <= g.mLocation.Y + 50
+                &&
+                             bluefrog.mLocation.X >= g.mLocation.X - 50 && bluefrog.mLocation.X <= g.mLocation.X + 50
+       && bluefrog.mLocation.Y >= g.mLocation.Y - 50 && bluefrog.mLocation.Y <= g.mLocation.Y + 50
+                && gameState == GameState.Level3
+              )
+               )
                 {
+                    ScoreValue = ScoreValue + 750;
                     Level_4();
 
                 }
@@ -889,11 +1016,22 @@ namespace FroggerXNA
             {
 
 
-                if (frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
+                if ((frog.mLocation.X >= g.mLocation.X - 50 && frog.mLocation.X <= g.mLocation.X + 50
        && frog.mLocation.Y >= g.mLocation.Y - 50 && frog.mLocation.Y <= g.mLocation.Y + 50
                 && gameState == GameState.Level4
               )
+              ||
+              (
+              redfrog.mLocation.X >= g.mLocation.X - 50 && redfrog.mLocation.X <= g.mLocation.X + 50
+       && redfrog.mLocation.Y >= g.mLocation.Y - 50 && redfrog.mLocation.Y <= g.mLocation.Y + 50
+                &&
+                             bluefrog.mLocation.X >= g.mLocation.X - 50 && bluefrog.mLocation.X <= g.mLocation.X + 50
+       && bluefrog.mLocation.Y >= g.mLocation.Y - 50 && bluefrog.mLocation.Y <= g.mLocation.Y + 50
+                && gameState == GameState.Level4
+              )
+               )
                 {
+                    ScoreValue = ScoreValue + 750;
                     Level_5();
 
                 }
@@ -911,13 +1049,14 @@ namespace FroggerXNA
                 && gameState == GameState.Level5
               )
                 {
+                    ScoreValue = ScoreValue + 750;
                     YouWin();
 
                 }
 
             });
 
-            if (gameState == GameState.Level1 || gameState == GameState.Level2 || gameState == GameState.Level3 || gameState == GameState.Level4 || gameState == GameState.Level5) //When you press on start, the game run
+            if (gameState == GameState.Level1 || gameState == GameState.Level2 || gameState == GameState.Level3 || gameState == GameState.Level4 || gameState == GameState.Level5 || gameState == GameState.Bonus) //When you press on start, the game run
            {
 
                float SPEED = 0; //Declaration
@@ -927,7 +1066,8 @@ namespace FroggerXNA
                if (gameState == GameState.Level3) { SPEED = 0.5f; } //Level 3 Speed
                if (gameState == GameState.Level4) { SPEED = 0.6f; } //Level 4 Speed
                if (gameState == GameState.Level5) { SPEED = 0.7f; } //Level 5 Speed
-               
+               if (gameState == GameState.Bonus) { SPEED = 0.8f; } //Bonus Speed
+
                //
                // Objects movement and Speed
                //
@@ -939,6 +1079,7 @@ namespace FroggerXNA
                listTurtle.ForEach(delegate(Turtle a) { a.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
                listTaxi.ForEach(delegate(Taxi t) { t.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
                listBicycle.ForEach(delegate(Bicycle b) { b.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
+               listCow.ForEach(delegate(Cow c) { c.mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED; });
   
            }
 
