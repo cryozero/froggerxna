@@ -87,6 +87,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Car</Name>
     </Compile>
+    <Compile Include="World\Cow.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Cow</Name>
+    </Compile>
     <Compile Include="World\Frog.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Frog</Name>
@@ -149,6 +153,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bg_bonus.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>bg_bonus</Name>
+    </Content>
     <Content Include="Content\bicycle.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
@@ -224,6 +234,12 @@
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
       <Name>car</Name>
+    </Content>
+    <Content Include="Content\cow.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>cow</Name>
     </Content>
     <Content Include="Content\frog.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>

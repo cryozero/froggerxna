@@ -190,6 +190,24 @@
       <Output>bin\x86\Debug\Content\nenuphar.xnb</Output>
       <Time>2008-04-28T22:02:57.71875+01:00</Time>
     </Item>
+    <Item>
+      <Source>Content\cow.png</Source>
+      <Name>Content\cow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\cow.xnb</Output>
+      <Time>2008-04-29T21:54:27.984375+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\bg_bonus.png</Source>
+      <Name>Content\bg_bonus</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\bg_bonus.xnb</Output>
+      <Time>2008-04-29T22:03:31.390625+01:00</Time>
+    </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
