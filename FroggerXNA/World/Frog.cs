@@ -3,36 +3,23 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Frogger.Effects;
 using Frogger.Utils;
 
 namespace Frogger.World
 {
-    /// <summary>
-    /// Represents the ship of the player
-    /// </summary>
     class Frog : WorldEntity
     {
         #region Constants
 
-        /// <summary>
-        /// Default speed of the ship
-        /// </summary>
-        const float SPEED = 0.4f;
+        const float SPEED = 0.6f; //Frog speed
         String position;
 
         #endregion
 
         #region Variables
 
-        /// <summary>
-        /// location of the ship
-        /// </summary>
         public Vector2 mLocation;
 
-        /// <summary>
-        /// time when the player shot for the last time
-        /// </summary>
         double TimeLastSound= 0;
 
 
@@ -41,17 +28,11 @@ namespace Frogger.World
 
         #region Properties
 
-        /// <summary>
-        /// Location of the ship in the screen
-        /// </summary>
         public override Vector2 Location
         {
             get { return mLocation; }
         }
 
-        /// <summary>
-        /// Size of the ship
-        /// </summary>
         public override Vector2 Size
         {
             get { return new Vector2(64, 64); }
@@ -66,47 +47,39 @@ namespace Frogger.World
             : base(game, graphics, image, true)
         {
 
-            if (position == "C")
+            if (position == "C") //Central frog (green)
             {
                 this.mLocation = new Vector2(620, 670);
             }
 
-            if (position == "L")
+            if (position == "L") //Left frog
             {
                 this.mLocation = new Vector2(520, 670);
             }
 
-            if (position == "R")
+            if (position == "R") //Right frog
             {
                 this.mLocation = new Vector2(720, 670);
             }
 
 
-            this.position=position;
+            this.position=position; //Actual position
 
-          //  mEngineEffect = new ParticlesEmitter(game, graphics, new Vector2(this.Location.X + this.Size.X / 2f,
-                                                             //   this.Location.Y + this.Size.Y));
-
-           // game.Components.Add(mEngineEffect);
         }
 
         #endregion
 
         #region Update
 
-        /// <summary>
-        /// Update the player's location
-        /// </summary>
-        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            //mEngineEffect.Location = new Vector2(this.Location.X + this.Size.X / 2f, this.Location.Y + this.Size.Y);
+
+            //Central frog and Right frog , normal keyboard
 
             if (this.position == "C" || this.position == "R")
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Right))
                 {
-                    // if (mLocation.X < Background.BACKGROUND_WIDTH - Size.X)
                     mLocation.X += (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
                 }
@@ -125,7 +98,6 @@ namespace Frogger.World
                 }
                 else if (Keyboard.GetState().IsKeyDown(Keys.Down))
                 {
-                    // if (mLocation.Y < Background.BACKGROUND_HEIGHT - Size.Y)
                     mLocation.Y += (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
                 }
@@ -133,13 +105,13 @@ namespace Frogger.World
             }
 
 
-
+            //Left frog, keyboard QSDZ
 
             if (this.position == "L")
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.D))
                 {
-                    // if (mLocation.X < Background.BACKGROUND_WIDTH - Size.X)
+                   
                     mLocation.X += (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
                 }
@@ -158,7 +130,6 @@ namespace Frogger.World
                 }
                 else if (Keyboard.GetState().IsKeyDown(Keys.S))
                 {
-                    // if (mLocation.Y < Background.BACKGROUND_HEIGHT - Size.Y)
                     mLocation.Y += (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
                 }
@@ -176,19 +147,6 @@ namespace Frogger.World
                              TimeLastSound = gameTime.TotalGameTime.TotalMilliseconds;
                          }
 
-            /*
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                double timeElapsed = gameTime.TotalGameTime.TotalMilliseconds - mTimeLastShoot;
-
-                if (timeElapsed > 500)
-                {
-                    //PlayerShoot shoot = new PlayerShoot(Game, GraphicsDeviceManager, mLocation);
-                    //Game.Components.Add(shoot);
-
-                    mTimeLastShoot = gameTime.TotalGameTime.TotalMilliseconds;
-                }
-            }*/
 
             base.Update(gameTime);
         }

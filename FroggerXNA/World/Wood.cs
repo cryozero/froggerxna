@@ -6,17 +6,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Frogger.World
 {
-
-    /// <summary>
-    /// Represents the ship of the player
-    /// </summary>
     class Wood : WorldEntity
     {
         #region Enum
 
-        /// <summary>
-        /// State of the AI
-        /// </summary>
         enum AIState
         {
             GoRight,
@@ -27,9 +20,6 @@ namespace Frogger.World
 
         #region Constants
 
-        /// <summary>
-        /// Fix the speed of the ennemy ship
-        /// </summary>
         private const float SPEED = 0.1f;
 
         #endregion
@@ -37,27 +27,19 @@ namespace Frogger.World
         #region Variables
 
 
-
-        /// <summary>
-        /// location of the ship
-        /// </summary>
         public Vector2 mLocation;
 
         #endregion
 
         #region Properties
 
-        /// <summary>
-        /// Get the location
-        /// </summary>
+
         public override Vector2 Location
         {
             get { return mLocation; }
         }
 
-        /// <summary>
-        /// Get the Size
-        /// </summary>
+
         public override Vector2 Size
         {
             get { return new Vector2(120, 15); }
@@ -81,8 +63,6 @@ namespace Frogger.World
 
         public override void Update(GameTime gameTime)
         {
-            // mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-
             if (mLocation.X <= 10)
             {
                 this.mLocation.X = GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width;

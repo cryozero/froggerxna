@@ -7,9 +7,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Frogger.Utils
 {
-    /// <summary>
-    /// Used to watch the framerate
-    /// </summary>
+
     class FPSManager : DrawableGameComponent
     {
         #region Variables
@@ -26,11 +24,6 @@ namespace Frogger.Utils
 
         #region Initialization
 
-        /// <summary>
-        /// Initializes the FPSManager
-        /// </summary>
-        /// <param name="game"></param>
-        /// <param name="graphicDevice"></param>
         public FPSManager(Game game , GraphicsDevice graphicDevice)
             : base(game)
         {
@@ -39,10 +32,7 @@ namespace Frogger.Utils
            
         }
 
-        /// <summary>
-        /// Load the sprite font
-        /// </summary>
-        /// <param name="loadAllContent"></param>
+
         protected override void LoadGraphicsContent(bool loadAllContent)
         {
             if (loadAllContent)
@@ -55,10 +45,6 @@ namespace Frogger.Utils
 
         #region Draw / Update
 
-        /// <summary>
-        /// Draw the framerate
-        /// </summary>
-        /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
          
@@ -67,18 +53,13 @@ namespace Frogger.Utils
                                          String.Format("FPS : {0}", mFrameRate),
                                          new Vector2(50, 50), Color.WhiteSmoke);
 
-
-            
             this.mSpriteBatch.End();
 
             mFrameCount++;
 
         }
 
-        /// <summary>
-        /// Update the framerate
-        /// </summary>
-        /// <param name="gameTime"></param>
+
         public override void Update(GameTime gameTime)
         {
             // Measure our framerate.

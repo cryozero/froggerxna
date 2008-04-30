@@ -8,16 +8,10 @@ using Frogger.Utils;
 namespace Frogger.World
 {
 
-    /// <summary>
-    /// Represents the ship of the player
-    /// </summary>
     class Cow : WorldEntity
     {
         #region Enum
 
-        /// <summary>
-        /// State of the AI
-        /// </summary>
         enum AIState
         {
             GoRight,
@@ -26,42 +20,23 @@ namespace Frogger.World
 
         #endregion
 
-        #region Constants
-
-        /// <summary>
-        /// Fix the speed of the ennemy ship
-        /// </summary>
-        private const float SPEED = 0.05f;
-
-        #endregion
 
         #region Variables
 
-
-
-        /// <summary>
-        /// location of the ship
-        /// </summary>
         public Vector2 mLocation;
 
         #endregion
 
         #region Properties
 
-        /// <summary>
-        /// Get the location
-        /// </summary>
         public override Vector2 Location
         {
             get { return mLocation; }
         }
 
-        /// <summary>
-        /// Get the Size
-        /// </summary>
         public override Vector2 Size
         {
-            get { return new Vector2(32, 32); }
+            get { return new Vector2(50, 50); }
         }
         #endregion
 
@@ -80,19 +55,14 @@ namespace Frogger.World
 
         #region Update
 
-        /// <summary>
-        /// Update the ennemy ship location and behavior
-        /// </summary>
-        /// <param name="gameTime"></param>
+
         public override void Update(GameTime gameTime)
         {
-            Sound.Update();
-            // mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
 
             if (mLocation.X <= 10)
             {
                 this.mLocation.X = GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width;
-                //Sound.Play(Sounds.Car);
+                Sound.Play(Sounds.Cow);
             }
 
             base.Update(gameTime);

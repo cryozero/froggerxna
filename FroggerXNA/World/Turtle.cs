@@ -44,17 +44,12 @@ namespace Frogger.World
 
         #region Properties
 
-        /// <summary>
-        /// Get the location
-        /// </summary>
         public override Vector2 Location
         {
             get { return mLocation; }
         }
 
-        /// <summary>
-        /// Get the Size
-        /// </summary>
+
         public override Vector2 Size
         {
             get { return new Vector2(64, 64); }
@@ -69,9 +64,6 @@ namespace Frogger.World
         {
             Sound.Initialize();
             this.mLocation = location;
-
-
-
         }
 
         #endregion
@@ -80,12 +72,10 @@ namespace Frogger.World
         public override void Update(GameTime gameTime)
         {
             Sound.Update();
-            // mLocation.X -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * SPEED;
-
+           
             if (mLocation.X <= 10)
             {
                 this.mLocation.X = GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width;
-                Sound.Play(Sounds.Car);
             }
 
             base.Update(gameTime);

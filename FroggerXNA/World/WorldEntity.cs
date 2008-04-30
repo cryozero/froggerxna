@@ -8,10 +8,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Frogger.World
 {
-    /// <summary>
-    /// Represents a world entity
-    /// Each visible object in the screen must inherit from this class
-    /// </summary>
     abstract class WorldEntity : DrawableGameComponent
     {
         #region Variables
@@ -27,25 +23,18 @@ namespace Frogger.World
 
         #region Properties
 
-        /// <summary>
-        /// Get the GraphicsDeviceManager
-        /// </summary>
+  
         protected GraphicsDeviceManager GraphicsDeviceManager
         {
             get { return graphics; }
         }
 
-        /// <summary>
-        /// the location of the entity 
-        /// </summary>
         public abstract Vector2 Location
         {
             get;
         }
 
-        /// <summary>
-        /// the size of the entity
-        /// </summary>
+
         public abstract Vector2 Size
         {
             get;
@@ -64,12 +53,7 @@ namespace Frogger.World
 
         #region Initialization
 
-        /// <summary>
-        /// Represents a world entity
-        /// </summary>
-        /// <param name="game"></param>
-        /// <param name="graphics"></param>
-        /// <param name="textureName"></param>
+
         public WorldEntity(Game game, GraphicsDeviceManager graphics, string textureName , bool checkCollisions)
             : base(game)
         {
@@ -79,15 +63,10 @@ namespace Frogger.World
             this.mTextureName = textureName;
             this.mCheckCollisions = checkCollisions; 
 
-           // if (checkCollisions == true)
-             //   CollisionsManager.AddEntity(this);
         }
 
 
-        /// <summary>
-        /// Loads the graphics content
-        /// </summary>
-        /// <param name="loadAllContent"></param>
+
         protected override void LoadGraphicsContent(bool loadAllContent)
         {
             if (loadAllContent)
@@ -101,10 +80,6 @@ namespace Frogger.World
 
         #region Draw
 
-        /// <summary>
-        /// Draw the worldentity
-        /// </summary>
-        /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
             mSpriteBatch.Begin();
@@ -120,10 +95,7 @@ namespace Frogger.World
 
         #region Dispose
 
-        /// <summary>
-        /// Unloads graphic contents
-        /// </summary>
-        /// <param name="unloadAllContent"></param>
+
         protected override void UnloadGraphicsContent(bool unloadAllContent)
         {
             if (unloadAllContent)
@@ -132,19 +104,9 @@ namespace Frogger.World
             }
         }
 
-        /// <summary>
-        /// Dispose the world entity
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected override void Dispose(bool disposing)
-        {/*
-            if (disposing == true)
-            {
-                //if (mCheckCollisions == true)
-                    //CollisionsManager.RemoveEntity(this);
 
-                UnloadGraphicsContent(true);
-            }*/
+        protected override void Dispose(bool disposing)
+        {
 
             base.Dispose(disposing);
         }
