@@ -164,15 +164,6 @@
       <Time>2008-04-27T18:20:34.0625+01:00</Time>
     </Item>
     <Item>
-      <Source>Content\bicycle.png</Source>
-      <Name>Content\bicycle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>bin\x86\Debug\Content\bicycle.xnb</Output>
-      <Time>2008-04-27T20:15:41.984375+01:00</Time>
-    </Item>
-    <Item>
       <Source>Content\car.png</Source>
       <Name>Content\car</Name>
       <Importer>TextureImporter</Importer>

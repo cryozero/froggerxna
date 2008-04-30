@@ -55,14 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Effects\Particle.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Particle</Name>
-    </Compile>
-    <Compile Include="Effects\ParticlesEmitter.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>ParticlesEmitter</Name>
-    </Compile>
     <Compile Include="Utils\Sound.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Sound</Name>
@@ -74,10 +66,6 @@
     <Compile Include="World\Background.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Background</Name>
-    </Compile>
-    <Compile Include="World\Bicycle.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Bicycle</Name>
     </Compile>
     <Compile Include="World\Bus.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -123,10 +111,6 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Turtle</Name>
     </Compile>
-    <Compile Include="World\Truck.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Truck</Name>
-    </Compile>
     <Compile Include="World\Wood.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Wood</Name>
@@ -153,17 +137,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Audio\cow.wav">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>cow</Name>
+    </Content>
     <Content Include="Content\bg_bonus.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
       <Name>bg_bonus</Name>
-    </Content>
-    <Content Include="Content\bicycle.png">
-      <XNAUseContentPipeline>true</XNAUseContentPipeline>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Name>bicycle</Name>
     </Content>
     <Content Include="Audio\Collision.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -182,10 +164,6 @@
     <Content Include="Audio\Frog.wav">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Frog</Name>
-    </Content>
-    <Content Include="Audio\Music.wav">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Music</Name>
     </Content>
     <Content Include="Content\bg_level_1.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
