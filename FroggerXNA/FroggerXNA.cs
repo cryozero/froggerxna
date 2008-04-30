@@ -75,7 +75,7 @@ namespace FroggerXNA
         public double ScoreValue = 500; //Score value
         public double Level = 0; //Level
         public double lives = 3; //Number of lives
-        public int Revision = 38; //Subversion revision
+        public int Revision = 45; //Subversion revision
 
         //Backgrounds
 
